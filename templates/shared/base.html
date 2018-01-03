@@ -1,0 +1,36 @@
+<!doctype html>
+{% load static %}
+<html>
+    <head>
+        <title> {{ title }} - OIT HELP CENTER TIME CLOCK & SCHEDULE APPLICATION </title>
+
+        {# load the icons, styles, and scripts from head #}
+        {% include "shared/head.html" %}
+        {% load viewtag %}
+    </head>
+
+    <body>
+        {% view "hydro.views.NavbarView" %}
+        <div class="container-fluid">
+            <div class="row main-container">
+                <div class="col-md-3 sidebar prevent_select">
+                    {% view "hydro.views.SidebarView" %}
+                </div>
+                <div class="col-md-9 main">
+                    <h2 class="page-header">
+                        <span style="font-weight: 500">OIT Help Center</span>
+                        <span style="font-weight: 300">Time Clock &amp; Schedule Application</span>
+                    </h2>
+                    <body style="overflow: scroll">
+                        {#overridden by hydro, schedule, settings, and policies templates#}
+                        {% block content %}
+                        {% endblock %}
+                    </body>
+                </div>
+            </div>
+        </div>
+        <div id="footer">
+            <button onclick="reportBug('form')"><span class="glyphicon glyphicon-screenshot"></span>Report a Bug</button>
+        </div>
+    </body>
+</html>

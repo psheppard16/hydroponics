@@ -1,0 +1,11 @@
+node_modules/
+*.log
+.idea/
+static/
+*.sqlite3
+lib/
+__pycache__/
+*.pyc
+.DS_Store
+settings_secret.py
+*.sqlite3-journal

@@ -1,0 +1,73 @@
+<div class="card">
+    <div class="card-header">
+        <h4 class="card-title">
+            <a data-toggle="collapse" data-parent="#reports_accordion" href="#reports_colOne">Hours Worked Report</a>
+        </h4>
+    </div>
+    <div id="reports_colOne" class="panel-collapse collapse in sub_section">
+        <div class="card-block">
+            <div class="step step_one step_active">
+                <form>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="username input_div">
+                                <div class="form_label">Employee</div>
+                                <select data-placeholder="Choose employees..." multiple class="form_item selectpicker" name="username_fullname" data-live-search="true"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row employee_control">
+                        <div class="col-xs-6">
+                            <button type="button" class="blue_button" onclick="multiselect('all','#reports_colOne .username')">Select All</button>
+                        </div>
+                        <div class="col-xs-6">
+                            <button type="button" class="red_button" onclick="multiselect('none','#reports_colOne .username')">Reset</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="from_date input_div">
+                                <div class="form_label">From Date</div>
+                                <input type="text" class="form_item datepick" name="From Date"  maxlength="10" size="10" tabindex="4" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="to_date input_div">
+                                <div class="form_label">To Date</div>
+                                <input type="text" class="form_item datepick" name="To Date"  maxlength="10" size="10" tabindex="4" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="punch_details input_div">
+                                <div class="form_label autowidth">Show Punches?</div>
+                                <select class="form_item selectpicker" data-width="30%" name="punch_details">
+                                    <option value="true">Yes</option>
+                                    <option value="false">No</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                    </div>
+                </form>
+                <div class="row sub_menu">
+                    <div class="col-md-6 menu_item"><button onclick="resetForm('#reports_colOne form')">Reset Form</button></div>
+                    <div class="col-md-6 menu_item"><button onclick="hoursWorked('#reports_colOne', 'generate')">Next</button></div>
+                </div>
+            </div>
+
+            <div class="step step_two">
+                <div class="row" id="hours_worked_cont">
+
+                </div>
+                <div class="row sub_menu">
+                    <div class="col-md-6 menu_item"><button onclick="hoursWorked('#reports_colOne', 'moveBack')">Back</button></div>
+                    <div class="col-md-6 menu_item"><button onclick="systemAlert('This feature is not yet available.','error');">Export CSV</button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,540 @@
+@import "mixins";
+
+//Global Boostrap custom stying
+.card {
+  box-shadow: none;
+  moz-box-shadow: none;
+  webkit-box-shadow: none;
+  border-radius: 0;
+  border: 0;
+  margin-top: 30px;
+
+  .card-header {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: #c1cacf;
+    background-image: none;
+    color: #636363;
+    border: 0;
+    font-size: 11px;
+    border-radius: 0 !important;
+    box-shadow: none;
+
+    .card-title {
+      a {
+        color: #636363;
+        font-size: 11px;
+      }
+    }
+  }
+}
+
+.popover {
+  border-radius: 0px;
+
+  button {
+    border: 1px solid #ababab;
+    padding: 5px 10px;
+    background: transparent;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-variant: normal;
+    text-transform: uppercase;
+    color: #787878;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    font-size: 12px;
+    margin-right: 10px;
+
+    &:hover {
+      background: #ababab;
+      color: #fff;
+    }
+  }
+}
+
+//datepicker
+.form-inline {
+  .datepicker {
+    border-radius: 0px;
+    font-weight: 400;
+    background: #fff;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    color: #fff;
+    table {
+      th.datepicker-switch {
+        color: #b6b6b6;
+      }
+      td {
+        text-shadow: none !important;
+        border-radius: 0px;
+        &.today {
+          background: $theGreen !important;
+          color: #fff !important;
+        }
+        &.selected {
+          background: #848484 !important;
+        }
+        &.range {
+          background: #dadada !important;
+        }
+        &.active {
+          background: $theRed !important;
+        }
+        &.old, &.new {
+          color: #b9b9b9 !important;
+        }
+        &:hover {
+          color: #939393;
+        }
+      }
+    }
+  }
+}
+
+.datepicker {
+  border-radius: 0px;
+  font-weight: 400;
+  background: $theBlue;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  color: #fff;
+  border: none;
+  padding: 12px;
+  z-index: 999999999 !important;
+  table {
+    th.datepicker-switch {
+      color: #fff;
+      -webkit-border-radius: 0px;
+      -moz-border-radius: 0px;
+      border-radius: 0px;
+      &:hover {
+        background: #6DAFD9 !important;
+      }
+    }
+    th.prev, th.next {
+      -webkit-border-radius: 0px;
+      -moz-border-radius: 0px;
+      border-radius: 0px;
+      &:hover {
+        background: #6DAFD9 !important;
+      }
+    }
+    th.dow {
+      font-size: 12px;
+      color: #6DAFD9;
+    }
+    td {
+      text-shadow: none !important;
+      border-radius: 0px;
+      padding: 8px;
+      font-size: 12px;
+      font-weight: 500;
+      &.today {
+        background: #206D9E !important;
+        color: #fff !important;
+      }
+      &.selected {
+        background: #848484 !important;
+      }
+      &.range {
+        background: #dadada !important;
+      }
+      &.active {
+        background: transparent !important;
+        border-bottom: 3px solid #294251 !important;
+      }
+      &.old, &.new {
+        color: #6DAFD9 !important;
+        &:hover {
+          color: #fff !important;
+        }
+      }
+      &:hover {
+        color: #fff;
+        background: #6DAFD9 !important;
+      }
+    }
+  }
+}
+
+.datepicker-dropdown::after {
+  border-bottom-color: $theBlue;
+}
+
+//daterange
+.input-daterange {
+  input {
+    &:first-child {
+      -webkit-border-radius: 0px;
+      -moz-border-radius: 0px;
+      border-radius: 0px;
+    }
+    &:last-child {
+      -webkit-border-radius: 0px;
+      -moz-border-radius: 0px;
+      border-radius: 0px;
+    }
+    &.form-control {
+      &:focus {
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075) !important;
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075) !important;
+      }
+    }
+  }
+}
+
+.bootstrap-select {
+  font-family: Ubuntu;
+  font-variant: normal;
+  text-transform: none;
+  color: #949595;
+  button {
+    border-radius: 0;
+    height: 40px;
+    color: #949595;
+
+    .caret {
+      display: none !important;
+    }
+  }
+  .dropdown-menu {
+    border-radius: 0;
+    li.active a {
+      &:hover {
+        background-color: $theBlue !important;
+      }
+      color: #fff;
+    }
+    a {
+      color: #949595;
+    }
+  }
+}
+
+//select2
+#select2-drop {
+  z-index: 999999999;
+}
+
+//chosen
+.chosen-container {
+  color: #949595;
+  letter-spacing: 0.1em;
+  font-size: 12px;
+  font-variant: normal;
+  text-transform: none;
+  font-weight: 400;
+  border-radius: 0;
+
+  &-active.chosen-with-drop {
+    .chosen-single {
+      background: #fff;
+      background-image: none !important;
+      box-shadow: none;
+    }
+  }
+
+  .chosen-results {
+    max-height: 175px !important;
+
+    li {
+      &.highlighted {
+        background: $theBlue !important;
+        display: none;
+      }
+    }
+  }
+
+  a.chosen-single {
+    background: #fff;
+    background-image: none;
+    border-radius: 0;
+    height: 40px;
+    box-shadow: none;
+    padding: 8px 0 0 8px;
+    color: #949595;
+    letter-spacing: 0.1em;
+    font-size: 12px;
+    font-variant: normal;
+    text-transform: none;
+    font-weight: 400;
+    border-color: #fff;
+
+    b {
+      margin-top: 8px;
+    }
+  }
+  .chosen-drop {
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+
+  ul.chosen-choices {
+    border: 1px solid;
+    border-color: #fff;
+    box-shadow: none;
+    height: 40px !important;
+
+    li.search-field {
+      height: 38px;
+      padding-top: 11px !important;
+      input.default {
+        width: 100% !important;
+        color: #787878 !important;
+      }
+    }
+    li.search-choice {
+      box-shadow: none;
+      background-image: none;
+      background: transparent;
+      border-radius: 0px;
+      color: #949595;
+    }
+  }
+  &-multi {
+    ul.chosen-choices {
+      background-image: none;
+    }
+  }
+  &-active {
+    ul.chosen-choices {
+      border: 1px solid;
+      border-color: #aaa;
+      height: auto !important;
+      box-shadow: none !important;
+    }
+  }
+}
+
+//sliders
+.slider.slider-horizontal {
+  width: 90% !important;
+  left: 5% !important;
+  .slider-selection {
+    background: $theYellow;
+  }
+}
+
+div[id^='id_request_'] .slider-handle { //regex to get only the request sliders
+  background: $theBlue;
+}
+
+div[id^='id_conflict_'] .slider-handle { //regex to get only the conflict sliders
+  background: $theRed;
+}
+
+//tabs
+#slider_wrapper .nav {
+  display: block;
+}
+
+.nav-sidebar li {
+  width: 100%;
+}
+
+.nav-link {
+  background: transparent !important;
+  border-color: transparent !important;
+}
+
+.nav-link.active {
+  border-bottom: 3px solid #218fd4 !important;
+  color: #6B6B6B !important;
+}
+
+.nav-link.active:hover {
+  color: #787878 !important;
+  border-bottom: 3px solid #3aa5e9 !important;
+}
+
+//grid
+.color_key {
+  background: #fff;
+  padding: 10px;
+  margin: 0px;
+  border: 1px solid #ddd;
+  border-bottom-color: #f3f3f3;
+  font-size: 12px;
+  color: #969696;
+
+  &.floating {
+    border: 0;
+    background: #c1cacf;
+    color: #636363;
+  }
+
+  .color {
+    width: 12px;
+    height: 12px;
+    float: left;
+    margin-top: 2.5px;
+    margin-right: 10px;
+    &.red {
+      background-color: $theRed;
+    }
+    &.lightred {
+      background-color: #ffdada;
+    }
+    &.blue {
+      background-color: $theBlue;
+    }
+    &.lightblue {
+      background-color: #cbe4f3;
+    }
+    &.yellow {
+      background-color: $theYellow;
+    }
+    &.crossed {
+      background-color: transparent;
+      background-image: url(../img/evnt_actv_patrn.png);
+      border: 1px solid #ddd;
+    }
+  }
+}
+
+#modal_inout {
+  width: 100%;
+  margin-top: 0px;
+  text-align: center;
+
+  select {
+    height: 30px;
+    background: none;
+    border: 1px solid #bebebe;
+  }
+  input {
+    height: 40px;
+    background: none;
+    border: 1px solid #bebebe;
+    padding: 5px;
+    color: #787878;
+    margin-bottom: 10px;
+    padding: 14px 15px;
+    letter-spacing: 0.2em;
+    font-size: 14px;
+  }
+  input:focus {
+    border: 1px solid #bebebe;
+  }
+  input.submit {
+    padding: 12px 15px;
+    float: right;
+    font-family: Ubuntu, sans-serif;
+    text-transform: uppercase;
+    font-size: 11px;
+    font-variant: small-caps;
+  }
+  input.submit:hover {
+    background: #bebebe;
+    color: #fff;
+  }
+  input.submit:active {
+    background: #787878;
+    color: #fff;
+  }
+  .submit_cont {
+    width: 100%;
+    height: 50px;
+    float: right;
+  }
+  .options_cont {
+    width: 100%;
+    height: 50px;
+  }
+  .left_notes {
+    float: right;
+    margin-bottom: 10px;
+
+    input {
+      text-transform: none;
+      font-variant: normal;
+      font-family: Ubuntu;
+    }
+  }
+  .left_inout {
+    float: left;
+    margin-bottom: 10px;
+  }
+}
+
+#modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 999999999;
+  display: none;
+
+  .modalBox {
+    width: 50%;
+    height: auto;
+    margin: 0 auto;
+    margin-top: 10%;
+    display: none;
+
+    .m_header {
+      width: 100%;
+      height: auto;
+      background: #fff;
+      padding: 10px 15px;
+      border-bottom: 1px solid #dddddd;
+      color: #787878;
+      text-align: left;
+    }
+    .m_content {
+      width: 100%;
+      max-height: 350px;
+      overflow: visible;
+      background-color: #f2f8fc;
+      background-image: url("../img/pat.png");
+      padding: 15px 15px;
+
+      .row {
+        margin-left: 0;
+        margin-right: 0;
+      }
+
+      h2 {
+        color: #787878;
+        margin-top: 0;
+        line-height: 17px;
+      }
+      textarea {
+        border: none;
+        height: 80px;
+      }
+    }
+
+    .input_div {
+      float: none;
+      width: 100%;
+    }
+
+    .deleteButton {
+      position: absolute;
+      top: 20px;
+      right: 10px;
+    }
+
+    table {
+      border: 1px solid #dddddd;
+      margin-bottom: 20px;
+
+      tr:last-child {
+        border: none;
+      }
+    }
+    table:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+//modal scrolling fix
+.overflowHidden {
+  overflow: hidden !important;
+}

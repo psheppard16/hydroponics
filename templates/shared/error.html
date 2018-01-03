@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="//img/favicon.ico"/>
+    <link rel="apple-touch-icon"  href="//img/apple-touch-icon.png">
+
+    <title>OIT HELP CENTER TIME CLOCK</title>
+
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700' rel='stylesheet' type='text/css'>
+
+    <!-- Bootstrap core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <!-- <link href="/css/login.css" rel="stylesheet"> -->
+
+    <!-- Just for debugging purposes. Don't actually copy this line! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+    <style>
+      /* login page css document */
+      html {
+        background-color: #454545;
+        /*background: url(../img/bg_dark.jpg);*/
+        background-size: 234px 234px;
+      }
+
+      body {
+        background-color: #454545;
+        /*background: url(../img/bg_dark.jpg);*/
+        background-size: 234px 234px;
+        font-family: 'Ubuntu', sans-serif;
+        font-weight: 400;
+        font-variant: small-caps;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        text-align: center;
+      }
+
+      .prevent_select {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -khtml-user-select: none;
+        -ms-user-select: none;
+      }
+
+      #alert_bar {
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        background: #d44141;
+        opacity: 0.95;
+        z-index: 99999999999;
+        display: none;
+        padding: 15px;
+        text-align: center;
+        color: #fff;
+        /*border-bottom: 5px solid #d4d4d4;*/
+      }
+
+      #app_bg {
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: auto;
+        z-index: 0;
+      }
+      #app_bg img {
+        width: 100%;
+      }
+
+      #app_container {
+        position: absolute;
+        left: 50%;
+        margin-left: -150px;
+        margin-top: 100px;
+        width: 300px;
+        height: auto;
+        z-index: 1;
+        background-color: #232323;
+        padding-top: 5px;
+        /* form styling */
+      }
+      #app_container .row {
+        margin: 0;
+        height: 60px;
+      }
+      
+
+      #app_container h1 {
+        font-size: 20px;
+        padding: 0 15px 0 15px;
+        line-height: 1.5em;
+      }
+      #app_container h2 {
+        font-size: 12px;
+        color: #fff;
+        text-transform: uppercase;
+        margin: 0px;
+        line-height: 1.2em;
+        padding-top: 14px;
+        text-align: left;
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+      #app_container h3 {
+        font-size: 13px;
+        color: #fff;
+        text-transform: uppercase;
+        margin: 0px;
+        padding: 0;
+      }
+
+      #app_container #error {
+        background: #fff;
+        color: #d44141;
+        height:auto;
+        padding:20px;
+      }
+      #app_container #error h2 {
+        line-height: 1.5em;
+        padding:0px;
+        color: #d44141;
+        text-align: center;
+      }
+
+      a {
+        display:inline-block;
+        padding:10px 14px;
+        background:#218fd4;
+        color: #fff;
+      }
+
+      a:hover {
+        text-decoration: none;
+        background: #27aafb;
+        color: #fff;
+      }
+
+      a.red {
+        background:#d44141;
+      }
+
+      a.red:hover {
+        background: #ff4e4e;
+      }
+
+      @media (min-width: 768px) {
+        #app_container {
+          position: absolute;
+          left: 50%;
+          margin-left: -250px;
+          margin-top: 150px;
+          width: 500px;
+          z-index: 1;
+        }
+        #app_container h1 {
+          font-size: 25px;
+        }
+        #app_container h2 {
+          font-size: 13px;
+          padding-top: 20px;
+          text-align: center;
+        }
+        #app_container form {
+          padding-top: 0px;
+        }
+      }
+
+    </style>
+
+  </head>
+
+    <body>
+        <div id="app_container">
+            <div class="row"><h2><span style="font-weight: 500">OIT Help Center</span><br class="visible-xs"/><span style="font-weight: 300"> Time Clock &amp; Schedule Application</span></h2></div>
+            <div class="row" id="error">
+                {% if error == "not_allowed" %}
+                    <h2 class="denied">Sorry {{ name }}, Look's like you're not allowed to access the Time Clock.</h2>
+                    <br />
+                    <a class="red" href="{% url 'logout' %}">Logout</a>
+                {% elif error == "404" %}
+                    <h2 class="not_found" style="font-size: 50px">404</h2>
+                    <h2 class="not_found">A Little Lost?</h2>
+                    <br />
+                    <a href="{% url 'hydro_student' %}">Back to the Time Clock</a>
+                {% endif %}
+            </div>
+        </div>
+    </body>
+</html>

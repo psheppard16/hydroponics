@@ -1,0 +1,44 @@
+{% extends 'shared/base.html' %}
+{% load viewtag %}
+
+{% block content %}
+    {# slider navigation #}
+    <div id="slider_wrapper">
+        <ul class="nav nav-tabs sects">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#sec1">Current Events</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#sec2">Reports</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="tab-content">
+        <div id="sec1" class="sec-content tab-pane fade active show">
+            <div class="container-fluid">
+                <div class="row">
+                    {% view "hydro.views.StudentAnalyticsView" %}
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        {% view "hydro.views.StatusView" %}
+                        {% view "hydro.views.WeatherView" %}
+                    </div>
+                    <div class="col-md-6">
+                        {% view "hydro.views.ShiftsView" %}
+                    </div>
+                    <div class="col-md-6">
+                    </div>
+                </div>
+                <div class="row">
+                    {% view "hydro.views.DailyView" %}
+                </div>
+            </div>
+        </div>
+
+        <div id="sec2" class="sec-content tab-pane fade">
+            {% view "hydro.views.ReportView" %}
+        </div>
+    </div>
+{% endblock %}

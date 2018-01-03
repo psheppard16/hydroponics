@@ -1,0 +1,71 @@
+{% load custom_filters %}
+
+<div class="sub_section" id="analytics">
+    <div class="header">Analytics</div>
+    <div class="sub_content">
+{#        <div class="row">#}
+{#            <div id="weekly_stats" class="col-md-12">#}
+{#                <div class="row" style="height:80%;">#}
+{#                    <div class="col-md-1" style="height:100%;">#}
+{#                        {% for x in max_list %}#}
+{#                            <div class="row" style="height:{{ row_size }}%;">#}
+{#                                <div class="col">{{ x }}</div>#}
+{#                            </div>#}
+{#                        {% endfor %}#}
+{#                    </div>#}
+{#                    {% for center in centers %}#}
+{#                        <div class="col-md-3" style="height: {{ center.currently_working|length|multiply:row_size|add:1 }}%;">#}
+{#                            <div class="col" style="width: 50%; height: 100%; background: #d44141;;">#}
+{##}
+{#                            </div>#}
+{#                        </div>#}
+{#                    {% endfor %}#}
+{#                </div>#}
+{#                <div class="row" style="height:20%;">#}
+{#                    <div class="row align-items-center" style="height:50%;">#}
+{#                        {% for center in centers %}#}
+{#                            <div class="col-md-3">#}
+{#                                <div>{{ center.name }}</div>#}
+{#                            </div>#}
+{#                        {% endfor %}#}
+{#                    </div>#}
+{#                    <div class="row align-items-center" style="height:50%;">#}
+{#                        <h2>Employees per Center</h2>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#</div>#}
+
+        <div class="row">
+            <div id="weekly_stats" class="col-md-12">
+                <div class="row align-items-end" style="height:100%;">
+                    <div class="col-md-1" style="height:80%;">
+                        {% for x in max_list %}
+                            <div class="row" style="height:{{ row_size }}%;">
+                                <div class="col">{{ x }}</div>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="col-md-11" style="height:100%;">
+                        {% for center in centers %}
+                            <div class="col-sm-2" style="height:100%;">
+                                <div class="row" style="height:80%;">
+                                    <div class="col" style="height: {{ center.currently_working|length|multiply:row_size|add:1 }}%; background: #d44141;"></div>
+                                </div>
+                                <div class="row" style="height:20%;">
+                                    <div>{{ center.name }}</div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="row align-items-center" style="height:50%;">
+                        <h2>Employees per Center</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

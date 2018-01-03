@@ -1,0 +1,84 @@
+@import "mixins";
+
+//Settings
+.sec-content {
+  height: 100%;
+
+  &.full_width {
+    margin: 0px;
+    padding: 0px;
+  }
+  .sub_section {
+    .header {
+      background-color: #c1cacf;
+      color: #636363;
+      border: none;
+    }
+    .sub_content {
+      background: #e9ecee;
+      padding: 0px;
+      color: #636363;
+
+      table {
+        margin: 0;
+        tr {
+          font-size: 11px;
+          &:nth-child(even) {
+            background: #d9d9d9;
+          }
+          &:nth-child(odd) {
+            background: #d3d3d3;
+          }
+          &.header_row {
+            background-color: #e9ecee;
+          }
+
+          th {
+            padding-left: 0px;
+            border: none;
+            font-weight: 600;
+            padding-top: 15px;
+            padding-bottom: 15px;
+            &:first-child {
+              padding-left: 5%;
+            }
+          }
+          td {
+            padding-left: 0px;
+            border: none;
+            font-weight: 400;
+            a {
+
+            }
+            &:first-child {
+              padding-left: 5%;
+            }
+          }
+        }
+      }
+      .sub_menu {
+        border: none;
+      }
+      &.in_dev {
+        padding: 10px;
+        padding-left: 5%;
+        h2 {
+          margin-top: 10px;
+        }
+      }
+    }
+    table {
+      button.delete {
+        text-transform: uppercase;
+        font-size: 9px;
+        color: #939393;
+        border: none;
+        padding: 3px 6px;
+        &:hover {
+          color: #fff;
+        }
+      }
+    }
+
+  }
+}

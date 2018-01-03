@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'NevisBold';
+    src: url('nevis.eot');
+    src: url('nevis.eot') format('embedded-opentype'),
+         url('nevis.woff') format('woff'),
+         url('nevis.ttf') format('truetype'),
+         url('nevis.svg#NevisBold') format('svg');
+}

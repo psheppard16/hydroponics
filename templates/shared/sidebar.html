@@ -1,0 +1,47 @@
+<ul class="nav nav-sidebar">
+    <li id="" class="sidebar_user_type {{ user_role }}">{{ user_role }}</li>
+    <li class="sidebar_header">Menu</li>
+    <li {% if 'hydro' in request.path %} class="active" {% endif %}>
+            <a href="{% url 'hydro_student' %}">
+            <table>
+                <tr>
+                    <td class="navIcon"><div class="icon iconAct hydro"></div></td>
+                    <td class="navText">Manage Hydro</td>
+                </tr>
+            </table>
+        </a>
+    </li>
+    <li {% if 'schedule' in request.path %} class="active" {% endif %}>
+        <a href="{% url 'schedule_student' %}">
+            <table>
+                <tr>
+                    <td class="navIcon"><div class="icon schedule"></div></td>
+                    <td class="navText">Manage Schedule</td>
+                </tr>
+            </table>
+        </a>
+    </li>
+    <li {% if 'policies' in request.path %} class="active" {% endif %}>
+        <a href="{% url 'policies' %}">
+            <table>
+                <tr>
+                    <td class="navIcon"><div class="icon policies"></div></td>
+                    <td class="navText">View Policies</td>
+                </tr>
+            </table>
+        </a>
+    </li>
+    <li class="sidebar_sub curr_working_trig">
+        <table>
+            <tr>
+                <td>Currently Working</td>
+                <td align="right" style="font-size:20px;">-</td>
+            </tr>
+        </table>
+    </li>
+    <li class="curr_working_container">
+        <div class="curr_working">
+            <table></table>
+        </div>
+    </li>
+</ul>

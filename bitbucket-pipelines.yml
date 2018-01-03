@@ -1,0 +1,38 @@
+# Only use spaces to indent your .yml configuration.
+# -----
+# You can specify a custom docker image from Docker Hub as your build environment.
+image: elliottmcclinton/hydro:latest
+
+# enable Docker for your repository
+options:
+  docker: true
+
+pipelines:
+  branches:
+    master:
+      - step:
+          script:
+            - echo "Tests not yet configured for master"
+  default:
+    - step:
+        caches:
+          - pip
+        script:
+          - pip install -r requirements.txt
+          - cp boilerplate/settings_secret.py.template boilerplate/settings_secret.py
+          - echo -e "\n \n" >> boilerplate/settings_secret.py
+          - echo "import os" >> boilerplate/settings_secret.py
+          - echo "BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))" >> boilerplate/settings_secret.py
+          - echo "DATABASES = {}" >> boilerplate/settings_secret.py
+          - echo "DATABASES['default'] = {}" >> boilerplate/settings_secret.py
+          - echo "DATABASES['default']['ENGINE'] = 'django.db.backends.sqlite3'" >> boilerplate/settings_secret.py
+          - echo "DATABASES['default']['NAME'] = os.path.join(BASE_DIR, 'db.sqlite3')" >> boilerplate/settings_secret.py
+          - echo "ALLOWED_HOSTS = ['*']" >> boilerplate/settings_secret.py
+          - echo "NOTIFICATIONS = True" >> boilerplate/settings_secret.py
+          - echo "EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'" >> boilerplate/settings_secret.py
+          - echo "DEBUG = False" >> boilerplate/settings_secret.py
+          - echo "LOGGING = False" >> boilerplate/settings_secret.py
+          - printf 'yes\n' | python manage.py collectstatic
+          - Xvfb :1 -screen 5 1024x768x8 &
+          - export DISPLAY=:1.5
+          - 'eval driver=chrome-headless REMOTE_USER=admin python manage.py test'
