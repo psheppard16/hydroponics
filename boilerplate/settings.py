@@ -65,14 +65,15 @@ CACHES = {
 
 ROOT_URLCONF = 'boilerplate.urls'
 
+TEMPLATE_DEBUG = None
+
 TEMPLATES = [
 	{
 		'BACKEND': 'django.template.backends.django.DjangoTemplates',
 		'DIRS': [os.path.join(BASE_DIR, 'templates')],
 		'APP_DIRS': True,
-		'TEMPLATE_DEBUG' : False,
 		'OPTIONS': {
-			'debug': False,
+			'debug': None,
 			'context_processors': [
 				'django.template.context_processors.debug',
 				'django.template.context_processors.request',
