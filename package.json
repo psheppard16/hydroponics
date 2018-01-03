@@ -1,13 +1,9 @@
 {
   "name": "hydro",
   "version": "2.0.0",
-  "description": "Hydro for UMass NSS",
-  "repository": "https://bitbucket.org/nsssystems/user-services-hydro",
-  "scripts": {
-    "install": "npm-git install",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
+  "description": "Hydroponics project for raspberry pi",
+  "repository": "https://https://github.com/psheppard16/hydroponics",
+  "author": "Preston Sheppard",
   "license": "ISC",
   "devDependencies": {
     "babel-preset-env": "^1.6.1",
@@ -37,8 +33,5 @@
     "noty": "^3.1.3",
     "npm-git-install": "^0.3.0",
     "sweetalert": "^2.0.8"
-  },
-  "gitDependencies": {
-    "weather-icons": "https://github.com/erikflowers/weather-icons"
   }
 }
