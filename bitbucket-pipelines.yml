@@ -28,8 +28,6 @@ pipelines:
           - echo "DATABASES['default']['ENGINE'] = 'django.db.backends.sqlite3'" >> boilerplate/settings_secret.py
           - echo "DATABASES['default']['NAME'] = os.path.join(BASE_DIR, 'db.sqlite3')" >> boilerplate/settings_secret.py
           - echo "ALLOWED_HOSTS = ['*']" >> boilerplate/settings_secret.py
-          - echo "NOTIFICATIONS = True" >> boilerplate/settings_secret.py
-          - echo "EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'" >> boilerplate/settings_secret.py
           - echo "DEBUG = False" >> boilerplate/settings_secret.py
           - echo "LOGGING = False" >> boilerplate/settings_secret.py
           - printf 'yes\n' | python manage.py collectstatic

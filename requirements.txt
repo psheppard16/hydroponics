@@ -1,6 +1,10 @@
 Django==2.0.1
-requests==2.13.0
+requests==2.18.4
 selenium==3.3.1
 wheel==0.30.0
 Sphinx==1.5.3
 sphinx_bootstrap_theme==0.4.14
+django-admin-view-permission==1.4
+django-mass-edit==3.0
+django-nested-inline==0.3.7
+django-import-export==0.6.1

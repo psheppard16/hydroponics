@@ -4,7 +4,6 @@ from rest_framework import serializers, mixins
 from rest_framework.fields import CurrentUserDefault
 
 from hydro.models import *
-from tagging.fields import Tag
 
 User = get_user_model()
 class UserSerializer(serializers.ModelSerializer):

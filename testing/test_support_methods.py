@@ -6,7 +6,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from datetime import datetime
 from django.utils.timezone import utc
 import testing.support_methods as sup
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 
 
 class SupportMethodsTestCase(LiveServerTestCase):

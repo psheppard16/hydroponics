@@ -8,7 +8,7 @@ from sys import platform
 from selenium import webdriver
 from boilerplate.settings import BASE_DIR
 from hydro.models import *
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from datetime import datetime
 import datetime as dt
 from django.utils.timezone import utc
