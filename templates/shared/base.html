@@ -2,19 +2,22 @@
 {% load static %}
 <html>
     <head>
-        <title> {{ title }} - Hydroponics </title>
+        <title> {{ title }} - Hydrop </title>
 
         {# load the icons, styles, and scripts from head #}
         {% include "shared/head.html" %}
-        {% load viewtag %}
     </head>
 
     <body>
-        {% view "hydro.views.NavbarView" %}
+        {% block navbar %}
+            {% include "shared/navbar.html" %}
+        {% endblock navbar %}
         <div class="container-fluid">
             <div class="row main-container">
                 <div class="col-md-3 sidebar prevent_select">
-                    {% view "hydro.views.SidebarView" %}
+                    {% block sidebar %}
+                        {% include "shared/sidebar.html" %}
+                    {% endblock sidebar %}
                 </div>
                 <div class="col-md-9 main">
                     <h2 class="page-header">
@@ -22,9 +25,9 @@
                         <span style="font-weight: 300">Time Clock &amp; Schedule Application</span>
                     </h2>
                     <body style="overflow: scroll">
-                        {#overridden by hydro, schedule, settings, and policies templates#}
+                        {#overridden by home#}
                         {% block content %}
-                        {% endblock %}
+                        {% endblock content %}
                     </body>
                 </div>
             </div>

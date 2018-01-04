@@ -1,8 +1,9 @@
+{% block sidebar %}
 <ul class="nav nav-sidebar">
     <li id="" class="sidebar_user_type {{ user_role }}">{{ user_role }}</li>
     <li class="sidebar_header">Menu</li>
-    <li {% if 'hydro' in request.path %} class="active" {% endif %}>
-            <a href="{% url 'hydro_student' %}">
+    <li {% if 'home' in request.path %} class="active" {% endif %}>
+            <a href="{% url 'home' %}">
             <table>
                 <tr>
                     <td class="navIcon"><div class="icon iconAct hydro"></div></td>
@@ -12,7 +13,7 @@
         </a>
     </li>
     <li {% if 'schedule' in request.path %} class="active" {% endif %}>
-        <a href="{% url 'schedule_student' %}">
+        <a href="{% url 'home' %}">
             <table>
                 <tr>
                     <td class="navIcon"><div class="icon schedule"></div></td>
@@ -22,7 +23,7 @@
         </a>
     </li>
     <li {% if 'policies' in request.path %} class="active" {% endif %}>
-        <a href="{% url 'policies' %}">
+        <a href="{% url 'home' %}">
             <table>
                 <tr>
                     <td class="navIcon"><div class="icon policies"></div></td>
@@ -45,3 +46,4 @@
         </div>
     </li>
 </ul>
+{% endblock sidebar %}

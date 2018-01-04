@@ -121,7 +121,7 @@ gulp.task("fonts", ["clean-fonts"], () => {
     gulp.src("node_modules/bootstrap/dist/fonts/*")
 		.pipe(gulp.dest("static/fonts"));
 
-  // weather icons
+    // weather icons
     gulp.src("node_modules/weather-icons/font/**/*")
   	.pipe(gulp.dest("static/fonts"));
     return gulp.src("assets/fonts/**/*")
@@ -129,16 +129,14 @@ gulp.task("fonts", ["clean-fonts"], () => {
 });
 
 gulp.task("images", ["clean-images"], () => {
-	// bootstrap-editable
+    // bootstrap-editable
     gulp.src("node_modules/bootstrap-editable/img/*")
-		.pipe(gulp.dest("static/img"));
+        .pipe(gulp.dest("static/img"));
 
     return gulp.src("assets/img/**/*.+(png|jpg|jpeg|gif|svg)")
-  // Caching images that ran through imagemin
-  .pipe(cache(imagemin({
-      interlaced: true
-  })))
-  .pipe(gulp.dest("static/img"));
+    // Caching images that ran through imagemin
+    //.pipe(cache(imagemin({interlaced: true})))
+    .pipe(gulp.dest("static/img"));
 });
 
 gulp.task("default", () => {

@@ -1,5 +1,4 @@
 {% extends 'shared/base.html' %}
-{% load viewtag %}
 
 {% block content %}
     {# slider navigation #}
@@ -18,27 +17,39 @@
         <div id="sec1" class="sec-content tab-pane fade active show">
             <div class="container-fluid">
                 <div class="row">
-                    {% view "hydro.views.AnalyticsView" %}
+                    {% block analytics %}
+                        {% include "home/home_elements/analytics.html" %}
+                    {% endblock analytics %}
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        {% view "hydro.views.StatusView" %}
-                        {% view "hydro.views.WeatherView" %}
+                        {% block status %}
+                            {% include "home/home_elements/status.html" %}
+                        {% endblock status %}
+                        {% block weather %}
+                            {% include "home/home_elements/weather.html" %}
+                        {% endblock weather %}
                     </div>
                     <div class="col-md-6">
-                        {% view "hydro.views.ShiftsView" %}
+                        {% block shifts %}
+                            {% include "home/home_elements/shifts.html" %}
+                        {% endblock shifts %}
                     </div>
                     <div class="col-md-6">
                     </div>
                 </div>
                 <div class="row">
-                    {% view "hydro.views.DailyView" %}
+                    {% block daily %}
+                        {% include "home/home_elements/daily.html" %}
+                    {% endblock daily %}
                 </div>
             </div>
         </div>
 
         <div id="sec2" class="sec-content tab-pane fade">
-            {% view "hydro.views.ReportView" %}
+            {% block report %}
+                {% include "home/home_elements/report.html" %}
+            {% endblock report %}
         </div>
     </div>
-{% endblock %}
+{% endblock content %}
