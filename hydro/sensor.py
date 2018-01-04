@@ -1,8 +1,13 @@
-def getPH():
-    pass
+class Sensor:
+    def __init__(self):
+        #sensor initialization
+        pass
 
-def getEC():
-    pass
+    def get_pH(self):
+        return None
 
-def getORP():
-    pass
+    def get_EC(self):
+        return None
+
+    def get_ORP(self):
+        return None

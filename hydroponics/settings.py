@@ -24,10 +24,11 @@ INSTALLED_APPS = (
 	'django.contrib.sessions',
 	'django.contrib.messages',
 	'django.contrib.staticfiles',
-    'hydro.apps.HydroConfig',
 	'rest_framework',
 	'nested_inline',
 	'import_export',
+    'background_task',
+    'hydro.apps.HydroConfig',
 )
 
 MIDDLEWARE_CLASSES = (
