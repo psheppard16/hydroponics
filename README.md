@@ -102,35 +102,35 @@ Enter settings dir:
 
 Add the following to the config file:
 
-Alias /static /home/user/myproject/static
-<Directory /home/user/myproject/static>
+Alias /static [project path]/hydroponics/static
+<Directory [project path]/hydroponics/static>
     Require all granted
 </Directory>
 
-<Directory /home/user/myproject/myproject>
+<Directory [project path]/hydroponics/hydroponics>
     <Files wsgi.py>
         Require all granted
     </Files>
 </Directory>
 
-WSGIDaemonProcess myproject python-path=/home/user/myproject python-home=/home/user/myproject/myprojectenv
-WSGIProcessGroup myproject
-WSGIScriptAlias / /home/user/myproject/myproject/wsgi.py
+WSGIDaemonProcess hydroponics python-path=[project path]/hydroponics python-home=[project path]/hydroponics/hydroponicsenv
+WSGIProcessGroup hydroponics
+WSGIScriptAlias / [project path]/hydroponics/hydroponics/wsgi.py
 ```
 
 #### Permissions
 ```sh
 Give apache permission to access the database:
-`chmod 664 ~/myproject/db.sqlite3`
-`sudo chown :www-data ~/myproject/db.sqlite3`
-`sudo chown :www-data ~/myproject`
+`chmod 664 ~/hydroponics/db.sqlite3`
+`sudo chown :www-data ~/hydroponics/db.sqlite3`
+`sudo chown :www-data ~/hydroponics`
 
 Give apache permission to access the logs:
-`chmod 664 ~/myproject/logs/db_sql.log`
-`chmod 664 ~/myproject/logs/status.log`
-`sudo chown :www-data ~/myproject/logs/db_sql.log`
-`sudo chown :www-data ~/myproject/logs/status.log`
-`sudo chown :www-data ~/myproject/logs`
+`chmod 664 ~/hydroponics/logs/db_sql.log`
+`chmod 664 ~/hydroponics/logs/status.log`
+`sudo chown :www-data ~/hydroponics/logs/db_sql.log`
+`sudo chown :www-data ~/hydroponics/logs/status.log`
+`sudo chown :www-data ~/hydroponics/logs`
 ```
 
 #### Server Name
