@@ -15,6 +15,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
 
     url(r'^status/', include(status_api_patterns)),
-    url(r'^hydro/home', HomeView, name="home"),
+    url(r'^home', HomeView, name="home"),
     url(r'^error', ErrorView, name="error"),
 ]

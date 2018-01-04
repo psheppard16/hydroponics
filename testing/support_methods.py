@@ -6,7 +6,7 @@ from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException, ElementNotVisibleException, TimeoutException
 from sys import platform
 from selenium import webdriver
-from boilerplate.settings import BASE_DIR
+from hydroponics.settings import BASE_DIR
 from hydro.models import *
 from django.urls import reverse
 from datetime import datetime

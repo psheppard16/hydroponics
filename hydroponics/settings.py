@@ -13,6 +13,9 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
 
 ALLOWED_HOSTS = []
 
+ADMINS = [('Preston Sheppard', 'psheppard16@gmail.com')]
+DEBUG = True
+
 INSTALLED_APPS = (
 	'admin_view_permission',
 	'django.contrib.admin',
@@ -40,7 +43,7 @@ MIDDLEWARE_CLASSES = (
 )
 
 AUTHENTICATION_BACKENDS = (
-    'boilerplate.web_auth_backend.HydroRemoteUserBackend',
+    'hydroponics.web_auth_backend.HydroRemoteUserBackend',
 )
 
 REST_FRAMEWORK = {
@@ -63,7 +66,7 @@ CACHES = {
 	}
 }
 
-ROOT_URLCONF = 'boilerplate.urls'
+ROOT_URLCONF = 'hydroponics.urls'
 
 TEMPLATE_DEBUG = None
 
@@ -89,7 +92,7 @@ TEMPLATES = [
 ]
 
 
-WSGI_APPLICATION = 'boilerplate.wsgi.application'
+WSGI_APPLICATION = 'hydroponics.wsgi.application'
 
 USE_TZ = True
 TIME_ZONE = 'America/New_York'
@@ -153,4 +156,4 @@ LOGGING = {
 	}
 }
 
-from boilerplate.settings_secret import *
+from hydroponics.settings_secret import *
