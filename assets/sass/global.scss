@@ -127,7 +127,7 @@ button {
 
 .checkbox {
   width: 10px;
-  margin: 0px auto;
+  margin: 0 auto;
   position: relative;
 
   label {
@@ -147,8 +147,8 @@ button {
     opacity: 0;
     content: '';
     position: absolute;
-    top: 0px;
-    left: 0px;
+    top: 0;
+    left: 0;
     width: 10px;
     height: 10px;
     border-radius: 2px;
@@ -175,7 +175,35 @@ button {
 .prevent_select {
   -webkit-user-select: none;
   -moz-user-select: none;
-  -khtml-user-select: none;
   -ms-user-select: none;
 }
 
+.sec-content {
+  clear: both;
+  padding: 5%;
+  padding-top: 0;
+  text-align: center;
+  margin-top: 20px;
+
+  .sub_section {
+    width: 100%;
+    margin-bottom: 20px;
+    margin-top: 30px;
+
+    .header {
+      background-color: #c1cacf;
+      color: #636363;
+      font-size: 12px;
+      padding: 20px 5%;
+    }
+
+    .sub_content {
+      background-color: $white;
+      color: #959494;
+      font-size: 12px;
+      font-variant: normal;
+      font-weight: 400;
+      overflow:hidden;
+    }
+  }
+}
