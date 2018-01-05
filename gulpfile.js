@@ -79,6 +79,10 @@ gulp.task("css", ["sass"], () => {
     gulp.src("node_modules/bootstrap/dist/css/*.min.css")
 		.pipe(gulp.dest("static/css/lib"));
 
+	// mdbootstrap
+    gulp.src("node_modules/mdbootstrap/css/*.min.css")
+		.pipe(gulp.dest("static/css/lib"));
+
 	// noty
     gulp.src("node_modules/noty/lib/*.css")
 		.pipe(gulp.dest("static/css/lib"));
@@ -112,25 +116,36 @@ gulp.task("fonts", ["clean-fonts"], () => {
 	// add fonts into css folder so they can be accessed by css in lib
     gulp.src("node_modules/bootstrap/dist/fonts/*")
 		.pipe(gulp.dest("static/css/fonts"));
+    gulp.src("node_modules/mdbootstrap/font/*")
+		.pipe(gulp.dest("static/font"));
     gulp.src("node_modules/weather-icons/font/**/*")
 		.pipe(gulp.dest("static/css/fonts"));
     gulp.src("assets/fonts/**/*")
 		.pipe(gulp.dest("static/css/fonts"));
 
-	// bootsrap
+	// bootstrap
     gulp.src("node_modules/bootstrap/dist/fonts/*")
+		.pipe(gulp.dest("static/fonts"));
+
+    // mdbootstrap
+    gulp.src("node_modules/mdbootstrap/font/*")
 		.pipe(gulp.dest("static/fonts"));
 
     // weather icons
     gulp.src("node_modules/weather-icons/font/**/*")
-  	.pipe(gulp.dest("static/fonts"));
+  	    .pipe(gulp.dest("static/fonts"));
+
     return gulp.src("assets/fonts/**/*")
-  	.pipe(gulp.dest("static/fonts"));
+  	    .pipe(gulp.dest("static/fonts"));
 });
 
 gulp.task("images", ["clean-images"], () => {
     // bootstrap-editable
     gulp.src("node_modules/bootstrap-editable/img/*")
+        .pipe(gulp.dest("static/img"));
+
+    // mdbootstrap
+    gulp.src("node_modules/mdbootstrap/img/*")
         .pipe(gulp.dest("static/img"));
 
     return gulp.src("assets/img/**/*.+(png|jpg|jpeg|gif|svg)")

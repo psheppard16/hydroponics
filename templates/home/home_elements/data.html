@@ -1,13 +1,14 @@
-{% block analytics %}
+{% block data %}
 <div class="sub_section" id="analytics">
-    <div class="header">Analytics</div>
+    <div class="header">Data</div>
     <div class="sub_content" style="padding:0px;font-weight:600 !important;">
         <div class="row">
             <div id="weekly_stats" class="col-md-12">
-                <div class="col-md-12"></div>
-                <h2>Employees per Center</h2>
+                <div class="col-md-12">
+                    <canvas id="lineChart"></canvas>
+                </div>
             </div>
         </div>
     </div>
 </div>
-{% endblock analytics %}
+{% endblock data %}

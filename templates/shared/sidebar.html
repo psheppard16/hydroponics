@@ -1,49 +1,35 @@
 {% block sidebar %}
 <ul class="nav nav-sidebar">
-    <li id="" class="sidebar_user_type {{ user_role }}">{{ user_role }}</li>
     <li class="sidebar_header">Menu</li>
     <li {% if 'home' in request.path %} class="active" {% endif %}>
             <a href="{% url 'home' %}">
             <table>
                 <tr>
                     <td class="navIcon"><div class="icon iconAct hydro"></div></td>
-                    <td class="navText">Manage Hydro</td>
+                    <td class="navText">Hydroponics</td>
                 </tr>
             </table>
         </a>
     </li>
-    <li {% if 'schedule' in request.path %} class="active" {% endif %}>
+    <li {% if 'none' in request.path %} class="active" {% endif %}>
         <a href="{% url 'home' %}">
             <table>
                 <tr>
                     <td class="navIcon"><div class="icon schedule"></div></td>
-                    <td class="navText">Manage Schedule</td>
+                    <td class="navText">None</td>
                 </tr>
             </table>
         </a>
     </li>
-    <li {% if 'policies' in request.path %} class="active" {% endif %}>
+    <li {% if 'none' in request.path %} class="active" {% endif %}>
         <a href="{% url 'home' %}">
             <table>
                 <tr>
                     <td class="navIcon"><div class="icon policies"></div></td>
-                    <td class="navText">View Policies</td>
+                    <td class="navText">None</td>
                 </tr>
             </table>
         </a>
-    </li>
-    <li class="sidebar_sub curr_working_trig">
-        <table>
-            <tr>
-                <td>Currently Working</td>
-                <td align="right" style="font-size:20px;">-</td>
-            </tr>
-        </table>
-    </li>
-    <li class="curr_working_container">
-        <div class="curr_working">
-            <table></table>
-        </div>
     </li>
 </ul>
 {% endblock sidebar %}

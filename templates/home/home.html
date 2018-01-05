@@ -5,10 +5,10 @@
     <div id="slider_wrapper">
         <ul class="nav nav-tabs sects">
             <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" href="#sec1">Current Events</a>
+                <a class="nav-link active" data-toggle="tab" href="#sec1">Control Panel</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#sec2">Reports</a>
+                <a class="nav-link" data-toggle="tab" href="#sec2">Settings</a>
             </li>
         </ul>
     </div>
@@ -17,39 +17,32 @@
         <div id="sec1" class="sec-content tab-pane fade active show">
             <div class="container-fluid">
                 <div class="row">
-                    {% block analytics %}
-                        {% include "home/home_elements/analytics.html" %}
-                    {% endblock analytics %}
+                    {% block data %}
+                        {% include "home/home_elements/data.html" %}
+                    {% endblock data %}
                 </div>
                 <div class="row">
+                    <div class="col-md-6">
+                        {% block control %}
+                            {% include "home/home_elements/control.html" %}
+                        {% endblock control %}
+                    </div>
                     <div class="col-md-6">
                         {% block status %}
                             {% include "home/home_elements/status.html" %}
                         {% endblock status %}
-                        {% block weather %}
-                            {% include "home/home_elements/weather.html" %}
-                        {% endblock weather %}
-                    </div>
-                    <div class="col-md-6">
-                        {% block shifts %}
-                            {% include "home/home_elements/shifts.html" %}
-                        {% endblock shifts %}
                     </div>
                     <div class="col-md-6">
                     </div>
-                </div>
-                <div class="row">
-                    {% block daily %}
-                        {% include "home/home_elements/daily.html" %}
-                    {% endblock daily %}
                 </div>
             </div>
         </div>
 
         <div id="sec2" class="sec-content tab-pane fade">
-            {% block report %}
-                {% include "home/home_elements/report.html" %}
-            {% endblock report %}
+            <div class="container-fluid">
+                <div class="row">
+                </div>
+            </div>
         </div>
     </div>
 {% endblock content %}

@@ -7,10 +7,6 @@ from django.conf import settings
 # @receiver(post_save, sender=Model, dispatch_uid="model_postsave")
 # def model_postsave(sender, instance, created, **kwargs):
 # 	pass
-#
-#
-# class Model(models.Model):
-# 	pass
 
 class Data(models.Model):
     date_time = models.DateTimeField(null=True)
@@ -20,7 +16,7 @@ class Data(models.Model):
 class Type(models.Model):
     type = models.CharField(max_length=20, null=False)
 
-class Settings(models.Model):
+class Configuration(models.Model):
     #REGULATION
     auto_regulate = models.BooleanField(default=False, null=False)
     min_change_interval = models.IntegerField(default=60, null=False) #seconds

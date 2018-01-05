@@ -21,6 +21,7 @@ body {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 h1 {
@@ -83,8 +84,8 @@ h6 {
 /* app container */
 #app_container {
   position: absolute;
-  top: 0%;
-  left: 0%;
+  top: 0;
+  left: 0;
   width: 100%;
   min-width: 1152px;
   height: 100%;
@@ -96,8 +97,8 @@ h6 {
 
 #footer {
   position: fixed;
-  bottom: 0px;
-  right: 0px;
+  bottom: 0;
+  right: 0;
   width: 100%;
   padding-right: 15px;
   /* Really Big */
