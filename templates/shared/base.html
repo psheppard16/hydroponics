@@ -14,7 +14,7 @@
         {% endblock navbar %}
         <div class="container-fluid">
             <div class="row main-container">
-                <div class="col-md-3 sidebar prevent_select">
+                <div class="col-md-3 sidebar">
                     {% block sidebar %}
                         {% include "shared/sidebar.html" %}
                     {% endblock sidebar %}
@@ -30,8 +30,8 @@
                 </div>
             </div>
         </div>
-        <div id="footer">
-            <button onclick="reportBug('form')"><span class="glyphicon glyphicon-screenshot"></span>Report a Bug</button>
-        </div>
+        {% block footer %}
+            {% include "shared/footer.html" %}
+        {% endblock footer %}
     </body>
 </html>

@@ -18,18 +18,18 @@
             <div class="container-fluid">
                 <div class="row">
                     {% block data %}
-                        {% include "home/home_elements/data.html" %}
+                        {% include "home/control_panel/data.html" %}
                     {% endblock data %}
                 </div>
                 <div class="row">
                     <div class="col-md-6">
                         {% block control %}
-                            {% include "home/home_elements/control.html" %}
+                            {% include "home/control_panel/control.html" %}
                         {% endblock control %}
                     </div>
                     <div class="col-md-6">
                         {% block status %}
-                            {% include "home/home_elements/status.html" %}
+                            {% include "home/control_panel/status.html" %}
                         {% endblock status %}
                     </div>
                     <div class="col-md-6">
@@ -39,10 +39,30 @@
         </div>
 
         <div id="sec2" class="sec-content tab-pane fade">
-            <div class="container-fluid">
-                <div class="row">
+            <form>
+                <div class="container-fluid">
+                    <div class="row">
+                        {% block pH_reg %}
+                            {% include "home/settings/pH_reg.html" %}
+                        {% endblock pH_reg %}
+                    </div>
+                    <div class="row">
+                        {% block nutrient_reg %}
+                            {% include "home/settings/nutrient_reg.html" %}
+                        {% endblock nutrient_reg %}
+                    </div>
+                    <div class="row">
+                        {% block dumping %}
+                            {% include "home/settings/dumping.html" %}
+                        {% endblock dumping %}
+                    </div>
+                    <div class="row">
+                        {% block misc %}
+                            {% include "home/settings/misc.html" %}
+                        {% endblock misc %}
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 {% endblock content %}

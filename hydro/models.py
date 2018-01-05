@@ -33,7 +33,6 @@ class Configuration(models.Model):
     nutrient_adj_volume = models.DecimalField(decimal_places=2, max_digits=5, null=False)
     last_nutrient_change = models.DateTimeField(null=True)
 
-
     #DUMPING
     auto_dump = models.BooleanField(default=False, null=False)
     low_ORP = models.DecimalField(decimal_places=2, max_digits=5, null=False)
