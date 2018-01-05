@@ -30,8 +30,11 @@ SECRET_KEY='super random characters'
 # return to repo root
 `cd ..`
 
-# collect static resources
+# collect static resources for main site
 `gulp` (`gulp watch` for continuous collection)
+
+# collect static resources for admin site
+`python manage.py collectstatic`
 ```
 
 ##### Database Configuration
@@ -121,16 +124,16 @@ WSGIScriptAlias / [project path]/hydroponics/hydroponics/wsgi.py
 #### Permissions
 ```sh
 Give apache permission to access the database:
-`chmod 664 ~/hydroponics/db.sqlite3`
-`sudo chown :www-data ~/hydroponics/db.sqlite3`
-`sudo chown :www-data ~/hydroponics`
+`chmod 664 [project path]/hydroponics/db.sqlite3`
+`sudo chown :www-data [project path]/hydroponics/db.sqlite3`
+`sudo chown :www-data [project path]/hydroponics`
 
 Give apache permission to access the logs:
-`chmod 664 ~/hydroponics/logs/db_sql.log`
-`chmod 664 ~/hydroponics/logs/status.log`
-`sudo chown :www-data ~/hydroponics/logs/db_sql.log`
-`sudo chown :www-data ~/hydroponics/logs/status.log`
-`sudo chown :www-data ~/hydroponics/logs`
+`chmod 664 [project path]/hydroponics/logs/db_sql.log`
+`chmod 664 [project path]/hydroponics/logs/status.log`
+`sudo chown :www-data [project path]/hydroponics/logs/db_sql.log`
+`sudo chown :www-data [project path]/hydroponics/logs/status.log`
+`sudo chown :www-data [project path]/hydroponics/logs`
 ```
 
 #### Server Name

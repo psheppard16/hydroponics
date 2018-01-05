@@ -16,7 +16,7 @@ import logging
 def HomeView(request):
     context = {'title': "Home",
                'user': request.user,
-               'config': Configuration.models.get(),
+               'config': Configuration.objects.get(),
                'pH_data': Data.objects.filter(type=Type(type="pH")),
                'EC_data': Data.objects.filter(type=Type(type="EC")),
                'ORP_data': Data.objects.filter(type=Type(type="ORP")),

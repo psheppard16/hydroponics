@@ -9,9 +9,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LOG_DIR = os.path.join(BASE_DIR, 'logs')
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
+STATIC_ROOT = BASE_DIR + STATIC_URL
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["192.168.0.28"]
 
 ADMINS = [('Preston Sheppard', 'psheppard16@gmail.com')]
 DEBUG = True
@@ -31,7 +31,7 @@ INSTALLED_APPS = (
     'hydro.apps.HydroConfig',
 )
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = (
 	'django.middleware.security.SecurityMiddleware',
 	'django.contrib.sessions.middleware.SessionMiddleware',
 	'django.middleware.common.CommonMiddleware',

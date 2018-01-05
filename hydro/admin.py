@@ -2,12 +2,33 @@ from django.contrib import admin
 from hydro.models import *
 from import_export.admin import ImportExportModelAdmin, ImportExportActionModelAdmin
 
-# class ModelAdmin(SimpleHistoryAdmin, ImportExportModelAdmin, ImportExportActionModelAdmin):
-# 	list_display = ()
-# 	filter_horizontal = ()
-# 	search_fields = []
-# 	fields = ()
-# 	readonly_fields = ()
-# 	list_filter = []
+class DataAdmin(ImportExportModelAdmin, ImportExportActionModelAdmin):
+	list_display = ()
+	filter_horizontal = ()
+	search_fields = ["date_time", "type", "value"]
+	fields = ("date_time", "type", "value")
+	readonly_fields = ()
+	list_filter = []
+admin.site.register(Data, DataAdmin)
 
-# admin.site.register(Model, ModelAdmin)
+class ConfigurationAdmin(ImportExportModelAdmin, ImportExportActionModelAdmin):
+	list_display = ()
+	filter_horizontal = ()
+	search_fields = []
+	fields = ("auto_regulate", "min_change_interval", "polling_range", "minimun_data_count",
+        "low_pH", "high_pH", "pH_adj_volume", "last_pH_change", "low_EC", "high_EC",
+        "nutrient_adj_volume", "last_nutrient_change", "auto_dump", "low_ORP", "high_ORP",
+        "last_dump", "maximum_dump_interval", "minimum_dump_interval", "auto_pump", "auto_refill",
+        "resevoir_volume", "basin_volume")
+	readonly_fields = ()
+	list_filter = []
+admin.site.register(Configuration, ConfigurationAdmin)
+
+class TypeAdmin(ImportExportModelAdmin, ImportExportActionModelAdmin):
+	list_display = ()
+	filter_horizontal = ()
+	search_fields = ["type"]
+	fields = ("type",)
+	readonly_fields = ()
+	list_filter = ["type"]
+admin.site.register(Type, TypeAdmin)
