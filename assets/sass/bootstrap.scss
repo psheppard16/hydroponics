@@ -1,10 +1,12 @@
 @import "mixins";
 
 //Global Boostrap custom stying
+.row {
+  height: 100%;
+}
+
 .card {
   box-shadow: none;
-  moz-box-shadow: none;
-  webkit-box-shadow: none;
   border-radius: 0;
   border: 0;
   margin-top: 30px;
@@ -30,7 +32,7 @@
 }
 
 .popover {
-  border-radius: 0px;
+  border-radius: 0;
 
   button {
     border: 1px solid #ababab;
@@ -56,7 +58,7 @@
 //datepicker
 .form-inline {
   .datepicker {
-    border-radius: 0px;
+    border-radius: 0;
     font-weight: 400;
     background: #fff;
     -webkit-box-shadow: none;
@@ -68,7 +70,7 @@
       }
       td {
         text-shadow: none !important;
-        border-radius: 0px;
+        border-radius: 0;
         &.today {
           background: $theGreen !important;
           color: #fff !important;
@@ -94,7 +96,7 @@
 }
 
 .datepicker {
-  border-radius: 0px;
+  border-radius: 0;
   font-weight: 400;
   background: $theBlue;
   -webkit-box-shadow: none;
@@ -106,17 +108,17 @@
   table {
     th.datepicker-switch {
       color: #fff;
-      -webkit-border-radius: 0px;
-      -moz-border-radius: 0px;
-      border-radius: 0px;
+      -webkit-border-radius: 0;
+      -moz-border-radius: 0;
+      border-radius: 0;
       &:hover {
         background: #6DAFD9 !important;
       }
     }
     th.prev, th.next {
-      -webkit-border-radius: 0px;
-      -moz-border-radius: 0px;
-      border-radius: 0px;
+      -webkit-border-radius: 0;
+      -moz-border-radius: 0;
+      border-radius: 0;
       &:hover {
         background: #6DAFD9 !important;
       }
@@ -127,7 +129,7 @@
     }
     td {
       text-shadow: none !important;
-      border-radius: 0px;
+      border-radius: 0;
       padding: 8px;
       font-size: 12px;
       font-weight: 500;
@@ -167,14 +169,14 @@
 .input-daterange {
   input {
     &:first-child {
-      -webkit-border-radius: 0px;
-      -moz-border-radius: 0px;
-      border-radius: 0px;
+      -webkit-border-radius: 0;
+      -moz-border-radius: 0;
+      border-radius: 0;
     }
     &:last-child {
-      -webkit-border-radius: 0px;
-      -moz-border-radius: 0px;
-      border-radius: 0px;
+      -webkit-border-radius: 0;
+      -moz-border-radius: 0;
+      border-radius: 0;
     }
     &.form-control {
       &:focus {
@@ -289,7 +291,7 @@
       box-shadow: none;
       background-image: none;
       background: transparent;
-      border-radius: 0px;
+      border-radius: 0;
       color: #949595;
     }
   }
@@ -353,7 +355,7 @@ div[id^='id_conflict_'] .slider-handle { //regex to get only the conflict slider
 .color_key {
   background: #fff;
   padding: 10px;
-  margin: 0px;
+  margin: 0;
   border: 1px solid #ddd;
   border-bottom-color: #f3f3f3;
   font-size: 12px;
@@ -396,7 +398,7 @@ div[id^='id_conflict_'] .slider-handle { //regex to get only the conflict slider
 
 #modal_inout {
   width: 100%;
-  margin-top: 0px;
+  margin-top: 0;
   text-align: center;
 
   select {
@@ -408,7 +410,6 @@ div[id^='id_conflict_'] .slider-handle { //regex to get only the conflict slider
     height: 40px;
     background: none;
     border: 1px solid #bebebe;
-    padding: 5px;
     color: #787878;
     margin-bottom: 10px;
     padding: 14px 15px;

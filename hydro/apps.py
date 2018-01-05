@@ -66,21 +66,21 @@ class HydroConfig(AppConfig):
                             elif avg_EC > config.high_EC:
                                 raise Exception("EC values above desired levels")
 
-                if config.auto_dump:
+                if config.auto_water_change:
                     # ORP
-                    max_dump_interval = datetime.timedelta(days=config.maximum_dump_interval)
-                    min_dump_interval = datetime.timedelta(days=config.minimum_dump_interval)
-                    can_dump = config.last_dump + min_dump_interval < datetime.datetime.now()
-                    must_dump = config.last_dump + max_dump_interval > datetime.datetime.now()
-                    if must_dump:
-                        pump.dump()
-                    elif can_dump:
+                    max_water_change_interval = datetime.timedelta(days=config.maximum_water_change_interval)
+                    min_water_change_interval = datetime.timedelta(days=config.minimum_water_change_interval)
+                    can_water_change = config.last_water_change + min_water_change_interval < datetime.datetime.now()
+                    must_water_change = config.last_water_change + max_water_change_interval > datetime.datetime.now()
+                    if must_water_change:
+                        pump.water_change()
+                    elif can_water_change:
                         avg_ORP = average_range("ORP", start, end, config.minimun_data_count)
                         if avg_ORP:
                             if avg_ORP < config.low_ORP:
-                                pump.dump()
+                                pump.water_change()
                             elif avg_ORP > config.high_ORP:
-                                pump.dump()
+                                pump.water_change()
 
             # collect data every second forever
             collect_data(repeat=1, repeat_until=None)

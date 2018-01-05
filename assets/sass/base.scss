@@ -1,6 +1,7 @@
 @charset "utf-8";
-/* base css */
+@import "mixins";
 
+/* base css */
 html {
   background: none;
   overflow-y: hidden;
@@ -24,124 +25,25 @@ body {
   overflow-y: scroll;
 }
 
-h1 {
-  background: none;
-  font-weight: 700;
-  font-size: 20px;
-  color: #959494;
-}
-
-h2 {
-  background: none;
-  font-weight: 700;
-  font-size: 12px;
-  color: #fff;
-}
-
-h3 {
-  // color: #787878;
-  color: #c7c7c7;
-  letter-spacing: 0.1em;
-  font-size: 15px;
-  margin-bottom: 10px;
-}
-
-h4 {
-  color: #d44141;
-  letter-spacing: 0.1em;
-  font-size: 13px;
-}
-
-h5 {
-  color: #787878;
-  font-size: 12px;
-  font-family: Ubuntu;
-  font-weight: bold;
-  font-style: normal;
-}
-
-h6 {
-  color: #787878;
-  font-size: 12px;
-  font-family: Ubuntu;
-  font-weight: normal;
-  font-style: normal;
-  padding: 0;
-  margin: 0;
-}
-
-@font-face {
-  font-family: 'NevisBold';
-  src: url('../fonts/nevis/nevis.eot');
-  src: url('../fonts/nevis/nevis.eot') format('embedded-opentype'),
-  url('../fonts/nevis/nevis.woff') format('woff'),
-  url('../fonts/nevis/nevis.ttf') format('truetype'),
-  url('../fonts/nevis/nevis.svg#NevisBold') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
-
-/* app container */
-#app_container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  min-width: 1152px;
-  height: 100%;
-}
-
-#slider_wrapper {
-  width: 100%;
-  background-color: #fafafa;
-  text-align: center;
-}
-
-ul.sects {
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  li {
-    margin: 0;
-    display: inline-block;
-    color: #b6b6b6;
-    a {
-      display: block;
-      padding: 5px;
-      padding-top: 18px;
-      font-size: 0.8em;
-      height: 48px;
-      color: #A3A3A3;
-      text-decoration: none;
-    }
-  }
-  li:hover {
-    color: #d1d1d1;
-  }
-}
-
-.main .page-header {
-  padding-top: 19px;
-  text-align: left;
-  color: #787878;
-}
-
+//Main page sytling
 .main-container {
-  min-height: calc(100vh - 48px);
-}
+  min-height: 100vh;
 
-.main {
-  padding: 0;
+  .main {
+    padding: 0;
 
-  .page-header {
-    margin-top: 0px;
-    width: 100%;
-    height: 50px;
-    background: #fff;
-    padding-left: 5%;
-    padding-top: 13px;
-    margin-bottom: 0;
-    border-bottom: 1px solid #eee;
-    border-radius: 0;
+    .page-header {
+      text-align: left;
+      color: #787878;
+      margin-top: 0px;
+      width: 100%;
+      height: 50px;
+      background: #fff;
+      padding-left: 5%;
+      padding-top: 13px;
+      margin-bottom: 0;
+      border-bottom: 1px solid #eee;
+      border-radius: 0;
+    }
   }
 }

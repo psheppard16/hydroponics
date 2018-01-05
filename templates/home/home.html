@@ -22,18 +22,14 @@
                     {% endblock data %}
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
-                        {% block control %}
-                            {% include "home/control_panel/control.html" %}
-                        {% endblock control %}
-                    </div>
-                    <div class="col-md-6">
-                        {% block status %}
-                            {% include "home/control_panel/status.html" %}
-                        {% endblock status %}
-                    </div>
-                    <div class="col-md-6">
-                    </div>
+                    {% block control %}
+                        {% include "home/control_panel/control.html" %}
+                    {% endblock control %}
+                </div>
+                <div class="row">
+                    {% block status %}
+                        {% include "home/control_panel/status.html" %}
+                    {% endblock status %}
                 </div>
             </div>
         </div>
@@ -52,9 +48,9 @@
                         {% endblock nutrient_reg %}
                     </div>
                     <div class="row">
-                        {% block dumping %}
-                            {% include "home/settings/dumping.html" %}
-                        {% endblock dumping %}
+                        {% block water_reg %}
+                            {% include "home/settings/water_reg.html" %}
+                        {% endblock water_reg %}
                     </div>
                     <div class="row">
                         {% block misc %}

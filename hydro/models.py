@@ -33,13 +33,13 @@ class Configuration(models.Model):
     nutrient_adj_volume = models.DecimalField(decimal_places=2, max_digits=5, null=False)
     last_nutrient_change = models.DateTimeField(null=True)
 
-    #DUMPING
-    auto_dump = models.BooleanField(default=False, null=False)
+    #WATER CHANGE
+    auto_water_change = models.BooleanField(default=False, null=False)
     low_ORP = models.DecimalField(decimal_places=2, max_digits=5, null=False)
     high_ORP = models.DecimalField(decimal_places=2, max_digits=5, null=False)
-    last_dump = models.DateTimeField(null=True)
-    maximum_dump_interval = models.IntegerField(default=31, null=False) #days
-    minimum_dump_interval = models.IntegerField(default=1, null=False) #days
+    last_water_change = models.DateTimeField(null=True)
+    maximum_water_change_interval = models.IntegerField(default=31, null=False) #days
+    minimum_water_change_interval = models.IntegerField(default=1, null=False) #days
 
     #PUMPING
     auto_pump = models.BooleanField(default=False, null=False)

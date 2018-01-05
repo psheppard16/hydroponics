@@ -12,7 +12,7 @@ class Pump:
         self.peri_pump2 = Relay(13)
         self.peri_pump3 = Relay(15)
 
-        self.dump_valve = Relay(29)
+        self.water_change_valve = Relay(29)
         self.water_valve = Relay(31)
         self.nutrients_valve = Relay(33)
 
@@ -63,10 +63,10 @@ class Pump:
         self.start_pump()
 
     @background(queue='pump_queue')
-    def dump(self, resevoir_volume, basin_volume):
+    def water_change(self, resevoir_volume, basin_volume):
         self.stop_pump()
 
-        self.dump_valve.activate()
+        self.water_change_valve.activate()
 
         pulse_length = resevoir_volume / 4.5 * 60 #pumps at 4.5 L/min
         self.main_pump_forward.pulse_on(pulse_length)
@@ -74,7 +74,7 @@ class Pump:
         pulse_length = basin_volume / 4.5 * 60  #pumps at ? L/min
         self.nutrients_valve.pulse_on(pulse_length)
 
-        self.dump_valve.deactivate()
+        self.water_change_valve.deactivate()
 
         self.start_pump()
 

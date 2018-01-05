@@ -9,6 +9,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LOG_DIR = os.path.join(BASE_DIR, 'logs')
 
 STATIC_URL = '/static/'
+STATIC_DIR = os.path.join(BASE_DIR, 'logs')
 STATIC_ROOT = BASE_DIR + STATIC_URL
 
 ALLOWED_HOSTS = ["192.168.0.28"]

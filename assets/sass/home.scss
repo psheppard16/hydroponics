@@ -1,1 +1,61 @@
 @import "mixins";
+
+//Slider styling
+#slider_wrapper {
+  width: 100%;
+  background-color: #fafafa;
+  text-align: center;
+
+  ul.sects {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    li {
+      margin: 0;
+      display: inline-block;
+      color: #b6b6b6;
+      a {
+        display: block;
+        padding: 5px;
+        padding-top: 18px;
+        font-size: 0.8em;
+        height: 48px;
+        color: #A3A3A3;
+        text-decoration: none;
+      }
+    }
+    li:hover {
+      color: #d1d1d1;
+    }
+  }
+}
+
+//Content sytling
+.sec-content {
+  clear: both;
+  padding: 5%;
+  padding-top: 0;
+  text-align: center;
+  margin-top: 20px;
+
+  .sub_section {
+    width: 100%;
+    margin-bottom: 20px;
+    margin-top: 30px;
+
+    .header {
+      background-color: #c1cacf;
+      color: #636363;
+      font-size: 12px;
+      padding: 20px 5%;
+    }
+
+    .sub_content {
+      background-color: $white;
+      color: #959494;
+      font-size: 12px;
+      font-variant: normal;
+      overflow:hidden;
+    }
+  }
+}

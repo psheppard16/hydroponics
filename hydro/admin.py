@@ -17,9 +17,9 @@ class ConfigurationAdmin(ImportExportModelAdmin, ImportExportActionModelAdmin):
 	search_fields = []
 	fields = ("auto_regulate", "min_change_interval", "polling_range", "minimun_data_count",
         "low_pH", "high_pH", "pH_adj_volume", "last_pH_change", "low_EC", "high_EC",
-        "nutrient_adj_volume", "last_nutrient_change", "auto_dump", "low_ORP", "high_ORP",
-        "last_dump", "maximum_dump_interval", "minimum_dump_interval", "auto_pump", "auto_refill",
-        "resevoir_volume", "basin_volume")
+        "nutrient_adj_volume", "last_nutrient_change", "auto_water_change", "low_ORP", "high_ORP",
+        "last_water_change", "maximum_water_change_interval", "minimum_water_change_interval", "auto_pump",
+		"auto_refill", "resevoir_volume", "basin_volume")
 	readonly_fields = ()
 	list_filter = []
 admin.site.register(Configuration, ConfigurationAdmin)
