@@ -64,6 +64,19 @@ ul.sects {
     margin-bottom: 20px;
     margin-top: 30px;
 
+    .sub_content {
+      background: #fff;
+      color: #959494;
+      font-variant: normal;
+      font-size: 12px;
+      font-weight:300;
+      overflow:hidden;
+      -webkit-transition: all 0.3s ease-out;
+      -moz-transition: all 0.3s ease-out;
+      -o-transition: all 0.3s ease-out;
+      transition: all 0.3s ease-out;
+    }
+
     .header {
       width: 100%;
       padding: 20px 5%;
