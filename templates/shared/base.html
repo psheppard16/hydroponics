@@ -9,15 +9,11 @@
     </head>
 
     <body>
-        {% block navbar %}
-            {% include "shared/navbar.html" %}
-        {% endblock navbar %}
+    {% include "shared/navbar.html" %}
         <div class="container-fluid">
             <div class="row main-container">
                 <div class="col-md-3 sidebar">
-                    {% block sidebar %}
-                        {% include "shared/sidebar.html" %}
-                    {% endblock sidebar %}
+                    {% include "shared/sidebar.html" %}
                 </div>
                 <div class="col-md-9 main">
                     <h2 class="page-header">
@@ -30,8 +26,6 @@
                 </div>
             </div>
         </div>
-        {% block footer %}
-            {% include "shared/footer.html" %}
-        {% endblock footer %}
+    {% include "shared/footer.html" %}
     </body>
 </html>

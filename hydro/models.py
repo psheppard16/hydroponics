@@ -17,23 +17,21 @@ class Type(models.Model):
     type = models.CharField(max_length=20, null=False)
 
 class Configuration(models.Model):
-    #REGULATION
-    auto_regulate = models.BooleanField(default=False, null=False)
-    min_change_interval = models.IntegerField(default=60, null=False) #seconds
-    polling_range = models.IntegerField(default=60, null=False) #seconds
-    minimun_data_count = models.IntegerField(default=100, null=False)
-
+    #PH REGULATION
+    auto_regulate_pH = models.BooleanField(default=False, null=False)
     low_pH = models.DecimalField(decimal_places=2, max_digits=5, null=False)
     high_pH = models.DecimalField(decimal_places=2, max_digits=5, null=False)
     pH_adj_volume = models.DecimalField(decimal_places=2, max_digits=5, null=False)
     last_pH_change = models.DateTimeField(null=True)
 
+    #NUTRIENT REGULATION
+    auto_regulate_nutrients = models.BooleanField(default=False, null=False)
     low_EC = models.DecimalField(decimal_places=2, max_digits=5, null=False)
     high_EC = models.DecimalField(decimal_places=2, max_digits=5, null=False)
     nutrient_adj_volume = models.DecimalField(decimal_places=2, max_digits=5, null=False)
     last_nutrient_change = models.DateTimeField(null=True)
 
-    #WATER CHANGE
+    #WASTE REGULATION
     auto_water_change = models.BooleanField(default=False, null=False)
     low_ORP = models.DecimalField(decimal_places=2, max_digits=5, null=False)
     high_ORP = models.DecimalField(decimal_places=2, max_digits=5, null=False)
@@ -41,11 +39,13 @@ class Configuration(models.Model):
     maximum_water_change_interval = models.IntegerField(default=31, null=False) #days
     minimum_water_change_interval = models.IntegerField(default=1, null=False) #days
 
-    #PUMPING
+    #WATER REGULATION
     auto_pump = models.BooleanField(default=False, null=False)
-
-    #REFILL
     auto_refill = models.BooleanField(default=False, null=False)
-
     resevoir_volume = models.IntegerField(default=27, null=False) #Liters
     basin_volume = models.IntegerField(default=27, null=False) #Liters
+
+    #DATA
+    min_change_interval = models.IntegerField(default=60, null=False) #seconds
+    polling_range = models.IntegerField(default=60, null=False) #seconds
+    minimun_data_count = models.IntegerField(default=100, null=False)

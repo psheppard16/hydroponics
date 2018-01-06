@@ -17,19 +17,13 @@
         <div id="sec1" class="sec-content tab-pane fade active show">
             <div class="container-fluid">
                 <div class="row">
-                    {% block data %}
-                        {% include "home/control_panel/data.html" %}
-                    {% endblock data %}
+                    {% include "home/control_panel/data.html" %}
                 </div>
                 <div class="row">
-                    {% block control %}
-                        {% include "home/control_panel/control.html" %}
-                    {% endblock control %}
+                    {% include "home/control_panel/control.html" %}
                 </div>
                 <div class="row">
-                    {% block status %}
-                        {% include "home/control_panel/status.html" %}
-                    {% endblock status %}
+                    {% include "home/control_panel/status.html" %}
                 </div>
             </div>
         </div>
@@ -38,24 +32,23 @@
             <form>
                 <div class="container-fluid">
                     <div class="row">
-                        {% block pH_reg %}
+                        <div class="col-6">
                             {% include "home/settings/pH_reg.html" %}
-                        {% endblock pH_reg %}
-                    </div>
-                    <div class="row">
-                        {% block nutrient_reg %}
+                        </div>
+                        <div class="col-6">
                             {% include "home/settings/nutrient_reg.html" %}
-                        {% endblock nutrient_reg %}
+                        </div>
                     </div>
                     <div class="row">
-                        {% block water_reg %}
+                        <div class="col-6">
+                            {% include "home/settings/waste_reg.html" %}
+                        </div>
+                        <div class="col-6">
                             {% include "home/settings/water_reg.html" %}
-                        {% endblock water_reg %}
+                        </div>
                     </div>
                     <div class="row">
-                        {% block misc %}
-                            {% include "home/settings/misc.html" %}
-                        {% endblock misc %}
+                        {% include "home/settings/data.html" %}
                     </div>
                 </div>
             </form>

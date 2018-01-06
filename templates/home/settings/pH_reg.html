@@ -1,9 +1,47 @@
-{% block status %}
 <div class="sub_section current_status">
     <div class="header">pH Regulation</div>
     <div class="sub_content">
-        <div class="row">
+        <div class="row justify-content-start">
+            <div class="col-4 align-self-center">
+                <h4>auto_regulate_pH</h4>
+            </div>
+            <div class="col-8 align-self-center">
+                <dive class="row justify-content-end">
+                    <div class="col-4">
+                        <input id="toggle_one" type="checkbox" checked data-toggle="toggle">
+                    </div>
+                </dive>
+            </div>
+            <div class="col-4 align-self-center">
+                <h4>pH_adj_volume</h4>
+            </div>
+            <div class="col-8 align-self-center">
+                <dive class="row justify-content-end">
+                    <div class="col-4">
+                        <input id="toggle_two" type="checkbox" checked data-toggle="toggle">
+                    </div>
+                </dive>
+            </div>
+            <div class="col-4 align-self-center">
+                <h4>low_pH</h4>
+            </div>
+            <div class="col-8 align-self-center">
+                <dive class="row justify-content-end">
+                    <div class="col-4">
+                        <input id="toggle_three" type="checkbox" checked data-toggle="toggle">
+                    </div>
+                </dive>
+            </div>
+            <div class="col-4 align-self-center">
+                <h4>high_pH</h4>
+            </div>
+            <div class="col-8 align-self-center">
+                <dive class="row justify-content-end">
+                    <div class="col-4">
+                        <input id="toggle_four" type="checkbox" checked data-toggle="toggle">
+                    </div>
+                </dive>
+            </div>
         </div>
     </div>
 </div>
-{% endblock status %}

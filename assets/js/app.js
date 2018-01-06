@@ -8,15 +8,17 @@ require("noty");
 require("bootstrap/dist/js/bootstrap.bundle.js");
 require("bootstrap-datepicker/dist/js/bootstrap-datepicker");
 require("bootstrap-slider/dist/bootstrap-slider");
-let md = require("mdbootstrap");
+let md = require("mdbootstrap/js/mdb.min.js");
 require("jscrollpane");
+require("bootstrap-toggle/js/bootstrap2-toggle.min.js");
 
 $(document).ready(() => {
-    $(".datepicker").datepicker({
-        orientation: "bottom auto"
-    });
-    console.log("awfwafwf");
+    //initialize datepicker ex.
+    // $(".datepicker").datepicker({
+    //     orientation: "bottom auto"
+    // });
 
+    $('#toggle_one').bootstrapToggle();
 
     let toTime = function(decimal) {
         let hrs = parseInt(Number(decimal));
@@ -40,7 +42,6 @@ $(document).ready(() => {
             $("#" + this.id + "_val_1").text(toTime(slideEvt.value[1]));
         });
     });
-    console.log("awfwafwf");
 
     let ctxL = document.getElementById("lineChart").getContext("2d");
     new md.Chart(ctxL, {

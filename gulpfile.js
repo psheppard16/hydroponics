@@ -95,6 +95,10 @@ gulp.task("css", ["sass"], () => {
     gulp.src("node_modules/bootstrap-slider/dist/css/*.min.css")
 		.pipe(gulp.dest("static/css/lib"));
 
+	// bootstrap-toggle
+    gulp.src("node_modules/bootstrap-toggle/css/bootstrap2-toggle.min.css")
+		.pipe(gulp.dest("static/css/lib"));
+
 	// jscrollpane
     gulp.src("node_modules/jscrollpane/style/*.css")
 		.pipe(gulp.dest("static/css/lib"));

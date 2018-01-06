@@ -15,7 +15,7 @@ class ConfigurationAdmin(ImportExportModelAdmin, ImportExportActionModelAdmin):
 	list_display = ()
 	filter_horizontal = ()
 	search_fields = []
-	fields = ("auto_regulate", "min_change_interval", "polling_range", "minimun_data_count",
+	fields = ("auto_regulate_pH", "auto_regulate_nutrients", "min_change_interval", "polling_range", "minimun_data_count",
         "low_pH", "high_pH", "pH_adj_volume", "last_pH_change", "low_EC", "high_EC",
         "nutrient_adj_volume", "last_nutrient_change", "auto_water_change", "low_ORP", "high_ORP",
         "last_water_change", "maximum_water_change_interval", "minimum_water_change_interval", "auto_pump",
