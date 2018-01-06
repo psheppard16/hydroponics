@@ -42,10 +42,10 @@ class Configuration(models.Model):
     #WATER REGULATION
     auto_pump = models.BooleanField(default=False, null=False)
     auto_refill = models.BooleanField(default=False, null=False)
-    resevoir_volume = models.IntegerField(default=27, null=False) #Liters
-    basin_volume = models.IntegerField(default=27, null=False) #Liters
+    resevoir_volume = models.IntegerField(default=27, null=False)  # liters
+    basin_volume = models.IntegerField(default=27, null=False)  # liters
 
     #DATA
-    min_change_interval = models.IntegerField(default=60, null=False) #seconds
-    polling_range = models.IntegerField(default=60, null=False) #seconds
+    min_change_interval = models.IntegerField(default=60, null=False)  # minutes
+    polling_range = models.IntegerField(default=60, null=False)  #minutes
     minimun_data_count = models.IntegerField(default=100, null=False)

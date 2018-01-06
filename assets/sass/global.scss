@@ -103,10 +103,10 @@ button {
   }
   &.confirm {
     @extend .button_default;
-    background: #bebebe;
+    background: $white;
 
     &:hover {
-      background: #acacac;
+      background: $theGreen;
     }
   }
   &.light {
@@ -154,6 +154,7 @@ button {
     }
   }
   &.delete {
+    @extend .button_default;
     border: 1px solid #b6b6b6;
     color: #969696;
     background: transparent;
@@ -168,17 +169,39 @@ button {
 }
 
 //Input styling
-input {
+.input_default {
   color: #949595;
   letter-spacing: 0.1em;
   font-size: 12px;
   font-variant: normal;
   text-transform: none;
-  font-weight: 400;
 }
 
-input:focus, select:focus, textarea:focus, button:focus {
-  outline: none;
+input {
+  &.number {
+    @extend .input_default;
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid #bdbdbd;
+    outline: 0;
+    width: 60px;
+    height: 30px;
+    font-size: 15px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+    -webkit-transition: all .3s;
+    transition: all .3s;
+
+    &:hover {
+      border-bottom: 2px solid $theBlue !important;
+    }
+
+    &:focus {
+      border-bottom: 2px solid $theBlue !important;
+    }
+  }
 }
 
 //Textarea styling
@@ -190,4 +213,67 @@ textarea {
   font-size: 12px;
   font-weight: normal;
   font-variant: normal;
+}
+
+//Checkbox styling
+/* The switch - the box around the slider */
+.switch {
+  margin: 5px;
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+
+  /* Hide default HTML checkbox */
+  input {
+    display: none;
+  }
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+
+  &:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+}
+
+input:checked + .slider {
+  background-color: $theBlue;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px $theBlue;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
 }

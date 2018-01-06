@@ -15,22 +15,27 @@
 
     <div class="tab-content">
         <div id="sec1" class="sec-content tab-pane fade active show">
-            <div class="container-fluid">
-                <div class="row">
-                    {% include "home/control_panel/data.html" %}
+            <form>
+                <div class="container-fluid">
+                    <div class="row">
+                        {% include "home/control_panel/data.html" %}
+                    </div>
+                    <div class="row">
+                        {% include "home/control_panel/control.html" %}
+                    </div>
+                    <div class="row">
+                        {% include "home/control_panel/status.html" %}
+                    </div>
                 </div>
-                <div class="row">
-                    {% include "home/control_panel/control.html" %}
-                </div>
-                <div class="row">
-                    {% include "home/control_panel/status.html" %}
-                </div>
-            </div>
+            </form>
         </div>
 
         <div id="sec2" class="sec-content tab-pane fade">
             <form>
                 <div class="container-fluid">
+                    <div class="row">
+                        <input type="submit" class="red">
+                    </div>
                     <div class="row">
                         <div class="col-6">
                             {% include "home/settings/pH_reg.html" %}

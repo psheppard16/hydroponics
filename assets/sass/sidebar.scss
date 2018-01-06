@@ -6,11 +6,6 @@
 /* border mixins */
 $sidebarBorder: 1px solid #434343;
 
-/* Hide for mobile, show later */
-.sidebar {
-  display: none;
-}
-
 
 /* Table Styling */
 table.def_table {
@@ -186,8 +181,6 @@ table.def_table {
   }
 }
 
-
-
 li.sidebar_user_type {
   width: 100%;
   height: 50px;
@@ -241,94 +234,6 @@ li.sidebar_sub {
     td {
       height: 100%;
       vertical-align: middle;
-    }
-  }
-}
-
-/* Currently Working Styles */ //this doesnt belong here
-.curr_working_container {
-  width: 100%;
-  height: 200px;
-  padding: 15px 3% 15px 0;
-
-  button.sidebar_multipunch {
-    width: 103%;
-    height: 30px;
-    background: #4e4e4e;
-    border: none;
-    outline: none;
-    color: #fff;
-    text-transform: lowercase;
-    letter-spacing: 0.1em;
-    margin-top: 10px;
-    padding-left: 10%;
-    text-align: left;
-    padding-bottom: 4px;
-
-    &:hover {
-      background: #565656;
-    }
-  }
-
-  .curr_working {
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    outline: none;
-
-    table {
-      width: 97%
-    }
-
-    tr {
-      width: 100%;
-
-      &:hover {
-        background: #4a4a4a;
-      }
-    }
-
-    td {
-      color: #bcbcbc;
-      font-size: 9px;
-      padding-top: 5px;
-      padding-bottom: 5px;
-    }
-    td.status_ind {
-      padding-right: 15px;
-      padding-left: 5%;
-      width: 10%;
-      min-width: 10%;
-
-      .circle {
-        -webkit-border-radius: 9px;
-        -moz-border-radius: 9px;
-        border-radius: 9px;
-        width: 9px;
-        height: 9px;
-      }
-      .circle.pres {
-        background-color: $theGreen;
-      }
-      .circle.past {
-        background-color: $theRed;
-      }
-    }
-    td.user_name {
-      width: 48%;
-      padding-left: 2%;
-    }
-    td.user_time {
-      width: 35%;
-      color: #989898;
-      text-align: right;
-    }
-    td.punch_checkbox {
-      width: 5%;
-
-      input {
-        margin: 0;
-      }
     }
   }
 }
