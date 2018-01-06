@@ -129,10 +129,10 @@ gulp.task("images", ["clean-images"], () => {
     .pipe(gulp.dest("static/img"));
 })
 gulp.task("default", () => {
-    sequence("webpack", "css", "fonts", "images";
-)
+    sequence("webpack", "css", "fonts", "images");
 })
 gulp.task("watch", () => {
+    sequence("webpack", "css", "fonts", "images");
     gulp.watch("assets/js/**/*.js", ["webpack"]);
     gulp.watch("assets/sass/**/*.scss", ["css"]);
     gulp.watch("assets/fonts/**/*.+(eot|svg|ttf|woff|otf|css)", ["fonts"]);

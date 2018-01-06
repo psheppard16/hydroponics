@@ -37,4 +37,4 @@ $(document).ready(() => {
             $("#" + this.id + "_val_1").text(toTime(slideEvt.value[1]));
         });
     });
-})
+});
