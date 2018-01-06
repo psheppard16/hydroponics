@@ -82,6 +82,7 @@ h6 {
 //Button styling
 .button_default {
   border: none;
+  margin: 0;
   font-variant: normal;
   display: block;
   text-align: center;
@@ -104,9 +105,12 @@ button {
   &.confirm {
     @extend .button_default;
     background: $white;
+    border-bottom: 4px solid $grey;
+    -webkit-transition: all .3s;
+    transition: all .3s;
 
     &:hover {
-      background: $theGreen;
+      border-bottom: 4px solid $theBlue;
     }
   }
   &.light {
@@ -238,7 +242,7 @@ textarea {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
+  background-color: $grey;
   -webkit-transition: .4s;
   transition: .4s;
 
