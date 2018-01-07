@@ -125,9 +125,9 @@ WSGIScriptAlias / [project path]/hydroponics/hydroponics/wsgi.py
 ```sh
 Create group for apache, and all users
 `sudo groupadd super_group`
-`sudo gpasswd -a www-data super_group`
-`sudo gpasswd -a pi super_group`      # if you have a user named pi
-`sudo gpasswd -a foo super_group`     # if you have a user named foo
+`sudo gpasswd -a www-data super_group` # if the apache user is www-data
+`sudo gpasswd -a pi super_group`       # if you have a user named pi
+`sudo gpasswd -a foo super_group`      # if you have a user named foo
 ...
 
 Give super_group permission to access the database:
@@ -143,8 +143,10 @@ Give super_group permission to access the logs:
 `sudo chmod 664 [project path]/hydroponics/logs/status.log`
 
 Give super_group permission to access the GPIO pins:
-`sudo chown :super_group /dev/mem`
-`sudo chmod g+rw /dev/mem`
+`sudo adduser www-data gpio` # if the apache user is www-data
+`sudo adduser pi gpio`       # if you have a user named pi
+`sudo adduser foo gpio`      # if you have a user named foo
+...
 ```
 
 ##### Server Name
