@@ -53,6 +53,13 @@ Make migrations:
 
 Run migrations: 
 `python manage.py migrate`
+
+Create a super user:
+`python manage.py createsuperuser`
+
+Populate database with default models:
+`python manage.py configure_hydro`
+
 ```
 
 ### Documentation
