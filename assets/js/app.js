@@ -30,11 +30,13 @@ $(document).ready(() => {
         else return hrs + ":" + min + " PM";
     };
 
-    $(".request_slider, .conflict_slider").each(function () {
-        $(this).slider({id: this.id, min: 8, max: 24, range: true, value: [10, 12], step: .25, handle: "square", tooltip: "hide"});
+    $(".data-slider").each(function () {
+        $(this).slider({id: this.id, range: true, handle: "square", tooltip: "hide"});
         $(this).on("slide", function(slideEvt) {
-            $("#" + this.id + "_val_0").text(toTime(slideEvt.value[0]));
-            $("#" + this.id + "_val_1").text(toTime(slideEvt.value[1]));
+            let val_1 = $("#" + this.id + "_val_0");
+            let val_2 = $("#" + this.id + "_val_1");
+            val_1.text(slideEvt.value[0] + " " + val_1.text().split(" ")[1]);
+            val_2.text(slideEvt.value[1] + " " + val_2.text().split(" ")[1]);
         });
     });
 });

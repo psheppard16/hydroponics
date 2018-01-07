@@ -123,17 +123,29 @@ WSGIScriptAlias / [project path]/hydroponics/hydroponics/wsgi.py
 
 #### Permissions
 ```sh
-Give apache permission to access the database:
-`chmod 664 [project path]/hydroponics/db.sqlite3`
-`sudo chown :www-data [project path]/hydroponics/db.sqlite3`
-`sudo chown :www-data [project path]/hydroponics`
+Create group for apache, www-data, and all users
+groupadd super_group
+gpasswd -a apache super_group
+gpasswd -a www-data super_group
+gpasswd -a pi super_group   # if you have a user named pi
+gpasswd -a foo super_group # if you have a user named foo
+...
 
-Give apache permission to access the logs:
-`chmod 664 [project path]/hydroponics/logs/db_sql.log`
-`chmod 664 [project path]/hydroponics/logs/status.log`
-`sudo chown :www-data [project path]/hydroponics/logs/db_sql.log`
-`sudo chown :www-data [project path]/hydroponics/logs/status.log`
-`sudo chown :www-data [project path]/hydroponics/logs`
+Give super_group permission to access the database:
+`sudo chown super_group [project path]/hydroponics/db.sqlite3`
+`sudo chown super_group [project path]/hydroponics`
+`sudo chmod 664 [project path]/hydroponics/db.sqlite3`
+
+Give super_group permission to access the logs:
+`sudo chown super_group [project path]/hydroponics/logs/db_sql.log`
+`sudo chown super_group [project path]/hydroponics/logs/status.log`
+`sudo chown super_group [project path]/hydroponics/logs`
+`sudo chmod 664 [project path]/hydroponics/logs/db_sql.log`
+`sudo chmod 664 [project path]/hydroponics/logs/status.log`
+
+Give super_group permission to access the GPIO pins:
+`sudo chown www-data /dev/mem`
+`sudo chmod g+rw /dev/mem`
 ```
 
 #### Server Name

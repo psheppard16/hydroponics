@@ -7,6 +7,7 @@ class Pump:
     def __init__(self):
         # set up GPIO using BCM numbering
         GPIO.setmode(GPIO.BOARD)
+        GPIO.setwarnings(False)
 
         self.peri_pump1 = Relay(11)
         self.peri_pump2 = Relay(13)

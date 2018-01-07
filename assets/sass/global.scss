@@ -220,7 +220,7 @@ textarea {
 }
 
 //Checkbox styling
-/* The switch - the box around the slider */
+/* The switch - the box around the toggle */
 .switch {
   margin: 5px;
   position: relative;
@@ -234,8 +234,8 @@ textarea {
   }
 }
 
-/* The slider */
-.slider {
+// Toggle styling
+.toggle {
   position: absolute;
   cursor: pointer;
   top: 0;
@@ -259,25 +259,25 @@ textarea {
   }
 }
 
-input:checked + .slider {
+input:checked + .toggle {
   background-color: $theBlue;
 }
 
-input:focus + .slider {
+input:focus + .toggle {
   box-shadow: 0 0 1px $theBlue;
 }
 
-input:checked + .slider:before {
+input:checked + .toggle:before {
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
   transform: translateX(26px);
 }
 
-/* Rounded sliders */
-.slider.round {
+//Rounded toggle
+.toggle.round {
   border-radius: 34px;
 }
 
-.slider.round:before {
+.toggle.round:before {
   border-radius: 50%;
 }

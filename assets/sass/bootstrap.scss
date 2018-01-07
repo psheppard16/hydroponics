@@ -312,19 +312,15 @@
 
 //sliders
 .slider.slider-horizontal {
+  margin: 5px;
   width: 90% !important;
-  left: 5% !important;
   .slider-selection {
     background: $theYellow;
   }
 }
 
-div[id^='id_request_'] .slider-handle { //regex to get only the request sliders
+.slider-handle {
   background: $theBlue;
-}
-
-div[id^='id_conflict_'] .slider-handle { //regex to get only the conflict sliders
-  background: $theRed;
 }
 
 //tabs

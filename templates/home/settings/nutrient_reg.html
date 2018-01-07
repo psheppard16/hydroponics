@@ -9,7 +9,7 @@
                 <div class="row justify-content-center">
                     <div class="col">
                         <label class="switch">
-                            <input type="checkbox"><span class="slider"></span>
+                            <input type="checkbox"><span class="toggle"></span>
                         </label>
                     </div>
                 </div>
@@ -24,27 +24,22 @@
                     </div>
                 </div>
             </div>
-            <div class="col-8 align-self-center">
-                <h4>low_EC</h4>
-            </div>
-            <div class="col-4 align-self-center">
+            <div class="col-12 align-self-center">
                 <div class="row justify-content-center">
-                    <div class="col">
-                        <label class="switch">
-                            <input type="checkbox"><span class="slider"></span>
-                        </label>
+                    <div class="col-8">
+                        <h4>Acceptable EC Range</h4>
                     </div>
                 </div>
-            </div>
-            <div class="col-8 align-self-center">
-                <h4>high_EC</h4>
-            </div>
-            <div class="col-4 align-self-center">
-                <div class="row justify-content-center">
+
+                <div class="row justify-content-between">
+                    <div class="col-4" id="id_EC_range_val_0">5 EC</div>
+                    <div class="col-4" id="id_EC_range_val_1">7 EC</div>
+                </div>
+
+                <div class="row">
                     <div class="col">
-                        <label class="switch">
-                            <input type="checkbox"><span class="slider"></span>
-                        </label>
+                        <input id="id_EC_range" class="data-slider" type="text" data-slider-value="[5, 7]"
+                               data-slider-min="0" data-slider-max="14" data-slider-step=".1"/><br/>
                     </div>
                 </div>
             </div>

@@ -89,7 +89,30 @@ class HydroConfig(AppConfig):
             monitor_data(repeat=1, repeat_until=None)
 
             management.call_command('process_tasks', sleep=1)
+        else:
+            from background_task import background
+            from hydro.models import Data, Type, Configuration
+            # from hydro.sensor import Sensor #imports dont work for some reason
+            # from hydro.pump import Pump
+            from hydro.relay import Relay
+            import RPi.GPIO as GPIO
 
+            # set up GPIO using BCM numbering
+            GPIO.setmode(GPIO.BOARD)
+            GPIO.setwarnings(False)
+
+            r1 = Relay(3)
+            r2 = Relay(5)
+            # r3 = Relay(7)
+            # r4 = Relay(11)
+            # r5 = Relay(13)
+            # r6 = Relay(15)
+            # r7 = Relay(19)
+            # r8 = Relay(21)
+            # relays = [r1, r2, r3, r4, r5, r6, r7, r8]
+            #
+            r1.pulse_on(3)
+            r2.pulse_on(3)
 
 
 
