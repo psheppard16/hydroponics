@@ -4,53 +4,46 @@ This is a Django powered web application for a hydroponics setup
 run on a raspberry pi.
 
 ### Installation ###
-NOTE: For Unix OS
+NOTE: For Rasbian OS
 
 ##### Clone and Setup Repository
 ```sh
-# clone repo:
+Clone and enter repo:
 `git clone https://github.com/psheppard16/hydroponics`
-
-# install pip requirements
 `cd hydroponics`
-`pip install -r requirements.txt`
 
-# install node requirements
-`npm install`
+Install pip:
+`sudo apt-get install python-pip python3-pip`
 
-# enter settings dir
-`cd hydro`
-
-# create settings_secret.py using template
-`cp settings_secret.py.template settings_secret.py`
-
-# Enter random characters for the 'SECRET_KEY' in `settings_secret.py`
-SECRET_KEY='super random characters'
-
-# return to repo root
-`cd ..`
-
-# collect static resources for main site
-`gulp` (`gulp watch` for continuous collection)
-
-# collect static resources for admin site
-`python manage.py collectstatic`
+Create and activate virtual environment:
+`pip install virtualenv`
+`virtualenv -p python3 venv`
+`source venv/bin/activate`
 ```
 
-##### Database Configuration
-For a local **SQLite** database add the following to settings_secret.py
+##### Install Dependencies
+```sh
+Install pip requirements:
+`pip install -r requirements.txt`
 
-```python
-import os
+Install node:
+`curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -`
+`sudo apt-get install -y nodejs`
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+Install node requirements:
+`npm install`
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+Create settings_secret.py using template:
+`cp hydro/settings_secret.py.template hydro/settings_secret.py`
+
+Enter random characters for the 'SECRET_KEY' in `settings_secret.py`:
+SECRET_KEY='super random characters'
+
+Collect static resources for main site:
+`gulp` (`gulp watch` for continuous collection)
+
+Collect static resources for admin site:
+`python manage.py collectstatic`
 ```
 
 ##### Database Setup
@@ -89,7 +82,7 @@ Run specific tests:
 
 ### Production Server ###
 
-#### Installation
+##### Installation
 ```sh
 Update apt-get:
 `sudo apt-get update`
@@ -98,7 +91,7 @@ Install apache2, and wsgi:
 `sudo apt-get install apache2 libapache2-mod-wsgi-py3`
 ```
 
-#### Configutation
+##### Configutation
 ```sh
 Enter settings dir:
 `sudo nano /etc/apache2/sites-available/000-default.conf`
@@ -121,14 +114,13 @@ WSGIProcessGroup hydroponics
 WSGIScriptAlias / [project path]/hydroponics/hydroponics/wsgi.py
 ```
 
-#### Permissions
+##### Permissions
 ```sh
-Create group for apache, www-data, and all users
-groupadd super_group
-gpasswd -a apache super_group
-gpasswd -a www-data super_group
-gpasswd -a pi super_group   # if you have a user named pi
-gpasswd -a foo super_group # if you have a user named foo
+Create group for apache, and all users
+sudo groupadd super_group
+sudo gpasswd -a www-data super_group
+sudo gpasswd -a pi super_group   # if you have a user named pi
+sudo gpasswd -a foo super_group # if you have a user named foo
 ...
 
 Give super_group permission to access the database:
@@ -144,11 +136,11 @@ Give super_group permission to access the logs:
 `sudo chmod 664 [project path]/hydroponics/logs/status.log`
 
 Give super_group permission to access the GPIO pins:
-`sudo chown www-data /dev/mem`
+`sudo chown super_group /dev/mem`
 `sudo chmod g+rw /dev/mem`
 ```
 
-#### Server Name
+##### Server Name
 ```sh
 Add the name localhost to the new servername config file:
 `echo "serverName localhost" | sudo tee /etc/apache2/conf-available/servername.conf
@@ -163,13 +155,13 @@ Reolad the apache daemon:
 `systemctl daemon-reload`
 ```
 
-#### Enabeling Changes
+##### Enabeling Changes
 ```sh
 Restart apache to finalize configuration:
 `sudo service apache2 restart`
 ```
     
-#### Starting and Stopping the Server:
+##### Starting and Stopping the Server:
 ```sh
 Start:
 `sudo apachetcl start`
