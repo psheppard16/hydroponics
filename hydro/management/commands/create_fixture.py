@@ -46,7 +46,7 @@ class Command(BaseCommand):
 			:returns: None
 			"""
 		db_dict = {'ENGINE': 'django.db.backends.sqlite3',
-				   'NAME': os.path.join(BASE_DIR, 'temp.sqlite3')}
+				   'NAME': os.path.join(BASE_DIR, 'databases/temp.sqlite3')}
 
 		#create or use the existing temporary database
 		with create_db(db_dict, usingname='temp', delete=options['delete']) as temp_db:

@@ -94,6 +94,9 @@ Run specific tests:
 Update apt-get:
 `sudo apt-get update`
 
+Install lynx to check the server status:
+`sudo aptitude install lynx`
+
 Install apache2, and wsgi:
 `sudo apt-get install apache2 libapache2-mod-wsgi-py3`
 ```
@@ -131,9 +134,9 @@ Create group for apache, and all users
 ...
 
 Give super_group permission to access the database:
-`sudo chown :super_group [project path]/hydroponics/db.sqlite3`
-`sudo chown :super_group [project path]/hydroponics`
-`sudo chmod 664 [project path]/hydroponics/db.sqlite3`
+`sudo chown :super_group [project path]/hydroponics/databases/db.sqlite3`
+`sudo chown :super_group [project path]/hydroponics/databases`
+`sudo chmod 664 [project path]/hydroponics/databases/db.sqlite3`
 
 Give super_group permission to access the logs:
 `sudo chown :super_group [project path]/hydroponics/logs/db_sql.log`
@@ -155,13 +158,13 @@ Add the name localhost to the new servername config file:
 `echo "serverName localhost" | sudo tee /etc/apache2/conf-available/servername.conf
 
 Enable the servername config file:
-`sudo a2enconf servername
+`sudo a2enconf servername`
 
 Reload apache:
 `sudo service apache2 reload`
 
 Reolad the apache daemon:
-`systemctl daemon-reload`
+`sudo systemctl daemon-reload`
 ```
 
 ##### Enabeling Changes

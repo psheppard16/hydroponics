@@ -8,6 +8,5 @@ django-admin-view-permission==1.4
 django-mass-edit==3.0
 django-nested-inline==0.3.7
 django-import-export==0.6.1
-django-background-tasks==1.1.12
 djangorestframework==3.7.7
 RPi.GPIO==0.6.3

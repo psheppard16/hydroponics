@@ -28,7 +28,6 @@ INSTALLED_APPS = (
 	'rest_framework',
 	'nested_inline',
 	'import_export',
-    'background_task',
     'hydro.apps.HydroConfig',
 )
 
