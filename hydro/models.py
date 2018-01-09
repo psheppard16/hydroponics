@@ -2,22 +2,36 @@ from django.db import models
 import django.utils.timezone as tz
 
 class Data(models.Model):
+    def __str__(self):
+        return str(self.type) + ": " + str(self.value) + " on: " + str(self.date_time)
+
     date_time = models.DateTimeField(null=True)
     type = models.ForeignKey('DataType', null=False, on_delete=True)
     value = models.DecimalField(decimal_places=2, max_digits=5, null=False)
 
 class DataType(models.Model):
+    def __str__(self):
+        return str(self.type)
+
     type = models.CharField(max_length=20, null=False)
 
-
 class RequestType(models.Model):
+    def __str__(self):
+        return str(self.type)
+
     type = models.CharField(max_length=20, null=False)
 
 class Status(models.Model):
+    def __str__(self):
+        return str(self.status)
+
     status = models.CharField(max_length=20, null=False)
 
 DEFAULT_STATUS_ID = 1
 class Request(models.Model):
+    def __str__(self):
+        return str(self.type) + " on: " + str(self.request_time)
+
     request_time = models.DateTimeField(null=True, default=tz.now)
     exec_time = models.DateTimeField(null=True)
     type = models.ForeignKey('DataType', null=False, on_delete=True)
