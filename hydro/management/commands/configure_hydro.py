@@ -45,15 +45,15 @@ class Command(BaseCommand):
         requested, created = Status.objects.update_or_create(id=1, defaults={"status": "requested"})
         completed, created = Status.objects.update_or_create(id=2, defaults={"status": "completed"})
         canceled, created = Status.objects.update_or_create(id=3, defaults={"status": "canceled"})
-        failed, created = Status.objects.update_or_create(id=3, defaults={"status": "failed"})
+        failed, created = Status.objects.update_or_create(id=4, defaults={"status": "failed"})
 
         increase_pH, created = RequestType.objects.update_or_create(id=1, defaults={"type": "increase_pH"})
         decrease_pH, created = RequestType.objects.update_or_create(id=2, defaults={"type": "decrease_pH"})
         increase_nutrients, created = RequestType.objects.update_or_create(id=3, defaults={"type": "increase_nutrients"})
-        refill, created = RequestType.objects.update_or_create(id=3, defaults={"type": "refill"})
-        water_change, created = RequestType.objects.update_or_create(id=3, defaults={"type": "water_change"})
-        start_pump, created = RequestType.objects.update_or_create(id=3, defaults={"type": "start_pump"})
-        stop_pump, created = RequestType.objects.update_or_create(id=3, defaults={"type": "stop_pump"})
+        refill, created = RequestType.objects.update_or_create(id=4, defaults={"type": "refill"})
+        water_change, created = RequestType.objects.update_or_create(id=5, defaults={"type": "water_change"})
+        start_pump, created = RequestType.objects.update_or_create(id=6, defaults={"type": "start_pump"})
+        stop_pump, created = RequestType.objects.update_or_create(id=7, defaults={"type": "stop_pump"})
 
 
 

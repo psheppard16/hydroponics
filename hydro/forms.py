@@ -14,5 +14,5 @@ class RequestForm(forms.ModelForm):
 
         """
     class Meta:
-        model = Configuration
+        model = Request
         exclude = ['exec_time', 'request_time', 'status']

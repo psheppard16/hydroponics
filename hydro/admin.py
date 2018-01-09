@@ -24,11 +24,38 @@ class ConfigurationAdmin(ImportExportModelAdmin, ImportExportActionModelAdmin):
 	list_filter = []
 admin.site.register(Configuration, ConfigurationAdmin)
 
-class TypeAdmin(ImportExportModelAdmin, ImportExportActionModelAdmin):
+class RequestAdmin(ImportExportModelAdmin, ImportExportActionModelAdmin):
+	list_display = ()
+	filter_horizontal = ()
+	search_fields = ["request_time", "type", "value", "status"]
+	fields = ("request_time", "exec_time", "type", "value", "status")
+	readonly_fields = ()
+	list_filter = []
+admin.site.register(Request, RequestAdmin)
+
+class DataTypeAdmin(ImportExportModelAdmin, ImportExportActionModelAdmin):
 	list_display = ()
 	filter_horizontal = ()
 	search_fields = ["type"]
 	fields = ("type",)
 	readonly_fields = ()
 	list_filter = ["type"]
-admin.site.register(DataType, TypeAdmin)
+admin.site.register(DataType, DataTypeAdmin)
+
+class RequestTypeAdmin(ImportExportModelAdmin, ImportExportActionModelAdmin):
+	list_display = ()
+	filter_horizontal = ()
+	search_fields = ["type"]
+	fields = ("type",)
+	readonly_fields = ()
+	list_filter = ["type"]
+admin.site.register(RequestType, RequestTypeAdmin)
+
+class StatusAdmin(ImportExportModelAdmin, ImportExportActionModelAdmin):
+	list_display = ()
+	filter_horizontal = ()
+	search_fields = ["status"]
+	fields = ("status",)
+	readonly_fields = ()
+	list_filter = ["status"]
+admin.site.register(Status, StatusAdmin)

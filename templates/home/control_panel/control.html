@@ -8,10 +8,20 @@
             <div class="col-8 align-self-center">
                 <dive class="row">
                     <div class="col-6">
-                        <button class="red">Increase pH</button>
+                        <form action="{% url 'post_control' %}" method="post">
+                            {% csrf_token %}
+                            <button class="red" type="submit">Increase pH</button>
+                            <input type="hidden" value="1" name="type"/>
+                            <input type="hidden" value="1" name="value"/>
+                        </form>
                     </div>
                     <div class="col-6">
-                        <button class="red">Decrease pH</button>
+                        <form action="{% url 'post_control' %}" method="post">
+                            {% csrf_token %}
+                            <button class="red" type="submit">Decrease pH</button>
+                            <input type="hidden" value="2" name="type"/>
+                            <input type="hidden" value="1" name="value"/>
+                        </form>
                     </div>
                 </dive>
             </div>

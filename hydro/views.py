@@ -64,17 +64,16 @@ def ControlEditView(request):
         :return:
     """
     if request.POST:
-        config = Configuration.objects.get(id=1)
-        form = ConfigurationForm(request.POST, instance=config)
+        form = RequestForm(request.POST)
         if form.is_valid():
             saved = form.save(commit=False)
             saved.save()
             form.save_m2m()
             response = redirect('home')
-            response['Location'] += '?updated=success'
+            response['Location'] += '?requested=success'
             return response
         else:
             log.error(form.errors)
             response = redirect('home')
-            response['Location'] += '?updated=failed'
+            response['Location'] += '?requested=failed'
             return response
