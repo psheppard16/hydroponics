@@ -33,7 +33,12 @@
             <div class="col-8 align-self-center">
                 <dive class="row">
                     <div class="col">
-                        <button class="red">Add Nutrients</button>
+                        <form action="{% url 'post_control' %}" method="post">
+                            {% csrf_token %}
+                            <button class="red" type="submit">Add Nutrients</button>
+                            <input type="hidden" value="3" name="type"/>
+                            <input type="hidden" value="1" name="value"/>
+                        </form>
                     </div>
                 </dive>
             </div>
@@ -45,10 +50,43 @@
             <div class="col-8 align-self-center">
                 <dive class="row">
                     <div class="col-6">
-                        <button class="red">Change Water</button>
+                        <form action="{% url 'post_control' %}" method="post">
+                            {% csrf_token %}
+                            <button class="red" type="submit">Refill Resevoir</button>
+                            <input type="hidden" value="4" name="type"/>
+                            <input type="hidden" value="1" name="value"/>
+                        </form>
                     </div>
                     <div class="col-6">
-                        <button class="red">Refill Reservoir</button>
+                        <form action="{% url 'post_control' %}" method="post">
+                            {% csrf_token %}
+                            <button class="red" type="submit">Change Water</button>
+                            <input type="hidden" value="5" name="type"/>
+                            <input type="hidden" value="1" name="value"/>
+                        </form>
+                    </div>
+                </dive>
+            </div>
+        </div>
+        <div class="row justify-content-start">
+            <div class="col-4 align-self-center">
+                <h4>Pump Controls</h4>
+            </div>
+            <div class="col-8 align-self-center">
+                <dive class="row">
+                    <div class="col-6">
+                        <form action="{% url 'post_control' %}" method="post">
+                            {% csrf_token %}
+                            <button class="red" type="submit">Start Main Pump</button>
+                            <input type="hidden" value="6" name="type"/>
+                        </form>
+                    </div>
+                    <div class="col-6">
+                        <form action="{% url 'post_control' %}" method="post">
+                            {% csrf_token %}
+                            <button class="red" type="submit">Stop Main Pump</button>
+                            <input type="hidden" value="7" name="type"/>
+                        </form>
                     </div>
                 </dive>
             </div>
