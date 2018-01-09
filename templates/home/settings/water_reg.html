@@ -8,8 +8,11 @@
             <div class="col-4 align-self-center">
                 <div class="row justify-content-center">
                     <div class="col">
-                        <label class="switch">
-                            <input type="checkbox"><span class="toggle"></span>
+                        <label class="form_label switch" for="id_auto_pump">
+                            {# hidden input to submit false to the form when checkbox is not checked #}
+                            <input type="hidden" value="false" name="auto_pump"/>
+                            <input id="id_auto_pump" {% if config.auto_pump %} checked {% endif %}
+                                   name="auto_pump" type="checkbox"><span class="toggle"></span>
                         </label>
                     </div>
                 </div>
@@ -20,8 +23,11 @@
             <div class="col-4 align-self-center">
                 <div class="row justify-content-center">
                     <div class="col">
-                        <label class="switch">
-                            <input type="checkbox"><span class="toggle"></span>
+                        <label class="form_label switch" for="id_auto_refill">
+                            {# hidden input to submit false to the form when checkbox is not checked #}
+                            <input type="hidden" value="false" name="auto_refill"/>
+                            <input id="id_auto_refill" {% if config.auto_refill %} checked {% endif %}
+                                   name="auto_refill" type="checkbox"><span class="toggle"></span>
                         </label>
                     </div>
                 </div>
@@ -33,7 +39,8 @@
                 <div class="row justify-content-center">
                     <div class="col">
                         <label class="form_label" for="id_resevoir_volume"></label>
-                        <input id="id_resevoir_volume" value="{{config.resevoir_volume}}" name="resevoir_volume"
+                        <input id="id_resevoir_volume"
+                               value="{{config.resevoir_volume}}" name="resevoir_volume"
                             class="number" max="100" min="0" type="number" align="middle" placeholder="L">
                     </div>
                 </div>

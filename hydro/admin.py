@@ -31,4 +31,4 @@ class TypeAdmin(ImportExportModelAdmin, ImportExportActionModelAdmin):
 	fields = ("type",)
 	readonly_fields = ()
 	list_filter = ["type"]
-admin.site.register(Type, TypeAdmin)
+admin.site.register(DataType, TypeAdmin)

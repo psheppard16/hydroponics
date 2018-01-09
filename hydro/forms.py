@@ -8,3 +8,11 @@ class ConfigurationForm(forms.ModelForm):
     class Meta:
         model = Configuration
         exclude = ['last_pH_change', 'last_nutrient_change', 'last_water_change']
+
+class RequestForm(forms.ModelForm):
+    """Form for creating configurations from POST requests
+
+        """
+    class Meta:
+        model = Configuration
+        exclude = ['exec_time', 'request_time', 'status']

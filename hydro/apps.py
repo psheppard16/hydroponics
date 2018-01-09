@@ -12,7 +12,7 @@ class HydroConfig(AppConfig):
 
     def ready(self):
         if False:
-            from hydro.models import Data, Type, Configuration
+            from hydro.models import Data, DataType, Configuration
             from hydro.sensor import Sensor
             from hydro.pump import Pump
             pump = Pump()
@@ -30,13 +30,13 @@ class HydroConfig(AppConfig):
             def collect_data():
                 pH = sensor.get_pH()
                 if pH:
-                    Data(date_time=datetime.datetime.now(), type=Type(type="pH"), value=pH).save()
+                    Data(date_time=datetime.datetime.now(), type=DataType(type="pH"), value=pH).save()
                 EC = sensor.get_EC()
                 if EC:
-                    Data(date_time=datetime.datetime.now(), type=Type(type="EC"), value=EC).save()
+                    Data(date_time=datetime.datetime.now(), type=DataType(type="EC"), value=EC).save()
                 ORP = sensor.get_ORP()
                 if ORP:
-                    Data(date_time=datetime.datetime.now(), type=Type(type="ORP"), value=ORP).save()
+                    Data(date_time=datetime.datetime.now(), type=DataType(type="ORP"), value=ORP).save()
 
             def monitor_data():
                 config = Configuration.objects.get(id=1)

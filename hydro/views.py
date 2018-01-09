@@ -21,9 +21,9 @@ def HomeView(request):
     context = {'title': "Home",
                'user': request.user,
                'config': Configuration.objects.get(id=1),
-               'pH_data': Data.objects.filter(type=Type(type="pH")),
-               'EC_data': Data.objects.filter(type=Type(type="EC")),
-               'ORP_data': Data.objects.filter(type=Type(type="ORP")),
+               'pH_data': Data.objects.filter(type=DataType(type="pH")),
+               'EC_data': Data.objects.filter(type=DataType(type="EC")),
+               'ORP_data': Data.objects.filter(type=DataType(type="ORP")),
                }
     return render(request, 'home/home.html', context)
 

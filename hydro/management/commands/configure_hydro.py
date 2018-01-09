@@ -38,8 +38,24 @@ class Command(BaseCommand):
                     "polling_range": "1",
                     "minimun_data_count": "60"})
 
-        pH_type, created = Type.objects.update_or_create(id=1, defaults={"type": "pH"})
-        EC_type, created = Type.objects.update_or_create(id=2, defaults={"type": "EC"})
-        ORP_type, created = Type.objects.update_or_create(id=3, defaults={"type": "ORP"})
+        pH, created = DataType.objects.update_or_create(id=1, defaults={"type": "pH"})
+        EC, created = DataType.objects.update_or_create(id=2, defaults={"type": "EC"})
+        ORP, created = DataType.objects.update_or_create(id=3, defaults={"type": "ORP"})
+
+        requested, created = Status.objects.update_or_create(id=1, defaults={"status": "requested"})
+        completed, created = Status.objects.update_or_create(id=2, defaults={"status": "completed"})
+        canceled, created = Status.objects.update_or_create(id=3, defaults={"status": "canceled"})
+        failed, created = Status.objects.update_or_create(id=3, defaults={"status": "failed"})
+
+        increase_pH, created = RequestType.objects.update_or_create(id=1, defaults={"type": "increase_pH"})
+        decrease_pH, created = RequestType.objects.update_or_create(id=2, defaults={"type": "decrease_pH"})
+        increase_nutrients, created = RequestType.objects.update_or_create(id=3, defaults={"type": "increase_nutrients"})
+        refill, created = RequestType.objects.update_or_create(id=3, defaults={"type": "refill"})
+        water_change, created = RequestType.objects.update_or_create(id=3, defaults={"type": "water_change"})
+        start_pump, created = RequestType.objects.update_or_create(id=3, defaults={"type": "start_pump"})
+        stop_pump, created = RequestType.objects.update_or_create(id=3, defaults={"type": "stop_pump"})
+
+
+
 
     log.info("Configuration complete")
