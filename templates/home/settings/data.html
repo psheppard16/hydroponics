@@ -8,7 +8,9 @@
             <div class="col-4 align-self-center">
                 <div class="row justify-content-center">
                     <div class="col">
-                        <input class="number" max="100" min="0" type="number" align="middle" placeholder="min">
+                        <label class="form_label" for="id_min_change_interval"></label>
+                        <input id="id_min_change_interval" value="{{config.min_change_interval}}"  name="min_change_interval"
+                               class="number" max="100" min="0" type="number" align="middle" placeholder="min">
                     </div>
                 </div>
             </div>
@@ -18,7 +20,9 @@
             <div class="col-4 align-self-center">
                 <div class="row justify-content-center">
                     <div class="col">
-                        <input class="number" max="100" min="0" type="number" align="middle" placeholder="min">
+                        <label class="form_label" for="id_polling_range"></label>
+                        <input id="id_polling_range" value="{{config.polling_range}}"  name="polling_range"
+                               class="number" max="100" min="0" type="number" align="middle" placeholder="min">
                     </div>
                 </div>
             </div>
@@ -27,8 +31,10 @@
             </div>
             <div class="col-4 align-self-center">
                 <div class="row justify-content-center">
-                    <div class="col">
-                        <input class="number" max="100" min="0" type="number" align="middle">
+                    <div class="col {% if form.minimun_data_count.errors %}has-error{% endif %}" >
+                        <label class="form_label" for="id_minimun_data_count"></label>
+                        <input id="id_minimun_data_count" value="{{config.minimun_data_count}}" name="minimun_data_count"
+                               class="number" max="100" min="0" type="number" align="middle">
                     </div>
                 </div>
             </div>

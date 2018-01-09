@@ -3,11 +3,11 @@ import os, webbrowser
 from hydroponics.settings import BASE_DIR
 
 import logging
-log = logging.getLogger('status')
+log = logging.getLogger('hydro')
 
 
 class Command(BaseCommand):
-	help = 'Opens the Status Documentation.'
+	help = 'Opens the Hydro Documentation.'
 
 	def handle(self, *args, **options):
 		"""Opens the sphinx documentation.

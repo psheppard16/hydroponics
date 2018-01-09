@@ -33,10 +33,10 @@ $(document).ready(() => {
     $(".data-slider").each(function () {
         $(this).slider({id: this.id, range: true, handle: "square", tooltip: "hide"});
         $(this).on("slide", function(slideEvt) {
-            let val_1 = $("#" + this.id + "_val_0");
-            let val_2 = $("#" + this.id + "_val_1");
-            val_1.text(slideEvt.value[0] + " " + val_1.text().split(" ")[1]);
-            val_2.text(slideEvt.value[1] + " " + val_2.text().split(" ")[1]);
+            let val_1 = $("#" + "id_low_" + this.id.split("_")[1]);
+            let val_2 = $("#" + "id_high_" + this.id.split("_")[1]);
+            val_1.attr("value", slideEvt.value[0]);
+            val_2.attr("value", slideEvt.value[1]);
         });
     });
 });

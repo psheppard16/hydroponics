@@ -442,7 +442,7 @@ class SupportMethodsTestCase(LiveServerTestCase):
 		self.assertRaises(ValueError, sup.element_exists, self.driver)
 
 	def test_open(self):
-		"""Attempt to open every page in status.
+		"""Attempt to open every page in hydro.
 
 			- assert detail view of the test routinechangerequest loads correctly
 

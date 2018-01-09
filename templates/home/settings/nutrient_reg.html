@@ -3,7 +3,7 @@
     <div class="sub_content">
         <div class="row justify-content-start">
             <div class="col-8 align-self-center">
-                <h4>auto_regulate_nutrients</h4>
+                <h4>Automatically Regulate Nutrients</h4>
             </div>
             <div class="col-4 align-self-center">
                 <div class="row justify-content-center">
@@ -15,12 +15,14 @@
                 </div>
             </div>
             <div class="col-8 align-self-center">
-                <h4>nutrient_adj_volume</h4>
+                <h4>Nutrient Adjustment Volume</h4>
             </div>
             <div class="col-4 align-self-center">
                 <div class="row justify-content-center">
                     <div class="col">
-                        <input class="number" max="100" min="0" type="number" align="middle" placeholder="mL">
+                        <label class="form_label" for="id_nutrient_adj_volume"></label>
+                        <input id="id_nutrient_adj_volume" value="{{config.nutrient_adj_volume}}" name="nutrient_adj_volume"
+                            class="number" max="100" min="0" type="number" align="middle" placeholder="mL">
                     </div>
                 </div>
             </div>
@@ -32,14 +34,18 @@
                 </div>
 
                 <div class="row justify-content-between">
-                    <div class="col-4" id="id_EC_range_val_0">5 EC</div>
-                    <div class="col-4" id="id_EC_range_val_1">7 EC</div>
+                    <input id="id_low_EC" value="{{config.low_EC}}" name="low_EC"
+                        class="col-4 slider_label" readonly >
+                    <label class="form_label" for="id_low_EC"></label>
+                    <label class="form_label" for="id_high_EC"></label>
+                    <input id="id_high_EC" value="{{config.high_EC}}" name="high_EC"
+                        class="col-4 slider_label" readonly >
                 </div>
 
                 <div class="row">
                     <div class="col">
-                        <input id="id_EC_range" class="data-slider" type="text" data-slider-value="[5, 7]"
-                               data-slider-min="0" data-slider-max="14" data-slider-step=".1"/><br/>
+                        <input id="id_EC_range" class="data-slider" type="text" data-slider-value="[{{config.low_EC}}, {{config.high_EC}}]"
+                               data-slider-min="0" data-slider-max="14" data-slider-step=".01"/><br/>
                     </div>
                 </div>
             </div>

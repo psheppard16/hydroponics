@@ -3,7 +3,7 @@ from hydro.models import *
 
 import logging
 from django.utils import timezone
-log = logging.getLogger('status')
+log = logging.getLogger('hydro')
 
 class Command(BaseCommand):
     help = 'Configures models for the hydro application.'

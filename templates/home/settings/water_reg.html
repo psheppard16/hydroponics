@@ -3,7 +3,7 @@
     <div class="sub_content">
         <div class="row justify-content-start">
             <div class="col-8 align-self-center">
-                <h4>auto_pump</h4>
+                <h4>Pump Automatically</h4>
             </div>
             <div class="col-4 align-self-center">
                 <div class="row justify-content-center">
@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="col-8 align-self-center">
-                <h4>auto_refill</h4>
+                <h4>Refill Automatically</h4>
             </div>
             <div class="col-4 align-self-center">
                 <div class="row justify-content-center">
@@ -27,22 +27,26 @@
                 </div>
             </div>
             <div class="col-8 align-self-center">
-                <h4>resevoir_volume</h4>
+                <h4>Resevoir Volume</h4>
             </div>
             <div class="col-4 align-self-center">
                 <div class="row justify-content-center">
                     <div class="col">
-                        <input class="number" max="100" min="0" type="number" align="middle" placeholder="L">
+                        <label class="form_label" for="id_resevoir_volume"></label>
+                        <input id="id_resevoir_volume" value="{{config.resevoir_volume}}" name="resevoir_volume"
+                            class="number" max="100" min="0" type="number" align="middle" placeholder="L">
                     </div>
                 </div>
             </div>
             <div class="col-8 align-self-center">
-                <h4>basin_volume</h4>
+                <h4>Basin Volume</h4>
             </div>
             <div class="col-4 align-self-center">
                 <div class="row justify-content-center">
                     <div class="col">
-                        <input class="number" max="100" min="0" type="number" align="middle" placeholder="L">
+                        <label class="form_label" for="id_basin_volume"></label>
+                        <input id="id_basin_volume" value="{{config.basin_volume}}" name="basin_volume"
+                            class="number" max="100" min="0" type="number" align="middle" placeholder="L">
                     </div>
                 </div>
             </div>

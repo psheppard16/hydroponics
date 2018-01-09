@@ -1,0 +1,35 @@
+{% block form_banner %}
+{# displays errors with the current form to the user so #}
+{# they can correct them, or displays "Success!" when #}
+{# the form is submitted successfully #}
+{% if form.errors %}
+    <div class="row flex-row">
+        <div class="panel panel-danger" style="width: 100%">
+            <div class="panel-heading">
+                <h3 class="panel-title">Please correct form errors:</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row flex-row">
+                    <div class="input-el flex">
+                        {% for field in form %}
+                            {% if field.errors %}
+                                {{ field.label_tag }}
+                                {{ field.errors }}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    {% if 'Edit' in breadcrumb2 %}
+                    <div class="input-el flex" style="text-align:right">
+                        <button id="id_revert" onclick="window.location.href='{{ request.get_full_path }}'">Revert Changes</button>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% elif success %}
+<div class="alert alert-success">
+  <strong>Success!</strong> {{breadcrumb2}} {{ success }}
+</div>
+{% endif %}
+{% endblock %}

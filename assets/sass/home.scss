@@ -30,7 +30,7 @@
   }
 }
 
-//Content sytling
+//Content styling
 .sec-content {
   clear: both;
   padding: 5%;
@@ -56,6 +56,17 @@
       font-size: 12px;
       font-variant: normal;
       overflow:hidden;
+
+      .slider_label {
+        color: #959494;
+        font-size: 12px;
+        font-variant: normal;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
     }
   }
 }

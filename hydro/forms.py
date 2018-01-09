@@ -1,7 +1,10 @@
 from django import forms
 from hydro.models import *
 
-# class ModelForm(forms.ModelForm):
-# 	class Meta:
-# 		model = Model
-# 		exclude = []
+class ConfigurationForm(forms.ModelForm):
+    """Form for creating configurations from POST requests
+
+        """
+    class Meta:
+        model = Configuration
+        exclude = ['last_pH_change', 'last_nutrient_change', 'last_water_change']

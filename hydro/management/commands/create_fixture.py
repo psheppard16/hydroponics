@@ -40,7 +40,7 @@ class Command(BaseCommand):
 	def handle(self, *args, **options):
 		"""Creates a clean database or uses the existing temporary database, populates it with the necessary database
 			entries for testing, then uses the populated database to create a fixture, which is stored as
-			"status/fixtures/testing.json", and then deletes the temporary database if desired.
+			"hydro/fixtures/testing.json", and then deletes the temporary database if desired.
 
 			:param delete: whether to delete the database after completion
 			:returns: None
@@ -68,7 +68,7 @@ class Command(BaseCommand):
 			print("##########################################")
 
 			#create the fixture
-			call_command("dumpdata", database=temp_db, output="status/fixtures/testing.json",
+			call_command("dumpdata", database=temp_db, output="hydro/fixtures/testing.json",
 						format="json", natural_foreign=True, natural_primary=True, indent=True,
 						exclude=['contenttypes', "sessions", "auth.Permission", "vlan", "admin"])
 			print("##########################################")

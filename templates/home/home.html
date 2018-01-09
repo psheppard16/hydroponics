@@ -15,7 +15,10 @@
 
     <div class="tab-content">
         <div id="sec1" class="sec-content tab-pane fade active show">
-            <form>
+            {% include 'shared/form_banner.html' %}
+
+            <form action="{% url 'post_control' %}" method="post">
+                {% csrf_token %}
                 <div class="container-fluid">
                     <div class="row">
                         {% include "home/control_panel/data.html" %}
@@ -31,7 +34,10 @@
         </div>
 
         <div id="sec2" class="sec-content tab-pane fade">
-            <form>
+            {% include 'shared/form_banner.html' %}
+
+            <form action="{% url 'post_configuration' %}" method="post">
+                {% csrf_token %}
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-6">
@@ -50,7 +56,14 @@
                         </div>
                     </div>
                     <div class="row">
-                        {% include "home/settings/data.html" %}
+                        <div class="col-6">
+                            {% include "home/settings/data.html" %}
+                        </div>
+                        <div class="col-6">
+                            {% include "home/settings/submit.html" %}
+                        </div>
+                    </div>
+                    <div class="row">
                     </div>
                 </div>
             </form>

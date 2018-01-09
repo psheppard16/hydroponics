@@ -25,6 +25,7 @@ h3 {
 }
 
 h4 {
+  margin: 5px;
   color: $theBlue;
   letter-spacing: 0.1em;
   font-weight: bold;
@@ -79,10 +80,18 @@ h6 {
  * ELEMENT STYLING
  */
 
+//Label styling
+.form_label {
+  margin: 0;
+  padding: 0;
+  width: 0;
+  height: 0;
+}
+
 //Button styling
 .button_default {
   border: none;
-  margin: 0;
+  margin: 5px;
   font-variant: normal;
   display: block;
   text-align: center;
@@ -104,13 +113,19 @@ button {
   }
   &.confirm {
     @extend .button_default;
-    background: $white;
-    border-bottom: 4px solid $grey;
+    background: $theBlue;
+    border-bottom: 3px solid $grey;
+    border-right: 3px solid $grey;
+    padding: 10px;
+    font-weight: bold;
+    color: $white;
     -webkit-transition: all .3s;
     transition: all .3s;
 
     &:hover {
-      border-bottom: 4px solid $theBlue;
+      border-bottom: 3px solid $theYellow;
+      border-right: 3px solid $theYellow;
+      color: $theYellow;
     }
   }
   &.light {
@@ -136,7 +151,7 @@ button {
     color: #fff;
     font-variant: small-caps;
     text-transform: uppercase;
-    font-weight: 500;
+    font-weight: bold;
     background: $theBlue;
     padding: 12px 15px;
 

@@ -48,6 +48,14 @@ Collect static resources for admin site:
 
 ##### Database Setup
 ```sh
+Install sqlite3:
+`sudo apt-get install sqlite3`
+
+Make the database:
+`cd databases`
+`sqlite3 db.sqlite3`
+`cd ..`
+
 Make migrations: 
 `python manage.py makemigrations`
 
@@ -140,10 +148,10 @@ Give super_group permission to access the database:
 
 Give super_group permission to access the logs:
 `sudo chown :super_group [project path]/hydroponics/logs/db_sql.log`
-`sudo chown :super_group [project path]/hydroponics/logs/status.log`
+`sudo chown :super_group [project path]/hydroponics/logs/hydro.log`
 `sudo chown :super_group [project path]/hydroponics/logs`
 `sudo chmod 664 [project path]/hydroponics/logs/db_sql.log`
-`sudo chmod 664 [project path]/hydroponics/logs/status.log`
+`sudo chmod 664 [project path]/hydroponics/logs/hydro.log`
 
 Give super_group permission to access the GPIO pins:
 `sudo adduser www-data gpio` # if the apache user is www-data

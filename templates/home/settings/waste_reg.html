@@ -3,7 +3,7 @@
         <div class="sub_content">
         <div class="row justify-content-start">
             <div class="col-8 align-self-center">
-                <h4>auto_water_change</h4>
+                <h4>Change Water Automatically</h4>
             </div>
             <div class="col-4 align-self-center">
                 <div class="row justify-content-center">
@@ -15,22 +15,26 @@
                 </div>
             </div>
             <div class="col-8 align-self-center">
-                <h4>maximum_water_change_interval</h4>
+                <h4>Maximum Days Between Water Changes</h4>
             </div>
             <div class="col-4 align-self-center">
                 <div class="row justify-content-center">
                     <div class="col">
-                        <input class="number" max="100" min="0" type="number" align="middle" placeholder="days">
+                        <label class="form_label" for="id_maximum_water_change_interval"></label>
+                        <input id="id_maximum_water_change_interval" value="{{config.maximum_water_change_interval}}" name="maximum_water_change_interval"
+                            class="number" max="100" min="0" type="number" align="middle" placeholder="days">
                     </div>
                 </div>
             </div>
             <div class="col-8 align-self-center">
-                <h4>minimum_water_change_interval</h4>
+                <h4>Minimum Days Between Water Changes</h4>
             </div>
             <div class="col-4 align-self-center">
                 <div class="row justify-content-center">
                     <div class="col">
-                        <input class="number" max="100" min="0" type="number" align="middle" placeholder="days">
+                        <label class="form_label" for="id_minimum_water_change_interval"></label>
+                        <input id="id_minimum_water_change_interval" value="{{config.minimum_water_change_interval}}" name="minimum_water_change_interval"
+                            class="number" max="100" min="0" type="number" align="middle" placeholder="days">
                     </div>
                 </div>
             </div>
@@ -42,14 +46,18 @@
                 </div>
 
                 <div class="row justify-content-between">
-                    <div class="col-4" id="id_ORP_range_val_0">5 ORP</div>
-                    <div class="col-4" id="id_ORP_range_val_1">7 ORP</div>
+                    <input id="id_low_ORP" value="{{config.low_ORP}}" name="low_ORP"
+                        class="col-4 slider_label" readonly >
+                    <label class="form_label" for="id_low_ORP"></label>
+                    <label class="form_label" for="id_high_ORP"></label>
+                    <input id="id_high_ORP" value="{{config.high_ORP}}" name="high_ORP"
+                        class="col-4 slider_label" readonly >
                 </div>
 
                 <div class="row">
                     <div class="col">
-                        <input id="id_ORP_range" class="data-slider" type="text" data-slider-value="[5, 7]"
-                               data-slider-min="0" data-slider-max="14" data-slider-step=".1"/><br/>
+                        <input id="id_ORP_range" class="data-slider" type="text" data-slider-value="[{{config.low_ORP}}, {{config.high_ORP}}]"
+                               data-slider-min="0" data-slider-max="14" data-slider-step=".01"/><br/>
                     </div>
                 </div>
             </div>

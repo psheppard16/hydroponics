@@ -3,7 +3,7 @@
     <div class="sub_content">
         <div class="row justify-content-start">
             <div class="col-8 align-self-center">
-                <h4>auto_regulate_pH</h4>
+                <h4>Regulate pH Automatically</h4>
             </div>
             <div class="col-4 align-self-center">
                 <div class="row justify-content-center">
@@ -15,12 +15,14 @@
                 </div>
             </div>
             <div class="col-8 align-self-center">
-                <h4>pH_adj_volume</h4>
+                <h4>pH Adjustment Volume</h4>
             </div>
             <div class="col-4 align-self-center">
                 <div class="row justify-content-center">
                     <div class="col">
-                        <input class="number" max="100" min="0" type="number" align="middle" placeholder="mL">
+                        <label class="form_label" for="id_pH_adj_volume"></label>
+                        <input id="id_pH_adj_volume" value="{{config.pH_adj_volume}}" name="pH_adj_volume"
+                            class="number" max="100" min="0" type="number" align="middle" placeholder="mL">
                     </div>
                 </div>
             </div>
@@ -32,14 +34,18 @@
                 </div>
 
                 <div class="row justify-content-between">
-                    <div class="col-4" id="id_pH_range_val_0">5 pH</div>
-                    <div class="col-4" id="id_pH_range_val_1">7 pH</div>
+                    <label class="form_label" for="id_low_pH"></label>
+                    <input id="id_low_pH" value="{{config.low_pH}}" name="low_pH"
+                        class="col-4 slider_label" readonly >
+                    <label class="form_label" for="id_high_pH"></label>
+                    <input id="id_high_pH" value="{{config.high_pH}}" name="high_pH"
+                        class="col-4 slider_label" readonly>
                 </div>
 
                 <div class="row">
                     <div class="col">
-                        <input id="id_pH_range" class="data-slider" type="text" data-slider-value="[5, 7]"
-                               data-slider-min="0" data-slider-max="14" data-slider-step=".1"/><br/>
+                        <input id="id_pH_range" class="data-slider" type="text" data-slider-value="[{{config.low_pH}}, {{config.high_pH}}]"
+                               data-slider-min="0" data-slider-max="14" data-slider-step=".01"/><br/>
                     </div>
                 </div>
             </div>

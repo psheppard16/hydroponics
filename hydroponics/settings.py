@@ -111,10 +111,10 @@ LOGGING = {
 			'level': 'DEBUG',
 			'class': 'logging.NullHandler',
 		},
-		'statuslogfile': {
+		'hydrologfile': {
 			'level': 'DEBUG',
 			'class': 'logging.handlers.RotatingFileHandler',
-			'filename': os.path.join(LOG_DIR, 'status.log'),
+			'filename': os.path.join(LOG_DIR, 'hydro.log'),
 			'maxBytes': 50000,
 			'backupCount': 2,
 			'formatter': 'standard',
@@ -144,8 +144,8 @@ LOGGING = {
 			'level': 'DEBUG',
 			'propagate': False,
 		},
-		'status': {
-			'handlers': ['console', 'statuslogfile'],
+		'hydro': {
+			'handlers': ['console', 'hydrologfile'],
 			'level': 'DEBUG',
 		}
 	}
