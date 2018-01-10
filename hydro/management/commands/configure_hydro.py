@@ -38,15 +38,18 @@ class Command(BaseCommand):
                     "polling_range": "1",
                     "minimun_data_count": "60"})
 
+        DataType.objects.all().delete()
         pH, created = DataType.objects.update_or_create(id=1, defaults={"type": "pH"})
         EC, created = DataType.objects.update_or_create(id=2, defaults={"type": "EC"})
         ORP, created = DataType.objects.update_or_create(id=3, defaults={"type": "ORP"})
 
+        Status.objects.all().delete()
         requested, created = Status.objects.update_or_create(id=1, defaults={"status": "requested"})
         completed, created = Status.objects.update_or_create(id=2, defaults={"status": "completed"})
         canceled, created = Status.objects.update_or_create(id=3, defaults={"status": "canceled"})
         failed, created = Status.objects.update_or_create(id=4, defaults={"status": "failed"})
 
+        RequestType.objects.all().delete()
         increase_pH, created = RequestType.objects.update_or_create(id=1, defaults={"type": "increase_pH"})
         decrease_pH, created = RequestType.objects.update_or_create(id=2, defaults={"type": "decrease_pH"})
         increase_nutrients, created = RequestType.objects.update_or_create(id=3, defaults={"type": "increase_nutrients"})

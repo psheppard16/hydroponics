@@ -36,7 +36,8 @@ class Request(models.Model):
     exec_time = models.DateTimeField(blank=True, null=True)
     type = models.ForeignKey('RequestType', blank=False, on_delete=True)
     status = models.ForeignKey('Status', default=DEFAULT_STATUS_ID, blank=False, on_delete=True)
-    value = models.DecimalField(decimal_places=2, max_digits=5, blank=True, null=True)
+    arg1 = models.DecimalField(decimal_places=2, max_digits=5, blank=True, null=True)
+    arg2 = models.DecimalField(decimal_places=2, max_digits=5, blank=True, null=True)
 
 class Configuration(models.Model):
     #PH REGULATION

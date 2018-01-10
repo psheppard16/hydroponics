@@ -12,7 +12,7 @@
                             {% csrf_token %}
                             <button class="red" type="submit">Increase pH</button>
                             <input type="hidden" value="1" name="type"/>
-                            <input type="hidden" value="1" name="value"/>
+                            <input type="hidden" value="1" name="arg1"/>
                         </form>
                     </div>
                     <div class="col-6">
@@ -20,7 +20,7 @@
                             {% csrf_token %}
                             <button class="red" type="submit">Decrease pH</button>
                             <input type="hidden" value="2" name="type"/>
-                            <input type="hidden" value="1" name="value"/>
+                            <input type="hidden" value="1" name="arg1"/>
                         </form>
                     </div>
                 </dive>
@@ -37,7 +37,7 @@
                             {% csrf_token %}
                             <button class="red" type="submit">Add Nutrients</button>
                             <input type="hidden" value="3" name="type"/>
-                            <input type="hidden" value="1" name="value"/>
+                            <input type="hidden" value="1" name="arg1"/>
                         </form>
                     </div>
                 </dive>
@@ -54,7 +54,7 @@
                             {% csrf_token %}
                             <button class="red" type="submit">Refill Resevoir</button>
                             <input type="hidden" value="4" name="type"/>
-                            <input type="hidden" value="1" name="value"/>
+                            <input type="hidden" value="1" name="arg1"/>
                         </form>
                     </div>
                     <div class="col-6">
@@ -62,7 +62,8 @@
                             {% csrf_token %}
                             <button class="red" type="submit">Change Water</button>
                             <input type="hidden" value="5" name="type"/>
-                            <input type="hidden" value="1" name="value"/>
+                            <input type="hidden" value="1" name="arg1"/>
+                            <input type="hidden" value="1" name="arg2"/>
                         </form>
                     </div>
                 </dive>

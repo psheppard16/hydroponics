@@ -12,7 +12,7 @@ class DataAdmin(ImportExportModelAdmin, ImportExportActionModelAdmin):
 admin.site.register(Data, DataAdmin)
 
 class ConfigurationAdmin(ImportExportModelAdmin, ImportExportActionModelAdmin):
-	list_display = ("id")
+	list_display = ("id",)
 	filter_horizontal = ()
 	search_fields = []
 	fields = ("auto_regulate_pH", "auto_regulate_nutrients", "min_change_interval", "polling_range", "minimun_data_count",
@@ -25,10 +25,10 @@ class ConfigurationAdmin(ImportExportModelAdmin, ImportExportActionModelAdmin):
 admin.site.register(Configuration, ConfigurationAdmin)
 
 class RequestAdmin(ImportExportModelAdmin, ImportExportActionModelAdmin):
-	list_display = ("type", "value", "status")
+	list_display = ("type", "status")
 	filter_horizontal = ()
-	search_fields = ["request_time", "type", "value", "status"]
-	fields = ("request_time", "exec_time", "type", "value", "status")
+	search_fields = ["request_time", "type", "arg1", "arg2", "status"]
+	fields = ("request_time", "exec_time", "type", "arg1", "arg2", "status")
 	readonly_fields = ()
 	list_filter = []
 admin.site.register(Request, RequestAdmin)
