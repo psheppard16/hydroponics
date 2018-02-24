@@ -23,6 +23,22 @@ Create and activate virtual environment:
 
 ##### Install Dependencies
 ```sh
+
+
+
+Update apt-get:
+`sudo apt-get update`
+
+Enable I2C:
+`sudo raspi-config`
+Select: 5 Interfacing Options
+Select: P5 I2C
+Select: Yes
+
+Install sensor requirements: (reboot necessary)
+`sudo apt-get install python-smbus`
+`sudo apt-get install i2c-tools`
+
 Install pip requirements:
 `pip install -r requirements.txt`
 
@@ -175,7 +191,7 @@ Reolad the apache daemon:
 `sudo systemctl daemon-reload`
 ```
 
-##### Enabeling Changes
+##### Enabling Changes
 ```sh
 Restart apache to finalize configuration:
 `sudo service apache2 restart`

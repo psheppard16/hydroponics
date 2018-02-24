@@ -1,7 +1,6 @@
 """
 Django settings for hydroponics project.
 """
-
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -12,7 +11,7 @@ STATIC_URL = '/static/'
 STATIC_DIR = os.path.join(BASE_DIR, 'logs')
 STATIC_ROOT = BASE_DIR + STATIC_URL
 
-ALLOWED_HOSTS = ["192.168.0.28"]
+ALLOWED_HOSTS = ["192.168.0.28", "169.254.248.180"]
 
 ADMINS = [('Preston Sheppard', 'psheppard16@gmail.com')]
 DEBUG = True

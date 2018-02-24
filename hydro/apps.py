@@ -62,9 +62,9 @@ class HydroConfig(AppConfig):
                         avg_pH = average_range("pH", start, end, config.minimun_data_count)
                         if avg_pH:
                             if avg_pH < config.low_pH:
-                                pump.increase_pH(config.pH_adj_volume)
+                                Request(type=RequestType.objects.get(type="increase_pH"), arg1=config.pH_adj_volume)
                             elif avg_pH > config.high_pH:
-                                pump.increase_pH(config.pH_adj_volume)
+                                Request(type=RequestType.objects.get(type="decrease_pH"), arg1=config.pH_adj_volume)
 
                 if config.auto_regulate_nutrients:
                     # EC
@@ -73,7 +73,7 @@ class HydroConfig(AppConfig):
                         avg_EC = average_range("EC", start, end, config.minimun_data_count)
                         if avg_EC:
                             if avg_EC < config.low_EC:
-                                pump.increase_nutrients(config.nutrient_adj_volume)
+                                Request(type=RequestType.objects.get(type="increase_nutrients"), arg1=config.nutrient_adj_volume)
                             elif avg_EC > config.high_EC:
                                 raise Exception("EC values above desired levels")
 
@@ -84,21 +84,20 @@ class HydroConfig(AppConfig):
                     can_water_change = config.last_water_change + min_water_change_interval < tz.now()
                     must_water_change = config.last_water_change + max_water_change_interval > tz.now()
                     if must_water_change:
-                        pump.water_change(config.basin_volume, config.resevoir_volume)
+                        Request(type=RequestType.objects.get(type="water_change"),
+                                arg1=config.basin_volume, arg2=config.resevoir_volume)
                     elif can_water_change:
                         avg_ORP = average_range("ORP", start, end, config.minimun_data_count)
-                        if avg_ORP:
-                            if avg_ORP < config.low_ORP:
-                                pump.water_change(config.basin_volume, config.resevoir_volume)
-                            elif avg_ORP > config.high_ORP:
-                                pump.water_change(config.basin_volume, config.resevoir_volume)
+                        if avg_ORP and (avg_ORP < config.low_ORP or avg_ORP > config.high_ORP):
+                            Request(type=RequestType.objects.get(type="water_change"),
+                                    arg1=config.basin_volume, arg2=config.resevoir_volume)
 
             def run():
                 log.info("Starting run loop")
 
                 while(server_alive()):
                     time.sleep(1)
-                    # collect_data()
+                    collect_data()
                     # monitor_data()
 
                 log.info("Exiting run loop")
