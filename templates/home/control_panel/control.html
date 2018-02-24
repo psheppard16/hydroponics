@@ -8,7 +8,7 @@
             <div class="col-8 align-self-center">
                 <dive class="row">
                     <div class="col-6">
-                        <form action="{% url 'post_control' %}" method="post">
+                        <form action="{% url 'control' %}" method="post">
                             {% csrf_token %}
                             <button class="red" type="submit">Increase pH</button>
                             <input type="hidden" value="1" name="type"/>
@@ -16,7 +16,7 @@
                         </form>
                     </div>
                     <div class="col-6">
-                        <form action="{% url 'post_control' %}" method="post">
+                        <form action="{% url 'control' %}" method="post">
                             {% csrf_token %}
                             <button class="red" type="submit">Decrease pH</button>
                             <input type="hidden" value="2" name="type"/>
@@ -33,7 +33,7 @@
             <div class="col-8 align-self-center">
                 <dive class="row">
                     <div class="col">
-                        <form action="{% url 'post_control' %}" method="post">
+                        <form action="{% url 'control' %}" method="post">
                             {% csrf_token %}
                             <button class="red" type="submit">Add Nutrients</button>
                             <input type="hidden" value="3" name="type"/>
@@ -50,7 +50,7 @@
             <div class="col-8 align-self-center">
                 <dive class="row">
                     <div class="col-6">
-                        <form action="{% url 'post_control' %}" method="post">
+                        <form action="{% url 'control' %}" method="post">
                             {% csrf_token %}
                             <button class="red" type="submit">Refill Resevoir</button>
                             <input type="hidden" value="4" name="type"/>
@@ -58,7 +58,7 @@
                         </form>
                     </div>
                     <div class="col-6">
-                        <form action="{% url 'post_control' %}" method="post">
+                        <form action="{% url 'control' %}" method="post">
                             {% csrf_token %}
                             <button class="red" type="submit">Change Water</button>
                             <input type="hidden" value="5" name="type"/>
@@ -76,14 +76,14 @@
             <div class="col-8 align-self-center">
                 <dive class="row">
                     <div class="col-6">
-                        <form action="{% url 'post_control' %}" method="post">
+                        <form action="{% url 'control' %}" method="post">
                             {% csrf_token %}
                             <button class="red" type="submit">Start Main Pump</button>
                             <input type="hidden" value="6" name="type"/>
                         </form>
                     </div>
                     <div class="col-6">
-                        <form action="{% url 'post_control' %}" method="post">
+                        <form action="{% url 'control' %}" method="post">
                             {% csrf_token %}
                             <button class="red" type="submit">Stop Main Pump</button>
                             <input type="hidden" value="7" name="type"/>

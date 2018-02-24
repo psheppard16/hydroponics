@@ -132,20 +132,20 @@ Enter settings dir:
 
 Add the following to the config file:
 
-Alias /static [project path]/hydroponics/static
-<Directory [project path]/hydroponics/static>
+Alias /static ~/pyprojects/hydroponics/static
+<Directory ~/pyprojects/hydroponics/static>
     Require all granted
 </Directory>
 
-<Directory [project path]/hydroponics/hydroponics>
+<Directory ~/pyprojects/hydroponics/hydroponics>
     <Files wsgi.py>
         Require all granted
     </Files>
 </Directory>
 
-WSGIDaemonProcess hydroponics python-path=[project path]/hydroponics python-home=[project path]/hydroponics/hydroponicsenv
+WSGIDaemonProcess hydroponics python-path=~/pyprojects/hydroponics python-home=~/pyprojects/hydroponics/hydroponicsenv
 WSGIProcessGroup hydroponics
-WSGIScriptAlias / [project path]/hydroponics/hydroponics/wsgi.py
+WSGIScriptAlias / ~/pyprojects/hydroponics/hydroponics/wsgi.py
 ```
 
 ##### Permissions
@@ -158,16 +158,16 @@ Create group for apache, and all users
 ...
 
 Give super_group permission to access the database:
-`sudo chown :super_group [project path]/hydroponics/databases/db.sqlite3`
-`sudo chown :super_group [project path]/hydroponics/databases`
-`sudo chmod 664 [project path]/hydroponics/databases/db.sqlite3`
+`sudo chown :super_group ~/pyprojects/hydroponics/databases/db.sqlite3`
+`sudo chown :super_group ~/pyprojects/hydroponics/databases`
+`sudo chmod 664 ~/pyprojects/hydroponics/databases/db.sqlite3`
 
 Give super_group permission to access the logs:
-`sudo chown :super_group [project path]/hydroponics/logs/db_sql.log`
-`sudo chown :super_group [project path]/hydroponics/logs/hydro.log`
-`sudo chown :super_group [project path]/hydroponics/logs`
-`sudo chmod 664 [project path]/hydroponics/logs/db_sql.log`
-`sudo chmod 664 [project path]/hydroponics/logs/hydro.log`
+`sudo chown :super_group ~/pyprojects/hydroponics/logs/db_sql.log`
+`sudo chown :super_group ~/pyprojects/hydroponics/logs/hydro.log`
+`sudo chown :super_group ~/pyprojects/hydroponics/logs`
+`sudo chmod 664 ~/pyprojects/hydroponics/logs/db_sql.log`
+`sudo chmod 664 ~/pyprojects/hydroponics/logs/hydro.log`
 
 Give super_group permission to access the GPIO pins:
 `sudo adduser www-data gpio` # if the apache user is www-data

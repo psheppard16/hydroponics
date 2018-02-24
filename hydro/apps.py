@@ -16,7 +16,7 @@ class HydroConfig(AppConfig):
 
     def ready(self):
         if True:
-            from hydro.models import Data, DataType, Configuration, Request, RequestType, Status
+            from hydro.models import Data, DataType, WasteSettings, ChemicalSettings, Request, RequestType, Status
             from hydro.sensor import Sensor
             from hydro.pump import Pump
 
@@ -47,50 +47,50 @@ class HydroConfig(AppConfig):
 
             def monitor_data():
                 log.info("Monitoring data")
-                config = Configuration.objects.get(id=1)
+                chemical = ChemicalSettings.objects.get(id=1)
 
-                delta = datetime.timedelta(seconds=config.polling_range)
+                delta = datetime.timedelta(seconds=chemical.polling_range)
                 start = tz.now() - delta
                 end = tz.now()
 
-                change_interval = datetime.timedelta(seconds=config.min_change_interval)
+                change_interval = datetime.timedelta(seconds=chemical.min_change_interval)
 
-                if config.auto_regulate_pH:
+                if chemical.auto_regulate_pH:
                     # Ph
-                    can_change_pH = config.last_pH_change + change_interval < tz.now()
+                    can_change_pH = chemical.last_pH_change + change_interval < tz.now()
                     if can_change_pH:
-                        avg_pH = average_range("pH", start, end, config.minimun_data_count)
+                        avg_pH = average_range("pH", start, end, chemical.minimun_data_count)
                         if avg_pH:
-                            if avg_pH < config.low_pH:
-                                Request(type=RequestType.objects.get(type="increase_pH"), arg1=config.pH_adj_volume)
-                            elif avg_pH > config.high_pH:
-                                Request(type=RequestType.objects.get(type="decrease_pH"), arg1=config.pH_adj_volume)
+                            if avg_pH < chemical.low_pH:
+                                Request(type=RequestType.objects.get(type="increase_pH"), arg1=chemical.pH_adj_volume)
+                            elif avg_pH > chemical.high_pH:
+                                Request(type=RequestType.objects.get(type="decrease_pH"), arg1=chemical.pH_adj_volume)
 
-                if config.auto_regulate_nutrients:
+                if chemical.auto_regulate_nutrients:
                     # EC
-                    can_change_EC = config.last_EC_change + change_interval < tz.now()
+                    can_change_EC = chemical.last_EC_change + change_interval < tz.now()
                     if can_change_EC:
-                        avg_EC = average_range("EC", start, end, config.minimun_data_count)
+                        avg_EC = average_range("EC", start, end, chemical.minimun_data_count)
                         if avg_EC:
-                            if avg_EC < config.low_EC:
-                                Request(type=RequestType.objects.get(type="increase_nutrients"), arg1=config.nutrient_adj_volume)
-                            elif avg_EC > config.high_EC:
+                            if avg_EC < chemical.low_EC:
+                                Request(type=RequestType.objects.get(type="increase_nutrients"), arg1=chemical.nutrient_adj_volume)
+                            elif avg_EC > chemical.high_EC:
                                 raise Exception("EC values above desired levels")
 
-                if config.auto_water_change:
+                if chemical.auto_water_change:
                     # ORP
-                    max_water_change_interval = datetime.timedelta(days=config.maximum_water_change_interval)
-                    min_water_change_interval = datetime.timedelta(days=config.minimum_water_change_interval)
-                    can_water_change = config.last_water_change + min_water_change_interval < tz.now()
-                    must_water_change = config.last_water_change + max_water_change_interval > tz.now()
+                    max_water_change_interval = datetime.timedelta(days=chemical.maximum_water_change_interval)
+                    min_water_change_interval = datetime.timedelta(days=chemical.minimum_water_change_interval)
+                    can_water_change = chemical.last_water_change + min_water_change_interval < tz.now()
+                    must_water_change = chemical.last_water_change + max_water_change_interval > tz.now()
                     if must_water_change:
                         Request(type=RequestType.objects.get(type="water_change"),
-                                arg1=config.basin_volume, arg2=config.resevoir_volume)
+                                arg1=chemical.basin_volume, arg2=chemical.resevoir_volume)
                     elif can_water_change:
-                        avg_ORP = average_range("ORP", start, end, config.minimun_data_count)
-                        if avg_ORP and (avg_ORP < config.low_ORP or avg_ORP > config.high_ORP):
+                        avg_ORP = average_range("ORP", start, end, chemical.minimun_data_count)
+                        if avg_ORP and (avg_ORP < chemical.low_ORP or avg_ORP > chemical.high_ORP):
                             Request(type=RequestType.objects.get(type="water_change"),
-                                    arg1=config.basin_volume, arg2=config.resevoir_volume)
+                                    arg1=chemical.basin_volume, arg2=chemical.resevoir_volume)
 
             def run():
                 log.info("Starting run loop")

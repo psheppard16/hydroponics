@@ -16,7 +16,8 @@ urlpatterns = [
 
     url(r'^api/', include(hydro_api_patterns)),
     url(r'^home', HomeView, name="home"),
-    url(r'^configure', ConfigurationEditView, name="post_configuration"),
-    url(r'^control', ControlEditView, name="post_control"),
+    url(r'^chemical', ChemicalSettingsView, name="chemical_settings"),
+    url(r'^waste', WasteSettingsView, name="waste_settings"),
+    url(r'^control', ControlEditView, name="control"),
     url(r'^error', ErrorView, name="error"),
 ]

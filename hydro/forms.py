@@ -1,16 +1,24 @@
 from django import forms
 from hydro.models import *
 
-class ConfigurationForm(forms.ModelForm):
-    """Form for creating configurations from POST requests
+class ChemicalSettingsForm(forms.ModelForm):
+    """Form for editing chemical chemical_settings from POST requests
 
         """
     class Meta:
-        model = Configuration
-        exclude = ['last_pH_change', 'last_nutrient_change', 'last_water_change']
+        model = ChemicalSettings
+        exclude = ['last_pH_change', 'last_nutrient_change', 'last_ORP_change']
+
+class WasteSettingsForm(forms.ModelForm):
+    """Form for editing waste chemical_settings from POST requests
+
+        """
+    class Meta:
+        model = WasteSettings
+        exclude = ['last_water_change']
 
 class RequestForm(forms.ModelForm):
-    """Form for creating configurations from POST requests
+    """Form for creating action requests from POST requests
 
         """
     class Meta:

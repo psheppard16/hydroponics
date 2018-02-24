@@ -8,7 +8,10 @@
                 <a class="nav-link active" data-toggle="tab" href="#sec1">Control Panel</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#sec2">Settings</a>
+                <a class="nav-link" data-toggle="tab" href="#sec2">Chemical Settings</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#sec3">Waste Settings</a>
             </li>
         </ul>
     </div>
@@ -17,7 +20,7 @@
         <div id="sec1" class="sec-content tab-pane fade active show">
             {% include 'shared/form_banner.html' %}
 
-            <form action="{% url 'post_control' %}" method="post">
+            <form action="{% url 'control' %}" method="post">
                 {% csrf_token %}
                 <div class="container-fluid">
                     <div class="row">
@@ -36,34 +39,49 @@
         <div id="sec2" class="sec-content tab-pane fade">
             {% include 'shared/form_banner.html' %}
 
-            <form action="{% url 'post_configuration' %}" method="post">
+            <form action="{% url 'chemical_settings' %}" method="post">
                 {% csrf_token %}
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-6">
-                            {% include "home/settings/pH_reg.html" %}
+                            {% include "home/chemical_settings/pH_reg.html" %}
                         </div>
                         <div class="col-6">
-                            {% include "home/settings/nutrient_reg.html" %}
+                            {% include "home/chemical_settings/nutrient_reg.html" %}
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            {% include "home/settings/waste_reg.html" %}
+                            {% include "home/chemical_settings/ORP_reg.html" %}
                         </div>
                         <div class="col-6">
-                            {% include "home/settings/water_reg.html" %}
+                            {% include "home/chemical_settings/data.html" %}
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            {% include "home/settings/data.html" %}
-                        </div>
-                        <div class="col-6">
-                            {% include "home/settings/submit.html" %}
+                            {% include "shared/submit.html" %}
                         </div>
                     </div>
+                </div>
+            </form>
+        </div>
+
+
+        <div id="sec3" class="sec-content tab-pane fade">
+            {% include 'shared/form_banner.html' %}
+
+            <form action="{% url 'waste_settings' %}" method="post">
+                {% csrf_token %}
+                <div class="container-fluid">
                     <div class="row">
+                        <div class="col-6">
+                            {% include "home/waste_settings/waste_reg.html" %}
+                        </div>
+                        <div class="col-6">
+                            {% include "home/waste_settings/water_reg.html" %}
+                            {% include "shared/submit.html" %}
+                        </div>
                     </div>
                 </div>
             </form>

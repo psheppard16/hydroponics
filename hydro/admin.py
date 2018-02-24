@@ -11,18 +11,23 @@ class DataAdmin(ImportExportModelAdmin, ImportExportActionModelAdmin):
 	list_filter = []
 admin.site.register(Data, DataAdmin)
 
-class ConfigurationAdmin(ImportExportModelAdmin, ImportExportActionModelAdmin):
+class WasteSettingsAdmin(ImportExportModelAdmin, ImportExportActionModelAdmin):
 	list_display = ("id",)
 	filter_horizontal = ()
 	search_fields = []
-	fields = ("auto_regulate_pH", "auto_regulate_nutrients", "min_change_interval", "polling_range", "minimun_data_count",
-        "low_pH", "high_pH", "pH_adj_volume", "last_pH_change", "low_EC", "high_EC",
-        "nutrient_adj_volume", "last_nutrient_change", "auto_water_change", "low_ORP", "high_ORP",
-        "last_water_change", "maximum_water_change_interval", "minimum_water_change_interval", "auto_pump",
-		"auto_refill", "resevoir_volume", "basin_volume")
+	fields = ()
 	readonly_fields = ()
 	list_filter = []
-admin.site.register(Configuration, ConfigurationAdmin)
+admin.site.register(WasteSettings, WasteSettingsAdmin)
+
+class ChemicalSettingsAdmin(ImportExportModelAdmin, ImportExportActionModelAdmin):
+	list_display = ("id",)
+	filter_horizontal = ()
+	search_fields = []
+	fields = ()
+	readonly_fields = ()
+	list_filter = []
+admin.site.register(ChemicalSettings, ChemicalSettingsAdmin)
 
 class RequestAdmin(ImportExportModelAdmin, ImportExportActionModelAdmin):
 	list_display = ("type", "status")
