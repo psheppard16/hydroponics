@@ -208,3 +208,28 @@ Stop:
 Restart:
 `sudo apachetcl restart`
 ```
+
+### Connecting to eduroam on raspberry pi ###
+
+##### Installation
+```sh
+Add to /etc/wpa_supplicant/wpa_supplicant.conf:
+`network={
+    ssid="eduroam"
+    key_mgmt=WPA-EAP
+    proto=WPA2
+    eap=TTLS
+    identity="YOUR-ID@umass.edu"
+    password="YOUR-PASSWORD"
+    phase2="auth=PAP"
+}`
+
+Kill current process:
+`sudo pkill wpa_supplicant`
+
+Restart process:
+`sudo wpa_supplicant -D nl80211 -i wlan0 -c wpa_supplicant.conf`
+
+Enable changes:
+ctrl+c and reboot
+```
