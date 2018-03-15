@@ -16,16 +16,12 @@ Install pip:
 `sudo apt-get install python-pip python3-pip`
 
 Create and activate virtual environment:
-`pip install virtualenv`
-`virtualenv -p python3 venv`
+`python3 -m venv venv`
 `source venv/bin/activate`
 ```
 
 ##### Install Dependencies
 ```sh
-
-
-
 Update apt-get:
 `sudo apt-get update`
 
@@ -46,11 +42,14 @@ Install node:
 `curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -`
 `sudo apt-get install -y nodejs`
 
+Install gulp globally:
+`sudo npm install -g gulp`
+
 Install node requirements:
 `npm install`
 
 Create settings_secret.py using template:
-`cp hydro/settings_secret.py.template hydro/settings_secret.py`
+`cp hydroponics/settings_secret.py.template hydroponics/settings_secret.py`
 
 Enter random characters for the 'SECRET_KEY' in `settings_secret.py`:
 SECRET_KEY='super random characters'
@@ -173,6 +172,14 @@ Give super_group permission to access the GPIO pins:
 `sudo adduser www-data gpio` # if the apache user is www-data
 `sudo adduser pi gpio`       # if you have a user named pi
 `sudo adduser foo gpio`      # if you have a user named foo
+
+Give super_group permission to execute along the path:
+`sudo chown :super_group ~`
+`sudo chown :super_group ~/pyprojects/`
+`sudo chown :super_group ~/pyprojects/hydroponics`
+`sudo chown :super_group ~/pyprojects/hydroponics/hydroponics`
+`sudo chown :super_group ~/pyprojects/hydroponics/hydroponics/wsgi.py`
+`sudo chmod 774 ~/pyprojects/hydroponics/hydroponics/wsgi.py`
 ...
 ```
 
@@ -211,7 +218,7 @@ Restart:
 
 ### Connecting to eduroam on raspberry pi ###
 
-##### Installation
+##### Connect to eduroam
 ```sh
 Add to /etc/wpa_supplicant/wpa_supplicant.conf:
 `network={

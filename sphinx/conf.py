@@ -22,7 +22,7 @@ import django
 import sphinx_bootstrap_theme
 
 sys.path.insert(0, os.path.abspath('..'))
-os.environ['DJANGO_SETTINGS_MODULE'] = 'hydroponics.chemical_settings'
+os.environ['DJANGO_SETTINGS_MODULE'] = 'hydroponics.settings'
 django.setup()
 
 # -- General configuration ------------------------------------------------
