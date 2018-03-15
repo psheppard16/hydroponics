@@ -23,6 +23,7 @@ class HydroConfig(AppConfig):
 
             pump = Pump()
             sensor = Sensor()
+            print(sensor.get_ORP())
 
             def average_range(type, start_time, end_time, min):
                 data = Data.objects.filter(type=type, datetime__gte=start_time, datetime__lte=end_time)
@@ -97,7 +98,7 @@ class HydroConfig(AppConfig):
 
                 while(server_alive()):
                     time.sleep(1)
-                    collect_data()
+                    # collect_data()
                     # monitor_data()
 
                 log.info("Exiting run loop")
