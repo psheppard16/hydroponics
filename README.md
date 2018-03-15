@@ -186,7 +186,7 @@ Give super_group permission to execute along the path:
 ##### Server Name
 ```sh
 Add the name localhost to the new servername config file:
-`echo "serverName localhost" | sudo tee /etc/apache2/conf-available/servername.conf
+`echo "serverName localhost" | sudo tee /etc/apache2/conf-available/servername.conf`
 
 Enable the servername config file:
 `sudo a2enconf servername`
