@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ### Quick summary  ###
 
 This is a Django powered web application for a hydroponics setup
@@ -17,8 +16,7 @@ Install pip:
 `sudo apt-get install python-pip python3-pip`
 
 Create and activate virtual environment:
-`pip install virtualenv`
-`virtualenv -p python3 venv`
+`python3 -m venv venv`
 `source venv/bin/activate`
 ```
 
@@ -44,8 +42,8 @@ Install node:
 `curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -`
 `sudo apt-get install -y nodejs`
 
-For development:
-`sudo npm config set -g production false`
+Install gulp globally:
+`sudo npm install -g gulp`
 
 Install node requirements:
 `npm install`
@@ -55,9 +53,6 @@ Create settings_secret.py using template:
 
 Enter random characters for the 'SECRET_KEY' in `settings_secret.py`:
 SECRET_KEY='super random characters'
-
-Install gulp globally:
-`sudo npm install --global gulp-cli`
 
 Collect static resources for main site:
 `gulp` (`gulp watch` for continuous collection)
@@ -71,6 +66,11 @@ Collect static resources for admin site:
 Install sqlite3:
 `sudo apt-get install sqlite3`
 
+Make the database:
+`cd databases`
+`sqlite3 db.sqlite3`
+`cd ..`
+
 Make migrations: 
 `python manage.py makemigrations`
 
@@ -82,6 +82,7 @@ Create a super user:
 
 Populate database with default models:
 `python manage.py configure_hydro`
+
 ```
 
 ### Documentation
@@ -128,21 +129,20 @@ Install apache2, and wsgi:
 Enter settings dir:
 `sudo nano /etc/apache2/sites-available/000-default.conf`
 
-Add the following to the config file inside <VirtualHost>:
-        
+Add the following to the config file:
+
 Alias /static ~/pyprojects/hydroponics/static
 <Directory ~/pyprojects/hydroponics/static>
     Require all granted
 </Directory>
 
-WSGIPythonPath ~/pyprojects/hydroponics
 <Directory ~/pyprojects/hydroponics/hydroponics>
     <Files wsgi.py>
         Require all granted
     </Files>
 </Directory>
 
-WSGIDaemonProcess hydroponics python-path=~/pyprojects/hydroponics python-home=~/pyprojects/hydroponics/venv
+WSGIDaemonProcess hydroponics python-path=~/pyprojects/hydroponics python-home=~/pyprojects/hydroponics/hydroponicsenv
 WSGIProcessGroup hydroponics
 WSGIScriptAlias / ~/pyprojects/hydroponics/hydroponics/wsgi.py
 ```
@@ -154,6 +154,7 @@ Create group for apache, and all users
 `sudo gpasswd -a www-data super_group` # if the apache user is www-data
 `sudo gpasswd -a pi super_group`       # if you have a user named pi
 `sudo gpasswd -a foo super_group`      # if you have a user named foo
+...
 
 Give super_group permission to access the database:
 `sudo chown :super_group ~/pyprojects/hydroponics/databases/db.sqlite3`
@@ -171,6 +172,15 @@ Give super_group permission to access the GPIO pins:
 `sudo adduser www-data gpio` # if the apache user is www-data
 `sudo adduser pi gpio`       # if you have a user named pi
 `sudo adduser foo gpio`      # if you have a user named foo
+
+Give super_group permission to execute along the path:
+`sudo chown :super_group ~`
+`sudo chown :super_group ~/pyprojects/`
+`sudo chown :super_group ~/pyprojects/hydroponics`
+`sudo chown :super_group ~/pyprojects/hydroponics/hydroponics`
+`sudo chown :super_group ~/pyprojects/hydroponics/hydroponics/wsgi.py`
+`sudo chmod 774 ~/pyprojects/hydroponics/hydroponics/wsgi.py`
+...
 ```
 
 ##### Server Name
@@ -186,9 +196,6 @@ Reload apache:
 
 Reolad the apache daemon:
 `sudo systemctl daemon-reload`
-
-Restart the pi:
-`sudo reboot`
 ```
 
 ##### Enabling Changes
@@ -208,6 +215,32 @@ Stop:
 Restart:
 `sudo apachetcl restart`
 ```
+
+### Connecting to eduroam on raspberry pi ###
+
+##### Connect to eduroam
+```sh
+Add to /etc/wpa_supplicant/wpa_supplicant.conf:
+`network={
+    ssid="eduroam"
+    key_mgmt=WPA-EAP
+    proto=WPA2
+    eap=TTLS
+    identity="YOUR-ID@umass.edu"
+    password="YOUR-PASSWORD"
+    phase2="auth=PAP"
+}`
+
+Kill current process:
+`sudo pkill wpa_supplicant`
+
+Restart process:
+`sudo wpa_supplicant -D nl80211 -i wlan0 -c wpa_supplicant.conf`
+
+Enable changes:
+ctrl+c and reboot
+```
+>>>>>>> 7aa2bf73350669222605953a7a0f91923e1f0ae2
 =======
 ### Quick summary  ###
 
