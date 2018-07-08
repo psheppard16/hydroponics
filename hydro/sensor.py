@@ -4,17 +4,51 @@ import time  # used for sleep delay and timestamps
 
 class Sensor:
     def __init__(self):
-        #sensor initialization
-        pass
+        self.device = AtlasI2C()  # creates the I2C port object, specify the address or bus if necessary
+        self.addresses = self.device.list_i2c_devices()
+
+        # initialize the address for the sensors
+        self.pH_addr = self.get_pH_address()
+        self.EC_addr = self.get_EC_address()
+        self.ORP_addr = self.get_ORP_address()
+        self.temp_addr = self.get_temp_address()
 
     def get_pH(self):
-        return None
+        return self._get_reading(self.pH_addr)
 
     def get_EC(self):
-        return None
+        return self._get_reading(self.EC_addr)
 
     def get_ORP(self):
-        return None
+        return self._get_reading(self.ORP_addr)
+
+    def get_temp(self):
+        return self._get_reading(self.temp_addr)
+
+    def get_pH_address(self):
+        return self._get_address("pH")
+
+    def get_EC_address(self):
+        return self._get_address("EC")
+
+    def get_ORP_address(self):
+        return self._get_address("ORP")
+
+    def get_temp_address(self):
+        return self._get_address("RTD")
+
+    def _get_reading(self, address):
+        self.device.set_i2c_address(address)
+        return self.device.query("R")
+
+    def _get_address(self, address_string):
+        for address in self.addresses:
+            self.device.set_i2c_address(address)
+            info = self.device.query("I")
+            type = info.split(",")[1]
+            if type == address_string:
+                return address
+        raise Exception("Could not find address of type: " + address_string)
 
 
 
@@ -54,15 +88,15 @@ class AtlasI2C:
 
     def read(self, num_of_bytes=31):
         # reads a specified number of bytes from I2C, then parses and displays the result
-        res = self.file_read.read(num_of_bytes)  # read from the board
-        response = filter(lambda x: x != '\x00', res)  # remove the null characters to get the response
-        if ord(response[0]) == 1:  # if the response isn't an error
+        response = self.file_read.read(num_of_bytes)  # read from the board
+        filtered = bytes(filter(lambda x: x != 0, response)) # remove the null characters to get the response
+        if filtered[0] == 1:  # if the response isn't an error
             # change MSB to 0 for all received characters except the first and get a list of characters
-            char_list = map(lambda x: chr(ord(x) & ~0x80), list(response[1:]))
+            char_list = map(lambda x: chr(x & ~0x80), filtered[1:])
             # NOTE: having to change the MSB to 0 is a glitch in the raspberry pi, and you shouldn't have to do this!
             return "Command succeeded " + ''.join(char_list)  # convert the char list to a string and returns it
         else:
-            return "Error " + str(ord(response[0]))
+            return "Error " + str(filtered[0])
 
     def query(self, string):
         # write a command to the board, wait the correct timeout, and read the response
