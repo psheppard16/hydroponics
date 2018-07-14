@@ -27,6 +27,7 @@ class Command(BaseCommand):
                     "sudo chmod 774 ~/pyprojects/hydroponics/logs/db_sql.log",
                     "sudo chmod 774 ~/pyprojects/hydroponics/logs/hydro.log",
                     "sudo chown :super_group /dev",
+                    "sudo chown :super_group /dev/i2c-1",
                     "sudo chmod 774 /dev/i2c-1",
                     "sudo chown :super_group ~",
                     "sudo chown :super_group ~/pyprojects/",
