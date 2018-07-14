@@ -21,34 +21,34 @@ const imagemin = require("gulp-imagemin");
 
 gulp.task("clean-js", () => {
     return del(["static/js/**", "!js"], {force:true});
-})
+});
 gulp.task("clean-css", () => {
     return del(["static/css/**", "!css"], {force:true});
-})
+});
 gulp.task("clean-fonts", () => {
     return del(["static/fonts/**", "!fonts"], {force:true});
-})
+});
 gulp.task("clean-images", () => {
     return del(["static/img/**", "!img"], {force:true});
-})
+});
 gulp.task("eol", ["clean-js"], () => {
     // Normalize EOL to Linux style (LF)
     return gulp.src("assets/js/*.js")
         .pipe(eol("\n"))
         .pipe(gulp.dest("static/js/es6/"));
-})
+});
 gulp.task("eslint", ["clean-js", "eol"], () => {
     // Run ESLint
     return gulp.src(["static/js/es5/**/*.js", "static/js/es6/**/*.js"])
         .pipe(eslint())
         .pipe(eslint.format());
-})
+});
 gulp.task("babel", ["clean-js", "eol", "eslint"], () => {
     // Convert to ES5
     return gulp.src("assets/js/**/*.js")
         .pipe(babel())
         .pipe(gulp.dest("static/js/es5"));
-})
+});
 gulp.task("webpack", ["clean-js", "eol", "eslint", "babel"], () => {
 	// Bundle
     return gulp.src("static/js/es5/**/*.js")
@@ -59,12 +59,12 @@ gulp.task("webpack", ["clean-js", "eol", "eslint", "babel"], () => {
     },
 }))
 		.pipe(gulp.dest("static/dist"));
-})
+});
 gulp.task("sass", () => {
     return gulp.src("assets/sass/**/*.scss")
         .pipe(sass()) // Using gulp-sass
         .pipe(gulp.dest("static/css"));
-})
+});
 gulp.task("css", ["sass"], () => {
 	// bootstrap
     gulp.src("node_modules/bootstrap/dist/css/*.min.css")
@@ -97,7 +97,7 @@ gulp.task("css", ["sass"], () => {
       .pipe(cleanCSS())
       .pipe(concat("hydro.min.css"))
       .pipe(gulp.dest("static/dist"));
-})
+});
 gulp.task("fonts", ["clean-fonts"], () => {
 	// add fonts into css folder so they can be accessed by css in lib
     gulp.src("node_modules/bootstrap/dist/fonts/*")
@@ -117,7 +117,7 @@ gulp.task("fonts", ["clean-fonts"], () => {
 
     return gulp.src("assets/fonts/**/*")
   	    .pipe(gulp.dest("static/fonts"));
-})
+});
 gulp.task("images", ["clean-images"], () => {
     // bootstrap-editable
     gulp.src("node_modules/bootstrap-editable/img/*")
@@ -127,14 +127,14 @@ gulp.task("images", ["clean-images"], () => {
     // Caching images that ran through imagemin
     //.pipe(cache(imagemin({interlaced: true})))
     .pipe(gulp.dest("static/img"));
-})
+});
 gulp.task("default", () => {
     sequence("webpack", "css", "fonts", "images");
-})
+});
 gulp.task("watch", () => {
     sequence("webpack", "css", "fonts", "images");
     gulp.watch("assets/js/**/*.js", ["webpack"]);
     gulp.watch("assets/sass/**/*.scss", ["css"]);
     gulp.watch("assets/fonts/**/*.+(eot|svg|ttf|woff|otf|css)", ["fonts"]);
     gulp.watch("assets/img/**/*.+(png|jpg|jpeg|gif|svg)", ["images"]);
-})
+});

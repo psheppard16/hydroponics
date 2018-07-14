@@ -34,7 +34,6 @@ class HydroConfig(AppConfig):
                 return sum / len(data)
 
             def collect_data():
-                log.info("Collecting data")
                 pH = sensor.get_pH()
                 if pH:
                     Data(date_time=tz.now(), type=DataType(type="pH"), value=pH).save()
@@ -46,7 +45,6 @@ class HydroConfig(AppConfig):
                     Data(date_time=tz.now(), type=DataType(type="ORP"), value=ORP).save()
 
             def monitor_data():
-                log.info("Monitoring data")
                 chemical = ChemicalSettings.objects.get(id=1)
 
                 delta = datetime.timedelta(seconds=chemical.polling_range)

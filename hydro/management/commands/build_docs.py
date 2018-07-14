@@ -1,6 +1,7 @@
 from django.core.management.base import BaseCommand, CommandError
 import subprocess, os
 from hydroponics.settings import BASE_DIR
+from shutil import copyfile
 
 import logging
 
@@ -30,10 +31,10 @@ class Command(BaseCommand):
         # run sphinx make command
         self.run_command("cd " + pwd + " && make html")
 
-
     def run_command(self, command):
         log.info("Executing shell command: " + command)
         cmd = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
         line = cmd.stdout.readline()
         while line:
             log.info("\t" + line.decode('utf-8').rstrip('\n'))
+            line = cmd.stdout.readline()
