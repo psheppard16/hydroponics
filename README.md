@@ -161,23 +161,25 @@ Give super_group permission to access the GPIO pins:
 `sudo adduser foo gpio`      # if you have a user named foo
 
 Give super_group permission to access the database:
-`sudo chown :super_group ~/pyprojects/hydroponics/databases/db.sqlite3`
 `sudo chown :super_group ~/pyprojects/hydroponics/databases`
+`sudo chown :super_group ~/pyprojects/hydroponics/databases/db.sqlite3`
 `sudo chmod 664 ~/pyprojects/hydroponics/databases/db.sqlite3`
 
 Give super_group permission to access the logs:
+`sudo chown :super_group ~/pyprojects/hydroponics/logs`
 `sudo chown :super_group ~/pyprojects/hydroponics/logs/db_sql.log`
 `sudo chown :super_group ~/pyprojects/hydroponics/logs/hydro.log`
-`sudo chown :super_group ~/pyprojects/hydroponics/logs`
 `sudo chmod 664 ~/pyprojects/hydroponics/logs/db_sql.log`
 `sudo chmod 664 ~/pyprojects/hydroponics/logs/hydro.log`
 
+Give super_group permission to access the i2c files (The number may change based on the bus):
+`sudo chown :super_group /dev`
+`sudo chmod 774 /dev/i2c-1`
 
 Give super_group permission to execute along the path:
 `sudo chown :super_group ~`
 `sudo chown :super_group ~/pyprojects/`
 `sudo chown :super_group ~/pyprojects/hydroponics`
-`sudo chown :super_group ~/pyprojects/hydroponics/logs`
 `sudo chown :super_group ~/pyprojects/hydroponics/hydroponics`
 `sudo chown :super_group ~/pyprojects/hydroponics/hydroponics/wsgi.py`
 `sudo chmod 774 ~/pyprojects/hydroponics/hydroponics/wsgi.py`
