@@ -1,15 +1,8 @@
 import contextlib
-import random
-import string
 import time
 from datetime import datetime
 
 import django.db
-import os
-import pytz
-from dateutil.relativedelta import relativedelta
-from django.contrib.auth.models import Group, Permission, User
-from django.contrib.contenttypes.models import ContentType
 from django.core.management import call_command
 from django.core.management.base import BaseCommand
 from django.utils.timezone import utc
@@ -17,13 +10,9 @@ import requests
 import textwrap
 import string
 printable = set(string.printable)
-try:
-	from BeautifulSoup import BeautifulSoup
-except ImportError:
-	from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup
 
 from hydroponics.settings import *
-from hydro.models import *
 
 
 class Command(BaseCommand):
@@ -70,7 +59,7 @@ class Command(BaseCommand):
 			#create the fixture
 			call_command("dumpdata", database=temp_db, output="hydro/fixtures/testing.json",
 						format="json", natural_foreign=True, natural_primary=True, indent=True,
-						exclude=['contenttypes', "sessions", "auth.Permission", "vlan", "admin"])
+						exclude=['contenttypes', "sessions", "auth.Permission", "admin"])
 			print("##########################################")
 			print("fixture creation successful")
 			print("##########################################")

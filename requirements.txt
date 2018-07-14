@@ -10,3 +10,5 @@ django-nested-inline==0.3.7
 django-import-export==0.6.1
 djangorestframework==3.7.7
 RPi.GPIO==0.6.3
+beautifulsoup4==4.4.0
+lxml==4.2.3
