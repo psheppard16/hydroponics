@@ -34,7 +34,12 @@ class Command(BaseCommand):
                     "sudo chown :super_group ~/pyprojects/hydroponics",
                     "sudo chown :super_group ~/pyprojects/hydroponics/hydroponics",
                     "sudo chown :super_group ~/pyprojects/hydroponics/hydroponics/wsgi.py",
-                    "sudo chmod 774 ~/pyprojects/hydroponics/hydroponics/wsgi.py"]
+                    "sudo chmod 774 ~/pyprojects/hydroponics/hydroponics/wsgi.py",
+                    "sudo chown :super_group ~/pyprojects/hydroponics/testing/selenium_drivers/chromedriver",
+                    "sudo chown :super_group ~/pyprojects/hydroponics/testing/selenium_drivers/phantomjs",
+                    "sudo chmod 774 ~/pyprojects/hydroponics/testing/selenium_drivers/chromedriver",
+                    "sudo chmod 774 ~/pyprojects/hydroponics/testing/selenium_drivers/phantomjs"]
+
         for command in commands:
             self.run_command(command)
 

@@ -172,6 +172,12 @@ Give super_group permission to access the logs:
 `sudo chmod 664 ~/pyprojects/hydroponics/logs/db.log`
 `sudo chmod 664 ~/pyprojects/hydroponics/logs/hydro.log`
 
+Give super_group permission to access the selenium drivers:
+`sudo chown :super_group ~/pyprojects/hydroponics/testing/selenium_drivers/chromedriver`
+`sudo chown :super_group ~/pyprojects/hydroponics/testing/selenium_drivers/phantomjs`
+`sudo chmod 774 ~/pyprojects/hydroponics/testing/selenium_drivers/chromedriver`
+`sudo chmod 774 ~/pyprojects/hydroponics/testing/selenium_drivers/phantomjs`
+
 Give super_group permission to access the i2c files (The number may change based on the bus):
 `sudo chown :super_group /dev`
 `sudo chmod 774 /dev/i2c-1`
