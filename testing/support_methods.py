@@ -6,8 +6,8 @@ from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException, ElementNotVisibleException, TimeoutException
 from sys import platform
 from selenium import webdriver
-from hydroponics.settings import BASE_DIR
-from hydro.models import *
+from boilerplate.settings import BASE_DIR
+from timeclock.models import *
 from django.urls import reverse
 from datetime import datetime
 import datetime as dt
@@ -130,11 +130,17 @@ def set_date(driver, id, date):
 		:raises: ValueError: Any part of date is out of range
 		:returns: None
 		"""
-	# round date to nearest 5 minutes
-	rounded_date = round_time(date, 5*60)
-
 	# find date-picker and wait until it is clickable, and click it
 	date_picker_text = WebDriverWait(driver, 3).until(EC.element_to_be_clickable((By.ID, id)))
+
+	# determine action
+	text_classes = date_picker_text.get_attribute("class").split()
+	if 'type-time' in text_classes:
+		action = 'time'
+	elif 'type-date' in text_classes:
+		action = 'date'
+	else:
+		action = 'datetime'
 
 	# click parent to remove inconsistencies involving parent divs containing multiple elements
 	if "phantom" in driver.capabilities['browserName'].lower():
@@ -145,107 +151,192 @@ def set_date(driver, id, date):
 	date_picker_text.click()
 
 	# find datetimepicker div
-	date_picker = WebDriverWait(driver, 3).until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'div.datetimepicker[style*="block"]')))
+	date_picker = WebDriverWait(driver, 3).until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'div.bootstrap-datetimepicker-widget')))
 
 	# scroll into view of date picker
 	driver.execute_script("window.scroll(" + str(date_picker_text.location['x']) + "," + str(
 		int(date_picker_text.location['y']) + 200) + ");")
 
-	# click switch button to display months
-	switch = WebDriverWait(date_picker, 3).until(
-		EC.element_to_be_clickable((By.CSS_SELECTOR, 'div.datetimepicker-days table thead tr th.switch')))
-	switch.click()
+	if 'time' in action:
+		# open date picker
+		if 'date' in action:
+			time_picker_parent = WebDriverWait(date_picker, 3).until(
+				EC.presence_of_element_located((By.CSS_SELECTOR, 'li.collapse div.timepicker'))).find_element_by_xpath('./..')
+			if "show" not in time_picker_parent.get_attribute("class"):
+				accordion_toggle = WebDriverWait(date_picker, 3).until(
+					EC.element_to_be_clickable((By.CSS_SELECTOR, 'li.accordion-toggle table tbody tr td a')))
+				accordion_toggle.click()
 
-	# click switch button again to display years
-	switch = WebDriverWait(date_picker, 3).until(
-		EC.element_to_be_clickable((By.CSS_SELECTOR, 'div.datetimepicker-months table thead tr th.switch')))
-	switch.click()
+		# navigate to minute
+		minute = WebDriverWait(date_picker, 3).until(
+			EC.element_to_be_clickable(
+				(By.CSS_SELECTOR, 'div.timepicker-picker table tr td span.timepicker-minute')))
+		while date.minute != int(minute.get_attribute('innerHTML')):
 
-	# update switch reference
-	switch = WebDriverWait(date_picker, 3).until(
-		EC.element_to_be_clickable((By.CSS_SELECTOR, 'div.datetimepicker-years table thead tr th.switch')))
+			if int(minute.get_attribute('innerHTML')) < date.minute:
+				try:
+					inc_btn = WebDriverWait(date_picker, 3).until(
+						EC.element_to_be_clickable((By.CSS_SELECTOR,
+						                            'div.timepicker-picker table tr td a[data-action="incrementMinutes"]')))
 
-	# make sure year is in range of years displayed
-	while rounded_date.year < int(switch.get_attribute('innerHTML').split("-")[0]):
-		# attempt to click prev button to go back
-		prev_btn = WebDriverWait(date_picker, 3).until(
-			EC.element_to_be_clickable((By.CSS_SELECTOR, 'div.datetimepicker-years table thead tr th.prev')))
-		if 'hidden' in prev_btn.get_attribute('style'):
-			raise ValueError("Rounded date: " + rounded_date.strftime('%Y-%m-%d %H:%M') + " from: " + date.strftime('%Y-%m-%d %H:%M') + " has year out of valid range.")
-		else:
-			prev_btn.click()
+					if 'hidden' in inc_btn.get_attribute('style'):
+						raise ValueError(
+							"Rounded date: " + date.strftime(
+								'%Y-%m-%d %H:%M') + " from: " + date.strftime(
+								'%Y-%m-%d %H:%M') + " has year out of valid range.")
+					else:
+						inc_btn.click()
 
-		# update switch instance
+				except TimeoutException:
+					raise ValueError(
+						"Rounded date: " + date.strftime('%Y-%m-%d %H:%M') + " from: " + date.strftime(
+							'%Y-%m-%d %H:%M') + " has year out of valid range.")
+
+			elif int(minute.get_attribute('innerHTML')) > date.minute:
+				try:
+					dec_btn = WebDriverWait(date_picker, 3).until(
+						EC.element_to_be_clickable((By.CSS_SELECTOR,
+						                            'div.timepicker-picker table tr td a[data-action="decrementMinutes"]')))
+
+					if 'hidden' in dec_btn.get_attribute('style'):
+						raise ValueError(
+							"Rounded date: " + date.strftime(
+								'%Y-%m-%d %H:%M') + " from: " + date.strftime(
+								'%Y-%m-%d %H:%M') + " has year out of valid range.")
+					else:
+						dec_btn.click()
+
+				except TimeoutException:
+					raise ValueError(
+						"Rounded date: " + date.strftime('%Y-%m-%d %H:%M') + " from: " + date.strftime(
+							'%Y-%m-%d %H:%M') + " has year out of valid range.")
+
+		# navigate to minute
+		hour = WebDriverWait(date_picker, 3).until(
+			EC.element_to_be_clickable(
+				(By.CSS_SELECTOR, 'div.timepicker-picker table tr td span.timepicker-hour')))
+		while int(date.strftime("%I")) != int(hour.get_attribute('innerHTML')):
+
+			if int(hour.get_attribute('innerHTML')) < int(date.strftime("%I")):
+				try:
+					inc_btn = WebDriverWait(date_picker, 3).until(
+						EC.element_to_be_clickable((By.CSS_SELECTOR,
+						                            'div.timepicker-picker table tr td a[data-action="incrementHours"]')))
+
+					if 'hidden' in inc_btn.get_attribute('style'):
+						raise ValueError(
+							"Rounded date: " + date.strftime('%Y-%m-%d %H:%M') + " from: " + date.strftime(
+								'%Y-%m-%d %H:%M') + " has year out of valid range.")
+					else:
+						inc_btn.click()
+
+				except TimeoutException:
+					raise ValueError(
+						"Rounded date: " + date.strftime('%Y-%m-%d %H:%M') + " from: " + date.strftime(
+							'%Y-%m-%d %H:%M') + " has year out of valid range.")
+
+			elif int(hour.get_attribute('innerHTML')) > int(date.strftime("%I")):
+				try:
+					dec_btn = WebDriverWait(date_picker, 3).until(
+						EC.element_to_be_clickable((By.CSS_SELECTOR,
+						                            'div.timepicker-picker table tr td a[data-action="decrementHours"]')))
+
+					if 'hidden' in dec_btn.get_attribute('style'):
+						raise ValueError(
+							"Rounded date: " + date.strftime('%Y-%m-%d %H:%M') + " from: " + date.strftime(
+								'%Y-%m-%d %H:%M') + " has year out of valid range.")
+					else:
+						dec_btn.click()
+
+				except TimeoutException:
+					raise ValueError(
+						"Rounded date: " + date.strftime('%Y-%m-%d %H:%M') + " from: " + date.strftime(
+							'%Y-%m-%d %H:%M') + " has year out of valid range.")
+
+		# change AM/PM
+		ampm_btn = WebDriverWait(date_picker, 3).until(
+			EC.element_to_be_clickable((By.CSS_SELECTOR,
+			                            'div.timepicker-picker table tr td button[data-action="togglePeriod"]')))
+		if date.strftime("%p") != ampm_btn.get_attribute('innerHTML'):
+			ampm_btn.click()
+
+	if 'date' in action:
+		# open date picker
+		if 'time' in action:
+			date_picker_parent = WebDriverWait(date_picker, 3).until(EC.presence_of_element_located((By.CSS_SELECTOR, 'li.collapse div.datepicker'))).find_element_by_xpath('..')
+			if "show" not in date_picker_parent.get_attribute("class"):
+				accordion_toggle = WebDriverWait(date_picker, 3).until(
+					EC.element_to_be_clickable((By.CSS_SELECTOR, 'li.accordion-toggle table tbody tr td a')))
+				accordion_toggle.click()
+
+		# click switch button to display months
 		switch = WebDriverWait(date_picker, 3).until(
-			EC.element_to_be_clickable((By.CSS_SELECTOR, 'div.datetimepicker-years table thead tr th.switch')))
+			EC.element_to_be_clickable((By.CSS_SELECTOR, 'div.datepicker-days table thead tr th.picker-switch')))
+		switch.click()
 
-	while rounded_date.year > int(switch.get_attribute('innerHTML').split("-")[1]):
-		# attempt to click next button to go forward
-		next_btn = WebDriverWait(date_picker, 3).until(
-			EC.element_to_be_clickable((By.CSS_SELECTOR, 'div.datetimepicker-years table thead tr th.next')))
-		if 'hidden' in next_btn.get_attribute('style'):
-			raise ValueError("Rounded date: " + rounded_date.strftime('%Y-%m-%d %H:%M') + " from: " + date.strftime('%Y-%m-%d %H:%M') + " has year out of valid range.")
-		else:
-			next_btn.click()
-
-		# update switch instance
+		# update switch reference
 		switch = WebDriverWait(date_picker, 3).until(
-			EC.element_to_be_clickable((By.CSS_SELECTOR, 'div.datetimepicker-years table thead tr th.switch')))
+			EC.element_to_be_clickable((By.CSS_SELECTOR, 'div.datepicker-months table thead tr th.picker-switch')))
 
-	# click year
-	years = WebDriverWait(date_picker, 3).until(
-		EC.presence_of_all_elements_located((By.CSS_SELECTOR, 'div.datetimepicker-years table tbody tr td span.year')))
-	for year in years:
-		if year.get_attribute('innerHTML') == str(rounded_date.year):
-			if 'disabled' in year.get_attribute('class'):
-				raise ValueError("Rounded date: " + rounded_date.strftime('%Y-%m-%d %H:%M') + " from: " + date.strftime('%Y-%m-%d %H:%M') + " has year out of valid range.")
-			else:
-				year.click()
-				break
+		# attempt to navigate to correct year
+		while date.year != int(switch.get_attribute('innerHTML')):
 
-	# click month
-	months = WebDriverWait(date_picker, 3).until(
-		EC.presence_of_all_elements_located((By.CSS_SELECTOR, 'div.datetimepicker-months table tbody tr td span.month')))
-	for month in months:
-		if month.get_attribute('innerHTML') == rounded_date.strftime('%b'):
-			if 'disabled' in month.get_attribute('class'):
-				raise ValueError("Rounded date: " + rounded_date.strftime('%Y-%m-%d %H:%M') + " from: " + date.strftime('%Y-%m-%d %H:%M') + " has month out of valid range.")
-			else:
-				month.click()
-				break
+			if date.year < int(switch.get_attribute('innerHTML')):
+				try:
+					prev_btn = WebDriverWait(date_picker, 3).until(
+						EC.element_to_be_clickable((By.CSS_SELECTOR, 'div.datepicker-months table thead tr th.prev')))
 
-	# click day
-	days = WebDriverWait(date_picker, 3).until(
-		EC.presence_of_all_elements_located((By.CSS_SELECTOR, 'div.datetimepicker-days table tbody tr td.day')))
-	for day in days:
-		if int(day.get_attribute('innerHTML')) == rounded_date.day and 'old' not in day.get_attribute('class') and 'new' not in day.get_attribute('class'):
-			if 'disabled' in day.get_attribute('class'):
-				raise ValueError("Rounded date: " + rounded_date.strftime('%Y-%m-%d %H:%M') + " from: " + date.strftime('%Y-%m-%d %H:%M') + " has day out of valid range.")
-			else:
-				day.click()
-				break
+					if 'hidden' in prev_btn.get_attribute('style'):
+						raise ValueError(
+							"Rounded date: " + date.strftime('%Y-%m-%d %H:%M') + " from: " + date.strftime(
+								'%Y-%m-%d %H:%M') + " has year out of valid range.")
+					else:
+						prev_btn.click()
 
-	# click hour
-	hours = WebDriverWait(date_picker, 3).until(
-		EC.presence_of_all_elements_located((By.CSS_SELECTOR, 'div.datetimepicker-hours table tbody tr td span.hour')))
-	for hour in hours:
-		if str(rounded_date.hour) in hour.get_attribute('innerHTML'):
-			if 'disabled' in hour.get_attribute('class'):
-				raise ValueError("Rounded date: " + rounded_date.strftime('%Y-%m-%d %H:%M') + " from: " + date.strftime('%Y-%m-%d %H:%M') + " has hour out of valid range.")
-			else:
-				hour.click()
-				break
+				except TimeoutException:
+					raise ValueError("Rounded date: " + date.strftime('%Y-%m-%d %H:%M') + " from: " + date.strftime(
+						'%Y-%m-%d %H:%M') + " has year out of valid range.")
 
-	# click minute
-	minutes = WebDriverWait(date_picker, 3).until(
-		EC.presence_of_all_elements_located((By.CSS_SELECTOR, 'div.datetimepicker-minutes table tbody tr td span.minute')))
-	for minute in minutes:
-		if str(rounded_date.minute) in minute.get_attribute('innerHTML'):
-			if 'disabled' in minute.get_attribute('class'):
-				raise ValueError("Rounded date: " + rounded_date.strftime('%Y-%m-%d %H:%M') + " from: " + date.strftime('%Y-%m-%d %H:%M') + " has minute out of valid range.")
-			else:
-				minute.click()
-				break
+			elif date.year > int(switch.get_attribute('innerHTML')):
+				try:
+					next_btn = WebDriverWait(date_picker, 3).until(
+						EC.element_to_be_clickable((By.CSS_SELECTOR, 'div.datepicker-months table thead tr th.next')))
+
+					if 'hidden' in next_btn.get_attribute('style'):
+						raise ValueError(
+							"Rounded date: " + date.strftime('%Y-%m-%d %H:%M') + " from: " + date.strftime(
+								'%Y-%m-%d %H:%M') + " has year out of valid range.")
+					else:
+						next_btn.click()
+
+				except TimeoutException:
+					raise ValueError("Rounded date: " + date.strftime('%Y-%m-%d %H:%M') + " from: " + date.strftime(
+						'%Y-%m-%d %H:%M') + " has year out of valid range.")
+
+		# click month
+		months = WebDriverWait(date_picker, 3).until(
+			EC.presence_of_all_elements_located((By.CSS_SELECTOR, 'div.datepicker-months table tbody tr td span.month')))
+		for month in months:
+			if month.get_attribute('innerHTML') == date.strftime('%b'):
+				if 'disabled' in month.get_attribute('class'):
+					raise ValueError("Rounded date: " + date.strftime('%Y-%m-%d %H:%M') + " from: " + date.strftime('%Y-%m-%d %H:%M') + " has month out of valid range.")
+				else:
+					month.click()
+					break
+
+		# click day
+		days = WebDriverWait(date_picker, 3).until(
+			EC.presence_of_all_elements_located((By.CSS_SELECTOR, 'div.datepicker-days table tbody tr td.day')))
+		for day in days:
+			if int(day.get_attribute('innerHTML')) == date.day and 'old' not in day.get_attribute('class') and 'new' not in day.get_attribute('class'):
+				if 'disabled' in day.get_attribute('class'):
+					raise ValueError("Rounded date: " + date.strftime('%Y-%m-%d %H:%M') + " from: " + date.strftime('%Y-%m-%d %H:%M') + " has day out of valid range.")
+				else:
+					day.click()
+					break
+
+	# close datepicker
+	date_picker_text.click()
 
 
 def round_time(date_time, roundTo=60):
@@ -316,7 +407,7 @@ def get_chosen_multi(driver, id):
 	selected_choices = []
 	for choice in chosens:
 		selected_choices.append(str(choice.text))
-	return filter(None, selected_choices)
+	return list(filter(None, selected_choices))
 
 
 def get_text(driver, id):
@@ -396,25 +487,25 @@ def get_driver():
 	driver_environment_variable = os.environ.get('driver')
 	if driver_environment_variable:
 		if 'phantomjs' in driver_environment_variable:
-			return webdriver.PhantomJS(executable_path=BASE_DIR + '/static_src/selenium_drivers/phantomjs')
+			return webdriver.PhantomJS(executable_path=BASE_DIR + '/testing/selenium_drivers/phantomjs')
 		elif 'chrome-headless' in driver_environment_variable:
 			if platform == "linux" or platform == "linux2":
 				chrome_options = webdriver.ChromeOptions()
 				chrome_options.add_argument("headless")
 				chrome_options.add_argument("disable-extensions")
 				chrome_options.add_argument("disable-gpu")
-				return webdriver.Chrome(chrome_options=chrome_options, executable_path=BASE_DIR + '/static_src/selenium_drivers/chromedriver-linux64')
+				return webdriver.Chrome(chrome_options=chrome_options, executable_path=BASE_DIR + '/testing/selenium_drivers/chromedriver-linux64')
 			else:
 				raise Exception("Headless Chrome testing is currently only supported on linux.")
 		elif 'chrome' in driver_environment_variable:
-			return webdriver.Chrome(executable_path=BASE_DIR + '/static_src/selenium_drivers/chromedriver')
+			return webdriver.Chrome(executable_path=BASE_DIR + '/testing/selenium_drivers/chromedriver')
 		elif 'safari' in driver_environment_variable:
 			return webdriver.Safari()
 		else:
 			raise Exception("Expected: %r, %r, %r, or %r. Was: %r" % ('phantomjs', 'chrome', 'chrome-headless', 'safari', driver_environment_variable))
 	else:
 		if "darwin" in platform:
-			return webdriver.Chrome(executable_path=BASE_DIR + '/static_src/selenium_drivers/chromedriver')
+			return webdriver.Chrome(executable_path=BASE_DIR + '/testing/selenium_drivers/chromedriver')
 		else:
 			return webdriver.PhantomJS()
 
