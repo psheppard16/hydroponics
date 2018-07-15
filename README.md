@@ -104,7 +104,7 @@ To build the documentation after changes:
 ##### Running tests locally
 ```sh
 Run all tests:
-`driver=chrome REMOTE_USER=admin python manage.py --keepdb`
+`driver=chrome REMOTE_USER=admin python manage.py --keepdb test`
 
 Run specific tests: 
 `driver=[driver] REMOTE_USER=admin python manage.py --keepdb testing.[test file].[test class].[test]`
@@ -167,9 +167,9 @@ Give super_group permission to access the database:
 
 Give super_group permission to access the logs:
 `sudo chown :super_group ~/pyprojects/hydroponics/logs`
-`sudo chown :super_group ~/pyprojects/hydroponics/logs/db_sql.log`
+`sudo chown :super_group ~/pyprojects/hydroponics/logs/db.log`
 `sudo chown :super_group ~/pyprojects/hydroponics/logs/hydro.log`
-`sudo chmod 664 ~/pyprojects/hydroponics/logs/db_sql.log`
+`sudo chmod 664 ~/pyprojects/hydroponics/logs/db.log`
 `sudo chmod 664 ~/pyprojects/hydroponics/logs/hydro.log`
 
 Give super_group permission to access the i2c files (The number may change based on the bus):

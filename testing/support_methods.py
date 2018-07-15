@@ -1,17 +1,12 @@
 import time
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException, ElementNotVisibleException, TimeoutException
 from sys import platform
 from selenium import webdriver
-from boilerplate.settings import BASE_DIR
-from timeclock.models import *
-from django.urls import reverse
-from datetime import datetime
+from hydroponics.settings import BASE_DIR
 import datetime as dt
-from django.utils.timezone import utc
 import os
 
 

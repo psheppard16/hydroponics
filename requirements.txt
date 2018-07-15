@@ -13,3 +13,4 @@ RPi.GPIO==0.6.3
 beautifulsoup4==4.4.0
 lxml==4.2.3
 django-filter==2.0.0
+python-memcached==1.59

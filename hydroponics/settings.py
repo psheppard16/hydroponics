@@ -110,7 +110,7 @@ LOGGING = {
             'level': 'DEBUG',
             'class': 'logging.NullHandler',
         },
-        'hydrologfile': {
+        'hydro': {
             'level': 'DEBUG',
             'class': 'logging.handlers.RotatingFileHandler',
             'filename': os.path.join(LOG_DIR, 'hydro.log'),
@@ -118,10 +118,10 @@ LOGGING = {
             'backupCount': 2,
             'formatter': 'standard',
         },
-        'dblogfile': {
+        'db': {
             'level': 'INFO',
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': os.path.join(LOG_DIR, 'db_sql.log'),
+            'filename': os.path.join(LOG_DIR, 'db.log'),
             'maxBytes': 50000,
             'backupCount': 2,
             'formatter': 'standard',
@@ -139,12 +139,12 @@ LOGGING = {
             'level': 'WARN',
         },
         'django.db.backends': {
-            'handlers': ['dblogfile'],
+            'handlers': ['db'],
             'level': 'DEBUG',
             'propagate': False,
         },
         'hydro': {
-            'handlers': ['console', 'hydrologfile'],
+            'handlers': ['console', 'hydro'],
             'level': 'DEBUG',
         }
     }
