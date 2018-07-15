@@ -1,8 +1,5 @@
 from django.contrib.auth import get_user_model
-
-from rest_framework import serializers, mixins
-from rest_framework.fields import CurrentUserDefault
-
+from rest_framework import serializers
 from hydro.models import *
 
 User = get_user_model()
@@ -17,7 +14,12 @@ class UserSerializer(serializers.ModelSerializer):
 			User.USERNAME_FIELD,
 		)
 
-# class ModelSerializer(serializers.ModelSerializer):
-# 	class Meta:
-# 		model = Model
-# 		fields = '__all__'
+class DataSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = Data
+		fields = '__all__'
+
+class DataTypeSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = DataType
+		fields = '__all__'
