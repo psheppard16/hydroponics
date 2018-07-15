@@ -5,7 +5,6 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 import testing.support_methods as sup
 from django.urls import reverse
-from dateutil.relativedelta import relativedelta
 from datetime import datetime
 
 class ModelTestCase(LiveServerTestCase):

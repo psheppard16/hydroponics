@@ -1,5 +1,5 @@
 import time
-from django.test import LiveServerTestCase
+from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
@@ -9,7 +9,7 @@ import testing.support_methods as sup
 from django.urls import reverse
 
 
-class SupportMethodsTestCase(LiveServerTestCase):
+class SupportMethodsTestCase(StaticLiveServerTestCase):
 	fixtures = ['testing.json']
 
 	def setUp(self):
@@ -162,21 +162,44 @@ class SupportMethodsTestCase(LiveServerTestCase):
 
 		# attempt to set far in future date
 		far_date = datetime.strptime('Jul 4 2100  1:36PM', '%b %d %Y %I:%M%p')
-		sup.set_date(self.driver, 'id_date_picker', far_date)
+		sup.set_date(self.driver, 'id_datetime_picker', far_date)
 
 		# check if value of text box matches date
-		expected = datetime.strptime('Jul 4 2100  1:35PM', '%b %d %Y %I:%M%p')
-		actual = datetime.strptime(sup.get_text(self.driver, 'id_date_picker'), '%Y-%m-%d %H:%M')
-		sup.assert_equals(expected, actual, id='id_date_picker')
+		expected = datetime.strptime('Jul 4 2100  1:36PM', '%b %d %Y %I:%M%p')
+		actual = datetime.strptime(sup.get_text(self.driver, 'id_datetime_picker'), '%m/%d/%Y %I:%M %p')
+		sup.assert_equals(expected, actual, id='id_datetime_picker')
 
-		time.sleep(5)
+		time.sleep(1)
+
 		# attempt to set far in past date
-		past_date = datetime.strptime('Dec 25 1900  11:58PM', '%b %d %Y %I:%M%p')
+		past_date = datetime.strptime('Dec 25 1900  12:00AM', '%b %d %Y %I:%M%p')
+		sup.set_date(self.driver, 'id_datetime_picker', past_date)
+
+		# check if value of text box matches date
+		expected = datetime.strptime('Dec 25 1900  12:00AM', '%b %d %Y %I:%M%p')
+		actual = datetime.strptime(sup.get_text(self.driver, 'id_datetime_picker'), '%m/%d/%Y %I:%M %p')
+		sup.assert_equals(expected, actual, id='id_datetime_picker')
+
+		time.sleep(1)
+
+		# attempt to just time
+		past_date = datetime.strptime('Dec 25 1900  12:00AM', '%b %d %Y %I:%M%p')
+		sup.set_date(self.driver, 'id_time_picker', past_date)
+
+		# check if value of text box matches date
+		expected = datetime.strptime('12:00 AM', '%I:%M %p')
+		actual = datetime.strptime(sup.get_text(self.driver, 'id_time_picker'), '%I:%M %p')
+		sup.assert_equals(expected, actual, id='id_time_picker')
+
+		time.sleep(1)
+
+		# attempt to just date
+		past_date = datetime.strptime('Dec 25 1900', '%b %d %Y')
 		sup.set_date(self.driver, 'id_date_picker', past_date)
 
 		# check if value of text box matches date
-		expected = datetime.strptime('Dec 26 1900  12:00AM', '%b %d %Y %I:%M%p')
-		actual = datetime.strptime(sup.get_text(self.driver, 'id_date_picker'), '%Y-%m-%d %H:%M')
+		expected = datetime.strptime('Dec 25 1900', '%b %d %Y')
+		actual = datetime.strptime(sup.get_text(self.driver, 'id_date_picker'), '%m/%d/%Y')
 		sup.assert_equals(expected, actual, id='id_date_picker')
 
 
@@ -255,7 +278,7 @@ class SupportMethodsTestCase(LiveServerTestCase):
 		sup.open(self, self.test_path)
 
 		# attempt to set the text box to "test"
-		id = "id_text_box"
+		id = "id_input"
 		sup.set_text_box(self.driver, id, "test")
 		expected = "test"
 		text_box = WebDriverWait(self.driver, 3).until(EC.presence_of_element_located((By.ID, id)))
@@ -271,7 +294,7 @@ class SupportMethodsTestCase(LiveServerTestCase):
 		sup.assert_equals(expected, actual, id=id)
 
 		# attempt to set the read-only text box to "test"
-		id = "id_readonly"
+		id = "id_input_readonly"
 		self.assertRaises(Exception, sup.set_text_box, self.driver, id, "text")
 
 
@@ -364,7 +387,7 @@ class SupportMethodsTestCase(LiveServerTestCase):
 		sup.open(self, self.test_path)
 
 		# assert returns "" then the text_box is empty
-		id = "id_text_box"
+		id = "id_input"
 		expected = ""
 		actual = sup.get_text(self.driver, id)
 		sup.assert_equals(expected, actual, id=id)
@@ -390,11 +413,11 @@ class SupportMethodsTestCase(LiveServerTestCase):
 	def test_element_exists(self):
 		"""Attempt to check for a real and fake element using css_selector, xpath, and id.
 
-			- assert find element by xpath for "//*[@id='id_text_box']" returns true
+			- assert find element by xpath for "//*[@id='id_input']" returns true
 
-			- assert find element by css_selector for "input#id_text_box" returns true
+			- assert find element by css_selector for "input#id_input" returns true
 
-			- assert find element by id for "id_text_box" returns true
+			- assert find element by id for "id_input" returns true
 
 			- assert find element by xpath for "//*[@id='id_fake']" returns False
 
@@ -413,15 +436,15 @@ class SupportMethodsTestCase(LiveServerTestCase):
 		sup.open(self, self.test_path)
 
 		# assert that searching by id, xpath, and css_selector for a real element all return True
-		actual = sup.element_exists(self.driver, xpath="//*[@id='id_text_box']")
+		actual = sup.element_exists(self.driver, xpath="//*[@id='id_input']")
 		expected = True
 		sup.assert_equals(expected, actual)
 
-		actual = sup.element_exists(self.driver, css_selector="input#id_text_box")
+		actual = sup.element_exists(self.driver, css_selector="input#id_input")
 		expected = True
 		sup.assert_equals(expected, actual)
 
-		actual = sup.element_exists(self.driver, id="id_text_box")
+		actual = sup.element_exists(self.driver, id="id_input")
 		expected = True
 		sup.assert_equals(expected, actual)
 
@@ -442,116 +465,44 @@ class SupportMethodsTestCase(LiveServerTestCase):
 		self.assertRaises(ValueError, sup.element_exists, self.driver)
 
 	def test_open(self):
-		"""Attempt to open every page in hydro.
+		"""Attempt to open every page in status.
 
-			- assert detail view of the test routinechangerequest loads correctly
+			- assert the timeclock page loads correctly
 
-			- assert detail view of the test changerequest loads correctly
+			- assert the schedule page loads correctly
 
-			- assert detail view of the test notification loads correctly
+			- assert the settings page loads correctly
 
-			- assert detail view of the test incident loads correctly
-
-			- assert list view for routinechangerequest loads correctly
-
-			- assert list view for changerequest loads correctly
-
-			- assert list view for notification loads correctly
-
-			- assert list view for incident loads correctly
-
-			- assert new view for routinechangerequest loads correctly
-
-			- assert new view for changerequest loads correctly
-
-			- assert new view for notification loads correctly
-
-			- assert new view for incident loads correctly
-
-			- assert the test page loads correctly
+			- assert the policies page loads correctly
 
 			:returns: None
 			"""
 
 		print('\n##########################################\n Support: Beginning test_open\n##########################################')
 
-		# load the detail view of the test routinechangerequest and assert the url is correct
-		sup.open(self, reverse('routinechangerequest_edit', kwargs={'routinechangerequest_id': self.rc.id}))
-		expected = reverse('routinechangerequest_edit', kwargs={'routinechangerequest_id': self.rc.id})
+		# load the timeclock page and assert the url is correct
+		sup.open(self, reverse('timeclock'))
+		expected = reverse('timeclock')
 		in_text = self.driver.current_url
-		sup.assert_in(expected, in_text, message="Browser did not load Edit Routine Change Request Page")
+		sup.assert_in(expected, in_text, message="Browser did not load Timeclock Page")
 
-		# load the detail view of the test changerequest and assert the url is correct
-		sup.open(self, reverse('changerequest_edit', kwargs={'changerequest_id': self.cr.id}))
-		expected = reverse('changerequest_edit', kwargs={'changerequest_id': self.cr.id})
+		# load the schedule page and assert the url is correct
+		sup.open(self, reverse('schedule'))
+		expected = reverse('schedule')
 		in_text = self.driver.current_url
-		sup.assert_in(expected, in_text, message="Browser did not load Edit Change Request Page")
+		sup.assert_in(expected, in_text, message="Browser did not load Schedule Page")
 
-		# load the detail view of the test notification and assert the url is correct
-		sup.open(self, reverse('notification_edit', kwargs={'notification_id': self.notification.id}))
-		expected = reverse('notification_edit', kwargs={'notification_id': self.notification.id})
+		# load the settings page and assert the url is correct
+		sup.open(self, reverse('settings'))
+		expected = reverse('settings')
 		in_text = self.driver.current_url
-		sup.assert_in(expected, in_text, message="Browser did not load Edit Notification Page")
+		sup.assert_in(expected, in_text, message="Browser did not load Settings Page")
 
-		# load the detail view of the test incident and assert the url is correct
-		sup.open(self, reverse('incident_edit', kwargs={'incident_id': self.incident.id}))
-		expected = reverse('incident_edit', kwargs={'incident_id': self.incident.id})
+		# load the settings page and assert the url is correct
+		sup.open(self, reverse('policies'))
+		expected = reverse('policies')
 		in_text = self.driver.current_url
-		sup.assert_in(expected, in_text, message="Browser did not load Edit Incident Page")
-
-		# load the list view of the test routinechangerequest and assert the url is correct
-		sup.open(self, reverse('routinechangerequest'))
-		expected = reverse('routinechangerequest')
-		in_text = self.driver.current_url
-		sup.assert_in(expected, in_text, message="Browser did not load Routine Change Request Page")
-
-		# load the list view of the test changerequest and assert the url is correct
-		sup.open(self, reverse('changerequest'))
-		expected = reverse('changerequest')
-		in_text = self.driver.current_url
-		sup.assert_in(expected, in_text, message="Browser did not load Change Request Page")
-
-		# load the list view of the test notification and assert the url is correct
-		sup.open(self, reverse('notification'))
-		expected = reverse('notification')
-		in_text = self.driver.current_url
-		sup.assert_in(expected, in_text, message="Browser did not load Notification Page")
-
-		# load the list view of the test incident and assert the url is correct
-		sup.open(self, reverse('incident'))
-		expected = reverse('incident')
-		in_text = self.driver.current_url
-		sup.assert_in(expected, in_text, message="Browser did not load Incident Page")
-
-		# load the new view of the test routinechangerequest and assert the url is correct
-		sup.open(self, reverse('routinechangerequest_new'))
-		expected = reverse('routinechangerequest_new')
-		in_text = self.driver.current_url
-		sup.assert_in(expected, in_text, message="Browser did not load New Routine Change Request Page")
-
-		# load the new view of the test changerequest and assert the url is correct
-		sup.open(self, reverse('changerequest_new'))
-		expected = reverse('changerequest_new')
-		in_text = self.driver.current_url
-		sup.assert_in(expected, in_text, message="Browser did not load New Change Request Page")
-
-		# load the new view of the test notification and assert the url is correct
-		sup.open(self, reverse('notification_new'))
-		expected = reverse('notification_new')
-		in_text = self.driver.current_url
-		sup.assert_in(expected, in_text, message="Browser did not load New Notification Page")
-
-		# load the new view of the test incident and assert the url is correct
-		sup.open(self, reverse('incident_new'))
-		expected = reverse('incident_new')
-		in_text = self.driver.current_url
-		sup.assert_in(expected, in_text, message="Browser did not load New Incident Page")
-
-		# load the widget test page and assert the url is correct
-		sup.open(self, self.test_path)
-		expected = "/templates/testing/widgets.html"
-		in_text = self.driver.current_url
-		sup.assert_in(expected, in_text, message="Browser did not load Test Page")
+		sup.assert_in(expected, in_text, message="Browser did not load Policies Page")
 
 	def test_get_all_data(self):
 		"""Test if get_all_data returns the correct data for the test page
@@ -570,22 +521,24 @@ class SupportMethodsTestCase(LiveServerTestCase):
 
 		# test if the data is correct on the default test page
 		actual = sup.get_all_data(self.driver)
-		expected = {'id_date_picker': '', 'id_chosen_single': 'Option 1', 'id_chosen_single_empty': 'Select an Option',
-					'id_text_area': '', 'id_text_box': '', 'id_readonly': '', 'id_chosen_multi': []}
+		expected = {'id_datetime_picker': '', 'id_time_picker': '', 'id_date_picker': '', 'id_chosen_single': 'Option 1', 'id_chosen_single_empty': 'Select an Option',
+					'id_text_area': '', 'id_input': '', 'id_input_readonly': '', 'id_chosen_multi': []}
 		sup.assert_equals(expected, actual, message="get_all_data did not fetch the expected values for the default test page")
 
 		# set the values of the elements on the test page
+		sup.set_date(self.driver, 'id_datetime_picker', datetime(2017, 9, 5, hour=9, minute=25))
+		sup.set_date(self.driver, 'id_time_picker', datetime(2017, 9, 5, hour=9, minute=25))
 		sup.set_date(self.driver, 'id_date_picker', datetime(2017, 9, 5, hour=9, minute=25))
 		sup.set_chosen_single(self.driver, 'id_chosen_single', 'Option 3')
 		sup.set_text_box(self.driver, 'id_text_area', 'Test 1')
-		sup.set_text_box(self.driver, 'id_text_box', 'Test 2')
+		sup.set_text_box(self.driver, 'id_input', 'Test 2')
 		sup.set_chosen_multi(self.driver, 'id_chosen_multi', ["Option 3", "Option 1", "Option 2"])
 
 		# test if the data is correct
 		actual = sup.get_all_data(self.driver)
-		expected = {'id_date_picker': '2017-09-05 09:25', 'id_chosen_single': 'Option 3',
-					'id_chosen_single_empty': 'Select an Option', 'id_text_area': 'Test 1', 'id_text_box': 'Test 2',
-					'id_readonly': '', 'id_chosen_multi': ["Option 3", "Option 1", "Option 2"]}
+		expected = {'id_datetime_picker': '09/05/2017 9:25 AM', 'id_time_picker': '9:25 AM', 'id_date_picker': '09/05/2017', 'id_chosen_single': 'Option 3',
+					'id_chosen_single_empty': 'Select an Option', 'id_text_area': 'Test 1', 'id_input': 'Test 2',
+					'id_input_readonly': '', 'id_chosen_multi': ["Option 3", "Option 1", "Option 2"]}
 		sup.assert_equals(expected, actual,
 						  message="get_all_data did not fetch the expected values for the edited test page")
 
