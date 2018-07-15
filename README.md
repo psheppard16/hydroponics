@@ -114,6 +114,10 @@ Run specific tests:
 
 ##### Installation
 ```sh
+Install firefox for automated tests:
+`sudo apt-get update`
+`sudo apt-get install firefox-esrsudo`
+
 Update apt-get:
 `sudo apt-get update`
 
@@ -174,8 +178,10 @@ Give super_group permission to access the logs:
 
 Give super_group permission to access the selenium drivers:
 `sudo chown :super_group ~/pyprojects/hydroponics/testing/selenium_drivers/chromedriver`
+`sudo chown :super_group ~/pyprojects/hydroponics/testing/selenium_drivers/pidriver`
 `sudo chown :super_group ~/pyprojects/hydroponics/testing/selenium_drivers/phantomjs`
 `sudo chmod 774 ~/pyprojects/hydroponics/testing/selenium_drivers/chromedriver`
+`sudo chmod 774 ~/pyprojects/hydroponics/testing/selenium_drivers/pidriver`
 `sudo chmod 774 ~/pyprojects/hydroponics/testing/selenium_drivers/phantomjs`
 
 Give super_group permission to access the i2c files (The number may change based on the bus):
