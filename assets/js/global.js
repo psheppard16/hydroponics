@@ -1,5 +1,6 @@
 import $ from "jquery";
 import jQuery from "jquery";
+
 window.$ = $;
 window.jQuery = jQuery;
 
@@ -36,14 +37,14 @@ export class Global {
         //slider initialization
         $(".data-slider").each(function () {
             $(this).slider({id: this.id, range: true, handle: "square", tooltip: "hide"});
-            $(this).on("slide", function(slideEvt) {
+            $(this).on("slide", function (slideEvt) {
                 $("#id_low_" + this.id.split("_")[2]).val(slideEvt.value[0]);
                 $("#id_high_" + this.id.split("_")[2]).val(slideEvt.value[1]);
             });
         });
-         $(".time_slider").each(function () {
+        $(".time_slider").each(function () {
             $(this).slider();
-            $(this).on("slide", function(slideEvt) {
+            $(this).on("slide", function (slideEvt) {
                 $("#id_label_0_" + this.id.split("_")[2]).val(utils.toTime(slideEvt.value[0]));
                 $("#id_label_1_" + this.id.split("_")[2]).val(utils.toTime(slideEvt.value[1]));
             });

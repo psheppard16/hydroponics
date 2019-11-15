@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+sudo groupadd super_group
+sudo gpasswd -a www-data super_group
+sudo gpasswd -a pi super_group
+sudo adduser www-data gpio
+sudo adduser pi gpio
+sudo chown :super_group databases
+sudo chown :super_group databases/db.sqlite3
+sudo chmod 664 databases/db.sqlite3
+sudo chown :super_group logs
+sudo chown :super_group logs/db.log
+sudo chown :super_group logs/hydro.log
+sudo chmod 774 logs/db.log
+sudo chmod 774 logs/hydro.log
+sudo chown :super_group /dev
+sudo chown :super_group /dev/i2c-1
+sudo chmod 774 /dev/i2c-1
+sudo chown :super_group ~
+sudo chown :super_group ~/pyprojects/
+sudo chown :super_group ~/pyprojects/hydroponics
+sudo chown :super_group hydroponics
+sudo chown :super_group hydroponics/wsgi.py
+sudo chmod 774 hydroponics/wsgi.py
+sudo chown :super_group testing/selenium_drivers/chromedriver
+sudo chown :super_group testing/selenium_drivers/pidriver
+sudo chown :super_group testing/selenium_drivers/phantomjs
+sudo chmod 774 testing/selenium_drivers/chromedriver
+sudo chmod 774 testing/selenium_drivers/pidriver
+sudo chmod 774 testing/selenium_drivers/phantomjs

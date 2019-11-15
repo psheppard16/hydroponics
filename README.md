@@ -103,6 +103,9 @@ To build the documentation after changes:
 
 ##### Running tests locally
 ```sh
+Install xvfb for pyvirtualdisplay:
+`sudo apt-get install xvfb`
+
 Run all tests:
 `driver=chrome REMOTE_USER=admin python manage.py --keepdb test`
 
@@ -221,13 +224,13 @@ Restart apache to finalize configuration:
 ##### Starting and Stopping the Server:
 ```sh
 Start:
-`sudo apachetcl start`
+`sudo apachectl start`
 
 Stop:
-`sudo apachetcl stop`
+`sudo apachectl stop`
 
 Restart:
-`sudo apachetcl restart`
+`sudo apachectl restart`
 ```
 
 ### Connecting to eduroam on raspberry pi ###

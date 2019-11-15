@@ -62,7 +62,7 @@ gulp.task("webpack", ["clean-js", "eol", "eslint", "babel"], () => {
 		.pipe(webpack({
     entry: "./static/js/es5/app.js",
     output:{
-        filename: "timeclock.bundle.js"
+        filename: "hydro.bundle.js"
     },
 }))
 		.pipe(gulp.dest("static/dist"));
@@ -106,7 +106,7 @@ gulp.task("css", ["sass"], () => {
     return gulp.src(["static/css/lib/**/*.css"])
       .pipe(autoprefixer())
       .pipe(cleanCSS())
-      .pipe(concat("timeclock.min.css"))
+      .pipe(concat("hydro.min.css"))
       .pipe(gulp.dest("static/dist"));
 });
 

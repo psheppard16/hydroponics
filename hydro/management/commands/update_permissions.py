@@ -14,7 +14,7 @@ class Command(BaseCommand):
 		    """
         log.info("Updating permissions...")
         commands = ["sudo groupadd super_group",
-                    "sudo gpasswd - a www - data super_group",
+                    "sudo gpasswd -a www-data super_group",
                     "sudo gpasswd -a pi super_group",
                     "sudo adduser www-data gpio",
                     "sudo adduser pi gpio",

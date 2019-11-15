@@ -1,13 +1,11 @@
-from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
-
-from hydro.models import *
 from hydro.forms import *
 from hydro.serializers import *
-from django.urls import reverse
 
 import logging
+
 log = logging.getLogger('hydro')
+
 
 ###########################################################################
 #                            HYDROPONICS VIEWS                            #
@@ -55,6 +53,7 @@ def ChemicalSettingsView(request):
             response['Location'] += '?updated=failed'
             return response
 
+
 def WasteSettingsView(request):
     """
 
@@ -77,6 +76,7 @@ def WasteSettingsView(request):
             response = redirect('home')
             response['Location'] += '?updated=failed'
             return response
+
 
 def ControlEditView(request):
     """

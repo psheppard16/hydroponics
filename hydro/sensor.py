@@ -1,13 +1,11 @@
-import io  # used to create file streams
 import fcntl  # used to access I2C parameters like addresses
 import time  # used for sleep delay and timestamps
+
 
 class Sensor:
     def __init__(self):
         self.device = AtlasI2C()  # creates the I2C port object, specify the address or bus if necessary
         self.addresses = self.device.list_i2c_devices()
-
-        # initialize the address for the sensors
         self.pH_addr = self.get_pH_address()
         self.EC_addr = self.get_EC_address()
         self.ORP_addr = self.get_ORP_address()
@@ -39,19 +37,24 @@ class Sensor:
 
     def _get_reading(self, address):
         self.device.set_i2c_address(address)
-        return self.device.query("R")
+        try:
+            return float(self.device.query("R"))
+        except ValueError:
+            return None
 
-    def _get_address(self, address_string):
+    def _get_address(self, address_string, tries=0):
+        if tries == 5:
+            raise Exception("Could not find address of type: " + address_string)
         for address in self.addresses:
             self.device.set_i2c_address(address)
             info = self.device.query("I")
-            type = info.split(",")[1]
-            if type == address_string:
-                return address
+            if len(info.split(",")) < 2:
+                return self._get_address(address_string, tries=tries + 1)
+            else:
+                type = info.split(",")[1]
+                if type == address_string:
+                    return address
         raise Exception("Could not find address of type: " + address_string)
-
-
-
 
 
 class AtlasI2C:
@@ -66,8 +69,9 @@ class AtlasI2C:
         # the specific I2C channel is selected with bus
         # it is usually 1, except for older revisions where its 0
         # wb and rb indicate binary read and write
-        self.file_read = io.open("/dev/i2c-" + str(bus), "rb", buffering=0)
-        self.file_write = io.open("/dev/i2c-" + str(bus), "wb", buffering=0)
+
+        self.file_read = open("/dev/i2c-" + str(bus), "rb", buffering=0)
+        self.file_write = open("/dev/i2c-" + str(bus), "wb", buffering=0)
 
         # initializes I2C to either a user specified or default address
         self.set_i2c_address(address)
@@ -89,12 +93,12 @@ class AtlasI2C:
     def read(self, num_of_bytes=31):
         # reads a specified number of bytes from I2C, then parses and displays the result
         response = self.file_read.read(num_of_bytes)  # read from the board
-        filtered = bytes(filter(lambda x: x != 0, response)) # remove the null characters to get the response
+        filtered = bytes(filter(lambda x: x != 0, response))  # remove the null characters to get the response
         if filtered[0] == 1:  # if the response isn't an error
             # change MSB to 0 for all received characters except the first and get a list of characters
             char_list = map(lambda x: chr(x & ~0x80), filtered[1:])
             # NOTE: having to change the MSB to 0 is a glitch in the raspberry pi, and you shouldn't have to do this!
-            return "Command succeeded " + ''.join(char_list)  # convert the char list to a string and returns it
+            return ''.join(char_list)  # convert the char list to a string and returns it
         else:
             return "Error " + str(filtered[0])
 
@@ -125,7 +129,7 @@ class AtlasI2C:
                 self.set_i2c_address(i)
                 self.read()
                 i2c_devices.append(i)
-            except IOError:
+            except IOError as e:
                 pass
         self.set_i2c_address(prev_addr)  # restore the address we were using
         return i2c_devices
@@ -145,7 +149,6 @@ def main():
     # main loop
     while True:
         console_input = input("Enter command: ")
-
         if console_input.upper().startswith("LIST_ADDR"):
             devices = device.list_i2c_devices()
             for i in range(len(devices)):

@@ -1,5 +1,6 @@
 import $ from "jquery";
 import jQuery from "jquery";
+
 window.$ = $;
 window.jQuery = jQuery;
 
@@ -14,20 +15,20 @@ export let toTime = (decimal) => {
     let hrs = parseInt(Number(decimal));
     let min = Math.round((Number(decimal) - hrs) * 60);
     let am = true;
-    if(hrs >= 12 && hrs < 24) am = false;
-    if(hrs > 12) hrs -= 12;
+    if (hrs >= 12 && hrs < 24) am = false;
+    if (hrs > 12) hrs -= 12;
     hrs = String(hrs);
     min = String(min);
     if (min.length === 1) min += "0";
-    if(am) return hrs + ":" + min + " AM";
+    if (am) return hrs + ":" + min + " AM";
     return hrs + ":" + min + " PM";
 };
 
 export let init_data_chart = () => {
     //graph initialization
-    $(".analytics_chart").each(function(index, chart) {
+    $(".analytics_chart").each(function (index, chart) {
         $.ajax({
-            url: "/timeclock/api/employees", success: function (employees) {
+            url: "/hydro/api/employees", success: function (employees) {
                 let data_array = [];
                 let label_array = [];
                 for (let i = 0; i < employees.length; i++) {

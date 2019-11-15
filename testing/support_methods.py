@@ -6,6 +6,7 @@ from selenium.common.exceptions import NoSuchElementException, ElementNotVisible
 from sys import platform
 from selenium import webdriver
 from hydroponics.settings import BASE_DIR
+from pyvirtualdisplay import Display
 import datetime as dt
 import os
 
@@ -508,6 +509,7 @@ def get_driver():
             if platform == "linux" or platform == "linux2":
                 return webdriver.Chrome(executable_path=BASE_DIR + '/testing/selenium_drivers/chromedriver')
         elif 'pidriver' in driver_environment_variable:
+            Display(visible=0, size=(800, 600)).start() #need to create a display for testing on the pi
             return webdriver.Firefox(executable_path=BASE_DIR + '/testing/selenium_drivers/pidriver')
         else:
             raise Exception("Expected: %r, %r, %r, or %r. Was: %r" % (

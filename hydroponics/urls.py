@@ -9,8 +9,6 @@ TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'hydro'),
 )
 
-handler403 = 'hydro.templates.permission_denied_view'
-
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^hydro/', include(hydro_patterns)),

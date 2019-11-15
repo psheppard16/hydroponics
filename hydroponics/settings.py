@@ -11,7 +11,7 @@ STATIC_URL = '/static/'
 STATIC_DIR = os.path.join(BASE_DIR, 'logs')
 STATIC_ROOT = BASE_DIR + STATIC_URL
 
-ALLOWED_HOSTS = ["192.168.0.28", "169.254.248.180"]
+ALLOWED_HOSTS = ["192.168.0.28", "169.254.248.180", "192.168.0.100"]
 
 ADMINS = [('Preston Sheppard', 'psheppard16@gmail.com')]
 DEBUG = True
@@ -26,8 +26,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'rest_framework',
     'nested_inline',
-    'import_export',
-    'hydro.apps.HydroConfig',
+    'hydro',
 )
 
 MIDDLEWARE = (
@@ -38,6 +37,7 @@ MIDDLEWARE = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+	'django.contrib.auth.middleware.RemoteUserMiddleware',
 )
 
 REST_FRAMEWORK = {
@@ -48,6 +48,8 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',)
 }
+
+LOGIN_URL = "/login"
 
 REST_FRAMEWORK_EXTENSIONS = {
     'DEFAULT_USE_CACHE': 'default',
@@ -70,6 +72,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
+		'TEMPLATE_DEBUG' : False,
         'OPTIONS': {
             'debug': None,
             'context_processors': [
@@ -79,9 +82,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
                 'django.template.context_processors.static',
-            ],
-            'libraries': {
-            }
+            ]
         },
     },
 ]

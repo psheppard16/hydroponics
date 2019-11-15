@@ -1,6 +1,7 @@
 from django.db import models
 import django.utils.timezone as tz
 
+
 class Data(models.Model):
     def __str__(self):
         return str(self.type) + ": " + str(self.value) + " on: " + str(self.date_time)
@@ -9,11 +10,13 @@ class Data(models.Model):
     type = models.ForeignKey('DataType', blank=False, on_delete=True)
     value = models.DecimalField(decimal_places=2, max_digits=5, blank=True, null=True)
 
+
 class DataType(models.Model):
     def __str__(self):
         return str(self.type)
 
     type = models.CharField(max_length=20, blank=False)
+
 
 class RequestType(models.Model):
     def __str__(self):
@@ -21,13 +24,17 @@ class RequestType(models.Model):
 
     type = models.CharField(max_length=20, blank=False)
 
+
 class Status(models.Model):
     def __str__(self):
         return str(self.status)
 
     status = models.CharField(max_length=20, blank=False)
 
+
 DEFAULT_STATUS_ID = 1
+
+
 class Request(models.Model):
     def __str__(self):
         return str(self.type) + " on: " + str(self.request_time)
@@ -39,41 +46,43 @@ class Request(models.Model):
     arg1 = models.DecimalField(decimal_places=2, max_digits=5, blank=True, null=True)
     arg2 = models.DecimalField(decimal_places=2, max_digits=5, blank=True, null=True)
 
+
 class ChemicalSettings(models.Model):
-    #PH REGULATION
+    # PH REGULATION
     auto_regulate_pH = models.BooleanField(default=False, blank=False)
     low_pH = models.DecimalField(decimal_places=2, max_digits=5, blank=False)
     high_pH = models.DecimalField(decimal_places=2, max_digits=5, blank=False)
     pH_adj_volume = models.DecimalField(decimal_places=2, max_digits=5, blank=False)
     last_pH_change = models.DateTimeField(null=True, blank=True)
 
-    #NUTRIENT REGULATION
+    # NUTRIENT REGULATION
     auto_regulate_nutrients = models.BooleanField(default=False, blank=False)
     low_EC = models.DecimalField(decimal_places=2, max_digits=5, blank=False)
     high_EC = models.DecimalField(decimal_places=2, max_digits=5, blank=False)
     nutrient_adj_volume = models.DecimalField(decimal_places=2, max_digits=5, blank=False)
     last_nutrient_change = models.DateTimeField(null=True, blank=True)
 
-    #ORP REGULATION
+    # ORP REGULATION
     auto_regulate_ORP = models.BooleanField(default=False, blank=False)
     low_ORP = models.DecimalField(decimal_places=2, max_digits=5, blank=False)
     high_ORP = models.DecimalField(decimal_places=2, max_digits=5, blank=False)
     ORP_adj_volume = models.DecimalField(decimal_places=2, max_digits=5, blank=False)
     last_ORP_change = models.DateTimeField(null=True, blank=True)
 
-    #DATA
+    # DATA
     min_change_interval = models.IntegerField(default=60, blank=False)  # minutes
-    polling_range = models.IntegerField(default=60, blank=False)  #minutes
+    polling_range = models.IntegerField(default=60, blank=False)  # minutes
     minimun_data_count = models.IntegerField(default=100, blank=False)
 
+
 class WasteSettings(models.Model):
-    #WASTE REGULATION
+    # WASTE REGULATION
     auto_water_change = models.BooleanField(default=False, blank=False)
     last_water_change = models.DateTimeField(null=True, blank=True)
-    maximum_water_change_interval = models.IntegerField(default=31, blank=False) #days
-    minimum_water_change_interval = models.IntegerField(default=1, blank=False) #days
+    maximum_water_change_interval = models.IntegerField(default=31, blank=False)  # days
+    minimum_water_change_interval = models.IntegerField(default=1, blank=False)  # days
 
-    #WATER REGULATION
+    # WATER REGULATION
     auto_pump = models.BooleanField(default=False, blank=False)
     auto_refill = models.BooleanField(default=False, blank=False)
     resevoir_volume = models.IntegerField(default=27, blank=False)  # liters

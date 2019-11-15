@@ -1,5 +1,7 @@
 import RPi.GPIO as GPIO
 import time
+
+
 class Relay:
     def __init__(self, pin, off_mode=True, mode=GPIO.OUT):
         GPIO.setup(pin, mode)

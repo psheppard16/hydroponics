@@ -468,13 +468,13 @@ class SupportMethodsTestCase(StaticLiveServerTestCase):
     def test_open(self):
         """Attempt to open every page in status.
 
-            - assert the timeclock page loads correctly
+            - assert the home page loads correctly
 
-            - assert the schedule page loads correctly
+            - assert the chemical page loads correctly
 
-            - assert the settings page loads correctly
+            - assert the waste page loads correctly
 
-            - assert the policies page loads correctly
+            - assert the control page loads correctly
 
             :returns: None
             """
@@ -482,29 +482,13 @@ class SupportMethodsTestCase(StaticLiveServerTestCase):
         print(
             '\n##########################################\n Support: Beginning test_open\n##########################################')
 
-        # load the timeclock page and assert the url is correct
-        sup.open(self, reverse('timeclock'))
-        expected = reverse('timeclock')
-        in_text = self.driver.current_url
-        sup.assert_in(expected, in_text, message="Browser did not load Timeclock Page")
-
-        # load the schedule page and assert the url is correct
-        sup.open(self, reverse('schedule'))
-        expected = reverse('schedule')
-        in_text = self.driver.current_url
-        sup.assert_in(expected, in_text, message="Browser did not load Schedule Page")
-
-        # load the settings page and assert the url is correct
-        sup.open(self, reverse('settings'))
-        expected = reverse('settings')
-        in_text = self.driver.current_url
-        sup.assert_in(expected, in_text, message="Browser did not load Settings Page")
-
-        # load the settings page and assert the url is correct
-        sup.open(self, reverse('policies'))
-        expected = reverse('policies')
-        in_text = self.driver.current_url
-        sup.assert_in(expected, in_text, message="Browser did not load Policies Page")
+        pages = ["home", "chemical", "waste", "control"]
+        for page in pages:
+            # load the home page and assert the url is correct
+            sup.open(self, reverse(page))
+            expected = reverse(page)
+            in_text = self.driver.current_url
+            sup.assert_in(expected, in_text, message="Browser did not load %s Page" % page)
 
     def test_get_all_data(self):
         """Test if get_all_data returns the correct data for the test page
