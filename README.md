@@ -103,8 +103,11 @@ To build the documentation after changes:
 
 ##### Running tests locally
 ```sh
+Install xvfb for pyvirtualdisplay:
+`sudo apt-get install xvfb`
+
 Run all tests:
-`driver=chrome REMOTE_USER=admin python manage.py --keepdb`
+`driver=chrome REMOTE_USER=admin python manage.py --keepdb test`
 
 Run specific tests: 
 `driver=[driver] REMOTE_USER=admin python manage.py --keepdb testing.[test file].[test class].[test]`
@@ -114,6 +117,10 @@ Run specific tests:
 
 ##### Installation
 ```sh
+Install firefox for automated tests:
+`sudo apt-get update`
+`sudo apt-get install firefox-esrsudo`
+
 Update apt-get:
 `sudo apt-get update`
 
@@ -154,24 +161,40 @@ Create group for apache, and all users
 `sudo gpasswd -a www-data super_group` # if the apache user is www-data
 `sudo gpasswd -a pi super_group`       # if you have a user named pi
 `sudo gpasswd -a foo super_group`      # if you have a user named foo
-...
+
+Give super_group permission to access the GPIO pins:
+`sudo adduser www-data gpio` # if the apache user is www-data
+`sudo adduser pi gpio`       # if you have a user named pi
+`sudo adduser foo gpio`      # if you have a user named foo
 
 Give super_group permission to access the database:
-`sudo chown :super_group ~/pyprojects/hydroponics/databases/db.sqlite3`
 `sudo chown :super_group ~/pyprojects/hydroponics/databases`
+`sudo chown :super_group ~/pyprojects/hydroponics/databases/db.sqlite3`
 `sudo chmod 664 ~/pyprojects/hydroponics/databases/db.sqlite3`
 
 Give super_group permission to access the logs:
-`sudo chown :super_group ~/pyprojects/hydroponics/logs/db_sql.log`
-`sudo chown :super_group ~/pyprojects/hydroponics/logs/hydro.log`
 `sudo chown :super_group ~/pyprojects/hydroponics/logs`
-`sudo chmod 664 ~/pyprojects/hydroponics/logs/db_sql.log`
+`sudo chown :super_group ~/pyprojects/hydroponics/logs/db.log`
+`sudo chown :super_group ~/pyprojects/hydroponics/logs/hydro.log`
+`sudo chmod 664 ~/pyprojects/hydroponics/logs/db.log`
 `sudo chmod 664 ~/pyprojects/hydroponics/logs/hydro.log`
 
 Give super_group permission to access the GPIO pins:
 `sudo adduser www-data gpio` # if the apache user is www-data
 `sudo adduser pi gpio`       # if you have a user named pi
 `sudo adduser foo gpio`      # if you have a user named foo
+
+Give super_group permission to access the selenium drivers:
+`sudo chown :super_group ~/pyprojects/hydroponics/testing/selenium_drivers/chromedriver`
+`sudo chown :super_group ~/pyprojects/hydroponics/testing/selenium_drivers/pidriver`
+`sudo chown :super_group ~/pyprojects/hydroponics/testing/selenium_drivers/phantomjs`
+`sudo chmod 774 ~/pyprojects/hydroponics/testing/selenium_drivers/chromedriver`
+`sudo chmod 774 ~/pyprojects/hydroponics/testing/selenium_drivers/pidriver`
+`sudo chmod 774 ~/pyprojects/hydroponics/testing/selenium_drivers/phantomjs`
+
+Give super_group permission to access the i2c files (The number may change based on the bus):
+`sudo chown :super_group /dev`
+`sudo chmod 774 /dev/i2c-1`
 
 Give super_group permission to execute along the path:
 `sudo chown :super_group ~`
@@ -180,7 +203,6 @@ Give super_group permission to execute along the path:
 `sudo chown :super_group ~/pyprojects/hydroponics/hydroponics`
 `sudo chown :super_group ~/pyprojects/hydroponics/hydroponics/wsgi.py`
 `sudo chmod 774 ~/pyprojects/hydroponics/hydroponics/wsgi.py`
-...
 ```
 
 ##### Server Name
@@ -207,13 +229,13 @@ Restart apache to finalize configuration:
 ##### Starting and Stopping the Server:
 ```sh
 Start:
-`sudo apachetcl start`
+`sudo apachectl start`
 
 Stop:
-`sudo apachetcl stop`
+`sudo apachectl stop`
 
 Restart:
-`sudo apachetcl restart`
+`sudo apachectl restart`
 ```
 
 ### Connecting to eduroam on raspberry pi ###

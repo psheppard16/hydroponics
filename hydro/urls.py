@@ -10,8 +10,15 @@ TEMPLATE_DIRS = (
 )
 
 router = routers.DefaultRouter(trailing_slash=False)
+router.register(r'data', DataViewSet)
+router.register(r'data', DataTypeViewSet)
 
-hydro_api_patterns = [
+hydro_patterns = [
+    url(r'^home', HomeView, name="home"),
+    url(r'^chemical', ChemicalSettingsView, name="chemical_settings"),
+    url(r'^waste', WasteSettingsView, name="waste_settings"),
+    url(r'^control', ControlEditView, name="control"),
+    url(r'^error', ErrorView, name="error"),
     url(r'^api/', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
