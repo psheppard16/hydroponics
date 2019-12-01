@@ -95,13 +95,13 @@ class AtlasI2C:
         # reads a specified number of bytes from I2C, then parses and displays the result
         response = self.file_read.read(num_of_bytes)  # read from the board
         filtered = bytes(filter(lambda x: x != 0, response))  # remove the null characters to get the response
-        if filtered[0] == 1:  # if the response isn't an error
+        if filtered and filtered[0] == 1:  # if the response isn't an error
             # change MSB to 0 for all received characters except the first and get a list of characters
             char_list = map(lambda x: chr(x & ~0x80), filtered[1:])
             # NOTE: having to change the MSB to 0 is a glitch in the raspberry pi, and you shouldn't have to do this!
             return ''.join(char_list)  # convert the char list to a string and returns it
         else:
-            return "Error " + str(filtered[0])
+            return "Error " + str(filtered)
 
     def query(self, string):
         # write a command to the board, wait the correct timeout, and read the response
@@ -140,16 +140,17 @@ def main():
 
     print(">> Atlas Scientific sample code")
     print(">> Any commands entered are passed to the board via I2C except:")
-    print(">>   List_addr lists the available I2C addresses.")
+    print(">>   List lists the available I2C addresses.")
     print(">>   Address,xx changes the I2C address the Raspberry Pi communicates with.")
     print(">>   Poll,xx.x command continuously polls the board every xx.x seconds")
+    print(">>   Cal,[high,mid,low],xx.x command calibrates the probe")
     print(" where xx.x is longer than the %0.2f second timeout." % AtlasI2C.long_timeout)
     print(">> Pressing ctrl-c will stop the polling")
 
     # main loop
     while True:
         console_input = input("Enter command: ")
-        if console_input.upper().startswith("LIST_ADDR"):
+        if console_input.upper().startswith("LIST"):
             devices = device.list_i2c_devices()
             for i in range(len(devices)):
                 print(devices[i])
@@ -159,6 +160,13 @@ def main():
             addr = int(console_input.split(',')[1])
             device.set_i2c_address(addr)
             print("I2C address set to " + str(addr))
+
+        # address command lets you change which address the Raspberry Pi will poll
+        elif console_input.upper().startswith("CAL"):
+            point = console_input.split(',')[1]
+            value = int(console_input.split(',')[2])
+            response = device.query("cal,%s,%d" % (point, value))
+            print(response)
 
         # continuous polling command automatically polls the board
         elif console_input.upper().startswith("POLL"):
