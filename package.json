@@ -29,7 +29,7 @@
     "chart.js": "^2.7.1",
     "chosen-js": "^1.8.3",
     "glyphicons": "^0.2.0",
-    "jquery": "^3.2.1",
+    "jquery": "^3.5.0",
     "moment": "^2.21.0",
     "moment-timezone": "^0.5.11",
     "noty": "^3.2.0-beta",
