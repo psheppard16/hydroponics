@@ -1,8 +1,9 @@
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 from hydro.models import *
 
 import logging
 from django.utils import timezone
+import datetime
 
 log = logging.getLogger('hydro')
 
@@ -15,40 +16,44 @@ class Command(BaseCommand):
         Adds default entries for the hydro app.
         :returns: None
         """
-        waste, created = ChemicalSettings.objects.update_or_create(id=1,
-                                                                   defaults={"auto_regulate_pH": "False",
-                                                                             "low_pH": "5",
-                                                                             "high_pH": "7",
-                                                                             "pH_adj_volume": "1",
-                                                                             "last_pH_change": timezone.now(),
-                                                                             "auto_regulate_nutrients": "False",
-                                                                             "low_EC": "5",
-                                                                             "high_EC": "7",
-                                                                             "nutrient_adj_volume": "1",
-                                                                             "last_nutrient_change": timezone.now(),
-                                                                             "auto_regulate_ORP": "False",
-                                                                             "low_ORP": "5",
-                                                                             "high_ORP": "7",
-                                                                             "ORP_adj_volume": "1",
-                                                                             "last_ORP_change": timezone.now(),
-                                                                             "min_change_interval": "2",
-                                                                             "polling_range": "1",
-                                                                             "minimun_data_count": "60"})
-
-        chemical, created = WasteSettings.objects.update_or_create(id=1,
+        chemical, created = ChemicalSettings.objects.update_or_create(id=1,
                                                                    defaults={
-                                                                       "auto_water_change": "False",
+                                                                            "auto_regulate_pH": False,
+                                                                             "low_pH": 5.0,
+                                                                             "high_pH": 7.0,
+                                                                             "pH_adj_volume": 1.0,
+                                                                             "last_pH_change": timezone.now(),
+                                                                             "auto_regulate_nutrients": False,
+                                                                             "low_EC": 5.0,
+                                                                             "high_EC": 7.0,
+                                                                             "nutrient_adj_volume": 1.0,
+                                                                             "last_nutrient_change": timezone.now(),
+                                                                             "auto_regulate_ORP": False,
+                                                                             "low_ORP": 5.0,
+                                                                             "high_ORP": 7.0,
+                                                                             "ORP_adj_volume": 1.0,
+                                                                             "last_ORP_change": timezone.now(),
+                                                                             "last_poll": timezone.now(),
+                                                                             "change_rate": datetime.timedelta(minutes=1),
+                                                                             "polling_rate": datetime.timedelta(minutes=1),
+                                                                             "minimum_data_count": 60,
+                                                                             })
+
+        waste, created = WasteSettings.objects.update_or_create(id=1,
+                                                                   defaults={
+                                                                       "auto_water_change": False,
                                                                        "last_water_change": timezone.now(),
-                                                                       "maximum_water_change_interval": "30",
-                                                                       "minimum_water_change_interval": "1",
-                                                                       "auto_pump": "False",
-                                                                       "auto_refill": "False",
-                                                                       "resevoir_volume": "90",
-                                                                       "basin_volume": "90"})
+                                                                       "maximum_water_change_interval": 30,
+                                                                       "minimum_water_change_interval": 1,
+                                                                       "auto_pump": False,
+                                                                       "auto_refill": False,
+                                                                       "reservoir_volume": 90,
+                                                                       "basin_volume": 90})
 
         pH, created = DataType.objects.update_or_create(id=1, defaults={"type": "pH"})
         EC, created = DataType.objects.update_or_create(id=2, defaults={"type": "EC"})
         ORP, created = DataType.objects.update_or_create(id=3, defaults={"type": "ORP"})
+        temp, created = DataType.objects.update_or_create(id=4, defaults={"type": "temp"})
 
         requested, created = Status.objects.update_or_create(id=1, defaults={"status": "requested"})
         completed, created = Status.objects.update_or_create(id=2, defaults={"status": "completed"})

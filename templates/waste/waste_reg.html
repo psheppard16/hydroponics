@@ -11,7 +11,7 @@
                         <label class="form_label switch" for="id_auto_water_change">
                             {# hidden input to submit false to the form when checkbox is not checked #}
                             <input type="hidden" value="false" name="auto_water_change"/>
-                            <input id="id_auto_water_change" {% if config.auto_water_change %} checked {% endif %}
+                            <input id="id_auto_water_change" {% if form.auto_water_change.value %} checked {% endif %}
                                    name="auto_water_change" type="checkbox"><span class="toggle"></span>
                         </label>
                     </div>
@@ -23,10 +23,11 @@
             <div class="col-4 align-self-center">
                 <div class="row justify-content-center">
                     <div class="col">
-                        <label class="form_label" for="id_resevoir_volume"></label>
-                        <input id="id_resevoir_volume"
-                               value="{{config.resevoir_volume}}" name="resevoir_volume"
-                            class="number" max="100" min="0" type="number" align="middle" placeholder="L">
+                        <label class="form_label" for="id_reservoir_volume">
+                            <input id="id_reservoir_volume"
+                                   value="{{form.reservoir_volume.value}}" name="reservoir_volume"
+                                   class="number" max="100" min="0" type="number" align="middle" placeholder="L">
+                        </label>
                     </div>
                 </div>
             </div>
@@ -36,9 +37,10 @@
             <div class="col-4 align-self-center">
                 <div class="row justify-content-center">
                     <div class="col">
-                        <label class="form_label" for="id_basin_volume"></label>
-                        <input id="id_basin_volume" value="{{config.basin_volume}}" name="basin_volume"
-                            class="number" max="100" min="0" type="number" align="middle" placeholder="L">
+                        <label class="form_label" for="id_basin_volume">
+                            <input id="id_basin_volume" value="{{form.basin_volume.value}}" name="basin_volume"
+                                   class="number" max="100" min="0" type="number" align="middle" placeholder="L">
+                        </label>
                     </div>
                 </div>
             </div>
@@ -48,9 +50,12 @@
             <div class="col-4 align-self-center">
                 <div class="row justify-content-center">
                     <div class="col">
-                        <label class="form_label" for="id_maximum_water_change_interval"></label>
-                        <input id="id_maximum_water_change_interval" value="{{config.maximum_water_change_interval}}" name="maximum_water_change_interval"
-                            class="number" max="100" min="0" type="number" align="middle" placeholder="days">
+                        <label class="form_label" for="id_maximum_water_change_interval">
+                            <input id="id_maximum_water_change_interval"
+                                   value="{{form.maximum_water_change_interval.value}}"
+                                   name="maximum_water_change_interval"
+                                   class="number" max="100" min="0" type="number" align="middle" placeholder="days">
+                        </label>
                     </div>
                 </div>
             </div>
@@ -60,9 +65,12 @@
             <div class="col-4 align-self-center">
                 <div class="row justify-content-center">
                     <div class="col">
-                        <label class="form_label" for="id_minimum_water_change_interval"></label>
-                        <input id="id_minimum_water_change_interval" value="{{config.minimum_water_change_interval}}" name="minimum_water_change_interval"
-                            class="number" max="100" min="0" type="number" align="middle" placeholder="days">
+                        <label class="form_label" for="id_minimum_water_change_interval">
+                            <input id="id_minimum_water_change_interval"
+                                   value="{{form.minimum_water_change_interval.value}}"
+                                   name="minimum_water_change_interval"
+                                   class="number" max="100" min="0" type="number" align="middle" placeholder="days">
+                        </label>
                     </div>
                 </div>
             </div>

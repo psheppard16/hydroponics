@@ -24,10 +24,12 @@ export class Global {
     }
 
     _init() {
+        utils.init_data_chart();
+
         // datepicker initialization
         $(".type-date").datetimepicker({format: "MM/DD/YYYY"});
         $(".type-datetime").datetimepicker({format: "MM/DD/YYYY h:mm A"});
-        $(".type-time").datetimepicker({format: "LT"});
+        $(".type-time").datetimepicker({format: "HH:mm:ss", inline: true, sideBySide: true});
 
         // chosen initialization
         $(".chosen-select").chosen({width: "100%"});
@@ -38,8 +40,9 @@ export class Global {
         $(".data-slider").each(function () {
             $(this).slider({id: this.id, range: true, handle: "square", tooltip: "hide"});
             $(this).on("slide", function (slideEvt) {
-                $("#id_low_" + this.id.split("_")[2]).val(slideEvt.value[0]);
-                $("#id_high_" + this.id.split("_")[2]).val(slideEvt.value[1]);
+                $("#id_low_" + this.id.split("_")[1]).val(slideEvt.value[0]);
+                console.log("#id_low_" + this.id.split("_")[1]);
+                $("#id_high_" + this.id.split("_")[1]).val(slideEvt.value[1]);
             });
         });
         $(".time_slider").each(function () {

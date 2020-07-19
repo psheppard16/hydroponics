@@ -1,0 +1,53 @@
+<div class="sub_section">
+    <div class="header">Data</div>
+    <div class="sub_content">
+        <div class="row justify-content-start">
+            <div class="col-4 align-self-center">
+                <h4>Change rate</h4>
+            </div>
+            <div class="col-8 align-self-center">
+                <div class="row justify-content-center">
+                    <div class="col">
+                        <div class="input-group date type-time" id="id_change_rate_datetimepicker"
+                             data-target-input="nearest">
+
+                            <input type="hidden" class="form-control datetimepicker-input"
+                                   data-target="#id_change_rate_datetimepicker" id="id_change_rate"
+                                   value="{{form.change_rate.value}}" name="change_rate"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4 align-self-center">
+                <h4>Polling Rate</h4>
+            </div>
+            <div class="col-8 align-self-center">
+                <div class="row justify-content-center">
+                    <div class="col">
+                        <div class="input-group date type-time" id="id_polling_rate_datetimepicker"
+                             data-target-input="nearest">
+
+                            <input type="hidden" class="form-control datetimepicker-input"
+                                   data-target="#id_polling_rate_datetimepicker" id="id_polling_rate"
+                                   value="{{form.polling_rate.value}}" name="polling_rate"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-8 align-self-center">
+                <h4>Minimum Data Points for Rolling Averages</h4>
+            </div>
+            <div class="col-4 align-self-center">
+                <div class="row justify-content-center">
+                    <div class="col {% if form.minimum_data_count.errors %}has-error{% endif %}">
+                        <label class="form_label" for="id_minimum_data_count">
+                            <input id="id_minimum_data_count" value="{{form.minimum_data_count.value}}"
+                                   name="minimum_data_count"
+                                   class="number" max="100" min="0" type="number" align="middle">
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

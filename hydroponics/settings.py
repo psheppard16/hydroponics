@@ -11,12 +11,14 @@ STATIC_URL = '/static/'
 STATIC_DIR = os.path.join(BASE_DIR, 'logs')
 STATIC_ROOT = BASE_DIR + STATIC_URL
 
-ALLOWED_HOSTS = ["192.168.0.28", "169.254.248.180", "192.168.0.100"]
+ALLOWED_HOSTS = ["192.168.0.28", "169.254.248.180", "192.168.0.100", "192.168.0.180"]
+CORS_ORIGIN_ALLOW_ALL = True
 
 ADMINS = [('Preston Sheppard', 'psheppard16@gmail.com')]
 DEBUG = True
 
 INSTALLED_APPS = (
+    'corsheaders',
     'admin_view_permission',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -30,6 +32,7 @@ INSTALLED_APPS = (
 )
 
 MIDDLEWARE = (
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -37,7 +40,7 @@ MIDDLEWARE = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-	'django.contrib.auth.middleware.RemoteUserMiddleware',
+    'django.contrib.auth.middleware.RemoteUserMiddleware',
 )
 
 REST_FRAMEWORK = {
@@ -72,7 +75,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
-		'TEMPLATE_DEBUG' : False,
+        'TEMPLATE_DEBUG': False,
         'OPTIONS': {
             'debug': None,
             'context_processors': [

@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
 from hydro.forms import *
 from hydro.serializers import *
+from django.views.generic.edit import FormView
+from django.forms.models import model_to_dict
+import datetime
 
 import logging
 
@@ -16,10 +19,7 @@ def HomeView(request):
     context = {'title': "Home",
                'user': request.user,
                'chemical_setings': ChemicalSettings.objects.get(id=1),
-               'waste_setings': WasteSettings.objects.get(id=1),
-               'pH_data': Data.objects.filter(type=DataType(type="pH")),
-               'EC_data': Data.objects.filter(type=DataType(type="EC")),
-               'ORP_data': Data.objects.filter(type=DataType(type="ORP")),
+               'waste_setings': WasteSettings.objects.get(id=1)
                }
     return render(request, 'home/home.html', context)
 
@@ -30,52 +30,44 @@ def ErrorView(request):
     return render(request, 'shared/error.html', context)
 
 
-def ChemicalSettingsView(request):
-    """
+class ChemicalSettingsView(FormView):
+    template_name = 'chemical/chemical.html'
+    form_class = ChemicalSettingsForm
+    success_url = '/?updated=success'
 
-        :param request:
-        :return:
-    """
+    def get_initial(self):
+        initial = super(ChemicalSettingsView, self).get_initial()
+        initial.update(model_to_dict(ChemicalSettings.objects.get(id=1)))
+        return initial
 
-    if request.POST:
-        chemical = ChemicalSettings.objects.get(id=1)
-        form = ChemicalSettingsForm(request.POST, instance=chemical)
-        if form.is_valid():
-            saved = form.save(commit=False)
-            saved.save()
-            form.save_m2m()
-            response = redirect('home')
-            response['Location'] += '?updated=success'
-            return response
-        else:
-            log.error(form.errors)
-            response = redirect('home')
-            response['Location'] += '?updated=failed'
-            return response
+    def get_form(self):
+        return ChemicalSettingsForm(instance=ChemicalSettings.objects.get(id=1), **self.get_form_kwargs())
+
+    def form_valid(self, form):
+        saved = form.save(commit=False)
+        ChemicalSettings.objects.filter(pk=1).update(**model_to_dict(saved))
+        response = redirect('chemical')
+        return response
 
 
-def WasteSettingsView(request):
-    """
+class WasteSettingsView(FormView):
+    template_name = 'waste/waste.html'
+    form_class = ChemicalSettingsForm
+    success_url = '/?updated=success'
 
-        :param request:
-        :return:
-    """
+    def get_initial(self):
+        initial = super(WasteSettingsView, self).get_initial()
+        initial.update(model_to_dict(WasteSettings.objects.get(id=1)))
+        return initial
 
-    if request.POST:
-        waste = WasteSettings.objects.get(id=1)
-        form = WasteSettingsForm(request.POST, instance=waste)
-        if form.is_valid():
-            saved = form.save(commit=False)
-            saved.save()
-            form.save_m2m()
-            response = redirect('home')
-            response['Location'] += '?updated=success'
-            return response
-        else:
-            log.error(form.errors)
-            response = redirect('home')
-            response['Location'] += '?updated=failed'
-            return response
+    def get_form(self):
+        return WasteSettingsForm(instance=WasteSettings.objects.get(id=1), **self.get_form_kwargs())
+
+    def form_valid(self, form):
+        saved = form.save(commit=False)
+        WasteSettings.objects.filter(pk=1).update(**model_to_dict(saved))
+        response = redirect('waste')
+        return response
 
 
 def ControlEditView(request):

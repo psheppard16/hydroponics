@@ -1,0 +1,58 @@
+{% extends 'shared/base.html' %}
+
+{% block content %}
+    {# slider navigation #}
+    <div id="slider_wrapper">
+        <ul class="nav nav-tabs sects">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#sec1">Chemical settings</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#sec2">None</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#sec3">None</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="tab-content">
+        <div id="sec1" class="sec-content tab-pane fade active show">
+            {% include 'shared/form_banner.html' %}
+
+            <form action="{% url 'chemical' %}" method="post">
+                {% csrf_token %}
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-6">
+                            {% include "chemical/pH_reg.html" %}
+                        </div>
+                        <div class="col-6">
+                            {% include "chemical/nutrient_reg.html" %}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            {% include "chemical/ORP_reg.html" %}
+                        </div>
+                        <div class="col-6">
+                            {% include "chemical/data.html" %}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            {% include "shared/submit.html" %}
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div id="sec2" class="sec-content tab-pane fade">
+        </div>
+
+
+        <div id="sec3" class="sec-content tab-pane fade">
+        </div>
+    </div>
+{% endblock content %}

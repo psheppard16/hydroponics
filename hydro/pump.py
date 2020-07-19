@@ -55,11 +55,11 @@ class Pump:
         self.clean_water_valve.deactivate()
         self.nutrient_water_valve.deactivate()
 
-    def water_change(self, resevoir_volume, basin_volume):
+    def water_change(self, reservoir_volume, basin_volume):
         self.dump_valve.activate()
         self.nutrient_water_valve.activate()
 
-        pulse_length = resevoir_volume / 4.5 * 60  # pumps at 4.5 L/min
+        pulse_length = reservoir_volume / 4.5 * 60  # pumps at 4.5 L/min
         self.main_pump_and_valve.pulse_on(pulse_length)
 
         self.nutrient_water_valve.deactivate()

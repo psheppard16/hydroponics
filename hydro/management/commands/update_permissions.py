@@ -1,17 +1,19 @@
-from django.core.management.base import BaseCommand, CommandError
-import subprocess, os
-from hydroponics.settings import BASE_DIR
+from django.core.management.base import BaseCommand
+import subprocess
 
 import logging
+
 log = logging.getLogger('hydro')
+
 
 class Command(BaseCommand):
     help = 'Updates permissions for django and apache.'
+
     def handle(self, *args, **options):
         """Updates permissions for django and apache.
 
-		    :returns: None
-		    """
+        :returns: None
+        """
         log.info("Updating permissions...")
         commands = ["sudo groupadd super_group",
                     "sudo gpasswd -a www-data super_group",

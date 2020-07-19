@@ -15,8 +15,8 @@ router.register(r'data', DataTypeViewSet)
 
 hydro_patterns = [
     url(r'^home', HomeView, name="home"),
-    url(r'^chemical', ChemicalSettingsView, name="chemical_settings"),
-    url(r'^waste', WasteSettingsView, name="waste_settings"),
+    url(r'^chemical', ChemicalSettingsView.as_view(), name="chemical"),
+    url(r'^waste', WasteSettingsView.as_view(), name="waste"),
     url(r'^control', ControlEditView, name="control"),
     url(r'^error', ErrorView, name="error"),
     url(r'^api/', include(router.urls)),

@@ -5,27 +5,27 @@
             <table>
                 <tr>
                     <td class="navIcon"><div class="icon iconAct hydro"></div></td>
-                    <td class="navText">Hydroponics</td>
+                    <td class="navText">Home</td>
                 </tr>
             </table>
         </a>
     </li>
     <li {% if 'none' in request.path %} class="active" {% endif %}>
-        <a href="{% url 'home' %}">
+        <a href="{% url 'chemical' %}">
             <table>
                 <tr>
                     <td class="navIcon"><div class="icon schedule"></div></td>
-                    <td class="navText">None</td>
+                    <td class="navText">Chemical</td>
                 </tr>
             </table>
         </a>
     </li>
     <li {% if 'none' in request.path %} class="active" {% endif %}>
-        <a href="{% url 'home' %}">
+        <a href="{% url 'waste' %}">
             <table>
                 <tr>
                     <td class="navIcon"><div class="icon policies"></div></td>
-                    <td class="navText">None</td>
+                    <td class="navText">Waste</td>
                 </tr>
             </table>
         </a>

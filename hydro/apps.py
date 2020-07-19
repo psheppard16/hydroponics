@@ -33,15 +33,31 @@ class HydroConfig(AppConfig):
             return sum / len(data)
 
         def collect_data():
-            pH = sensor.get_pH()
-            if pH:
-                Data(date_time=tz.now(), type=DataType.objects.get(type="pH"), value=pH).save()
-            EC = sensor.get_EC()
-            if EC:
-                Data(date_time=tz.now(), type=DataType.objects.get(type="EC"), value=EC).save()
-            ORP = sensor.get_ORP()
-            if ORP:
-                Data(date_time=tz.now(), type=DataType.objects.get(type="ORP"), value=ORP).save()
+            chemical = ChemicalSettings.objects.get(id=1)
+            if tz.now() > chemical.last_poll + chemical.polling_rate:
+                chemical.last_poll = tz.now()
+                chemical.save()
+                time = tz.now()
+                pH = sensor.get_pH()
+                EC = sensor.get_EC()
+                ORP = sensor.get_ORP()
+                temp = sensor.get_temp()
+                if pH:
+                    Data(date_time=time, type=DataType.objects.get(type="pH"), value=pH).save()
+                else:
+                    Data(date_time=time, type=DataType.objects.get(type="pH"), value=0).save()
+                if EC:
+                    Data(date_time=time, type=DataType.objects.get(type="EC"), value=EC).save()
+                else:
+                    Data(date_time=time, type=DataType.objects.get(type="EC"), value=0).save()
+                if ORP:
+                    Data(date_time=time, type=DataType.objects.get(type="ORP"), value=ORP).save()
+                else:
+                    Data(date_time=time, type=DataType.objects.get(type="ORP"), value=0).save()
+                if temp:
+                    Data(date_time=time, type=DataType.objects.get(type="temp"), value=ORP).save()
+                else:
+                    Data(date_time=time, type=DataType.objects.get(type="temp"), value=0).save()
 
         def monitor_data():
             chemical = ChemicalSettings.objects.get(id=1)
@@ -83,12 +99,12 @@ class HydroConfig(AppConfig):
                 must_water_change = chemical.last_water_change + max_water_change_interval > tz.now()
                 if must_water_change:
                     Request(type=RequestType.objects.get(type="water_change"),
-                            arg1=chemical.basin_volume, arg2=chemical.resevoir_volume)
+                            arg1=chemical.basin_volume, arg2=chemical.reservoir_volume)
                 elif can_water_change:
                     avg_ORP = average_range("ORP", start, end, chemical.minimun_data_count)
                     if avg_ORP and (avg_ORP < chemical.low_ORP or avg_ORP > chemical.high_ORP):
                         Request(type=RequestType.objects.get(type="water_change"),
-                                arg1=chemical.basin_volume, arg2=chemical.resevoir_volume)
+                                arg1=chemical.basin_volume, arg2=chemical.reservoir_volume)
 
         def run():
             log.info("Starting run loop")

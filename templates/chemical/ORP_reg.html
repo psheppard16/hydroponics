@@ -11,7 +11,7 @@
                         <label class="form_label switch" for="id_auto_regulate_ORP">
                             {# hidden input to submit false to the form when checkbox is not checked #}
                             <input type="hidden" value="false" name="auto_regulate_ORP"/>
-                            <input id="id_auto_regulate_ORP" {% if config.auto_regulate_ORP %} checked {% endif %}
+                            <input id="id_auto_regulate_ORP" {% if form.auto_regulate_ORP.value %} checked {% endif %}
                                    name="auto_regulate_ORP" type="checkbox"><span class="toggle"></span>
                         </label>
                     </div>
@@ -24,7 +24,7 @@
                 <div class="row justify-content-center">
                     <div class="col">
                         <label class="form_label" for="id_ORP_adj_volume">
-                            <input id="id_ORP_adj_volume" value="{{config.ORP_adj_volume}}" name="ORP_adj_volume"
+                            <input id="id_ORP_adj_volume" value="{{form.ORP_adj_volume.value}}" name="ORP_adj_volume"
                                 class="number" max="100" min="0" step=".01" type="number" align="middle" placeholder="mL">
                         </label>
                     </div>
@@ -39,18 +39,18 @@
 
                 <div class="row justify-content-between">
                     <label class="col-4 form_label" for="id_low_ORP">
-                        <input id="id_low_ORP" value="{{config.low_ORP}}" name="low_ORP"
+                        <input id="id_low_ORP" value="{{form.low_ORP.value}}" name="low_ORP"
                             class="slider_label" readonly >
                     </label>
                     <label class="col-4 form_label" for="id_high_ORP">
-                        <input id="id_high_ORP" value="{{config.high_ORP}}" name="high_ORP"
+                        <input id="id_high_ORP" value="{{form.high_ORP.value}}" name="high_ORP"
                             class="slider_label" readonly>
                     </label>
                 </div>
 
                 <div class="row">
                     <div class="col">
-                        <input id="id_ORP_range" class="data-slider" type="text" data-slider-value="[{{config.low_ORP}}, {{config.high_ORP}}]"
+                        <input id="id_ORP_range" class="data-slider" type="text" data-slider-value="[{{form.low_ORP.value}}, {{form.high_ORP.value}}]"
                                data-slider-min="0" data-slider-max="14" data-slider-step=".01"/><br/>
                     </div>
                 </div>

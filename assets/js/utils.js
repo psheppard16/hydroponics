@@ -25,62 +25,136 @@ export let toTime = (decimal) => {
 };
 
 export let init_data_chart = () => {
+    let options = {
+        scales: {
+            xAxes: [{
+                id: "x-axis",
+                type: "time"
+            }]
+        }
+    };
     //graph initialization
-    $(".analytics_chart").each(function (index, chart) {
+    $("#pHLineChart").each(function (index, chart) {
         $.ajax({
-            url: "/hydro/api/employees", success: function (employees) {
-                let data_array = [];
-                let label_array = [];
-                for (let i = 0; i < employees.length; i++) {
-                    let employee = employees[i];
-                    if (employee["office"] && employee["clocked_in"]) { //make sure that the employee has an office and is clocked in
-                        if (!label_array.includes(employee["office"])) { //only add the office to labels if it is not present
-                            label_array.push(employee["office"]);
-                            data_array.push(0);
+            url: "/hydro/api/data", success: function (data) {
+                let pH_data = [];
+                let pH_labels = [];
+                for (let i = 0; i < data.length; i++) {
+                    let info = data[i];
+                    let date = Date.parse(info["date_time"]);
+                    if (date > Date.now() - 1000 * 60 * 60 * 24) {
+                        if (info["type"] === 1) {
+                            pH_data.push(data[i]["value"]);
+                            pH_labels.push(date);
                         }
-                        data_array[label_array.indexOf(employee["office"])] += 1; //add 1 to the employee count for that office
                     }
                 }
                 new Chart(chart, {
-                    type: "bar",
+                    type: "line",
                     data: {
-                        labels: label_array,
+                        labels: pH_labels,
                         datasets: [{
-                            label: "# of Employees",
-                            data: data_array,
-                            backgroundColor: [
-                                "rgba(255, 99, 132, 0.75)",
-                                "rgba(255, 99, 132, 0.75)",
-                                "rgba(255, 99, 132, 0.75)",
-                                "rgba(255, 99, 132, 0.75)",
-                            ],
-                            borderColor: [
-                                "rgba(255,99,132,1)",
-                                "rgba(255,99,132,1)",
-                                "rgba(255,99,132,1)",
-                                "rgba(255,99,132,1)",
-                            ],
-                            borderWidth: 2
+                            data: pH_data,
+                            label: "pH",
+                            borderColor: "#3e95cd",
+                            fill: false
                         }]
                     },
-                    options: {
-                        scales: {
-                            yAxes: [{
-                                ticks: {
-                                    beginAtZero: true,
-                                    stepSize: 1
-                                }
-                            }]
-                        },
-                        layout: {
-                            padding: {
-                                left: 0,
-                                right: 0,
-                                top: 15,
-                                bottom: 15
-                            }
+                    options: options
+                });
+            }
+        });
+    });
+    $("#ecLineChart").each(function (index, chart) {
+        $.ajax({
+            url: "/hydro/api/data", success: function (data) {
+                let ec_data = [];
+                let ec_labels = [];
+                for (let i = 0; i < data.length; i++) {
+                    let info = data[i];
+                    let date = Date.parse(info["date_time"]);
+                    if (date > Date.now() - 1000 * 60 * 60 * 24) {
+                        if (info["type"] === 2) {
+                            ec_data.push(data[i]["value"]);
+                            ec_labels.push(date);
                         }
                     }
+                }
+                new Chart(chart, {
+                    type: "line",
+                    data: {
+                        labels: ec_labels,
+                        datasets: [{
+                            data: ec_data,
+                            label: "EC",
+                            borderColor: "#8e5ea2",
+                            fill: false
+                        }]
+                    },
+                    options: options
+                });
+            }
+        });
+    });
+    $("#orpLineChart").each(function (index, chart) {
+        $.ajax({
+            url: "/hydro/api/data", success: function (data) {
+                let orp_data = [];
+                let orp_labels = [];
+                for (let i = 0; i < data.length; i++) {
+                    let info = data[i];
+                    let date = Date.parse(info["date_time"]);
+                    if (date > Date.now() - 1000 * 60 * 60 * 24) {
+                        if (info["type"] === 3) {
+                            orp_data.push(data[i]["value"]);
+                            orp_labels.push(date);
+                        }
+                    }
+                }
+                new Chart(chart, {
+                    type: "line",
+                    data: {
+                        labels: orp_labels,
+                        datasets: [{
+                            data: orp_data,
+                            label: "ORP",
+                            borderColor: "#8e5ea2",
+                            fill: false
+                        }]
+                    },
+                    options: options
+                });
+            }
+        });
+    });
+    $("#temperatureLineChart").each(function (index, chart) {
+        $.ajax({
+            url: "/hydro/api/data", success: function (data) {
+                let temperature_data = [];
+                let temperature_labels = [];
+                for (let i = 0; i < data.length; i++) {
+                    let info = data[i];
+                    let date = Date.parse(info["date_time"]);
+                    if (date > Date.now() - 1000 * 60 * 60 * 24) {
+                        if (info["type"] === 4) {
+                            temperature_data.push(data[i]["value"]);
+                            temperature_labels.push(date);
+                        }
+                    }
+                }
+                new Chart(chart, {
+                    type: "line",
+                    data: {
+                        labels: temperature_labels,
+                        datasets: [{
+                            data: temperature_data,
+                            label: "Temperature",
+                            borderColor: "#e8c3b9",
+                            fill: false
+                        }
+                        ]
+                    },
+                    options: options
                 });
             }
         });

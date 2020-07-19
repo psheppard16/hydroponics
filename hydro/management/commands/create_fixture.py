@@ -156,7 +156,7 @@ def create_all(database, data):
                                                                                         "minimum_water_change_interval": "1",
                                                                                         "auto_pump": "False",
                                                                                         "auto_refill": "False",
-                                                                                        "resevoir_volume": "90",
+                                                                                        "reservoir_volume": "90",
                                                                                         "basin_volume": "90"})
 
     pH, created = DataType.objects.db_manager(database).update_or_create(id=1, defaults={"type": "pH"})

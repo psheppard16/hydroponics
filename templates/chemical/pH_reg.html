@@ -11,7 +11,7 @@
                         <label class="form_label switch" for="id_auto_regulate_pH">
                             {# hidden input to submit false to the form when checkbox is not checked #}
                             <input type="hidden" value="false" name="auto_regulate_pH"/>
-                            <input id="id_auto_regulate_pH" {% if config.auto_regulate_pH %} checked {% endif %}
+                            <input id="id_auto_regulate_pH" {% if form.auto_regulate_pH.value %} checked {% endif %}
                                    name="auto_regulate_pH" type="checkbox"><span class="toggle"></span>
                         </label>
                     </div>
@@ -24,8 +24,9 @@
                 <div class="row justify-content-center">
                     <div class="col">
                         <label class="form_label" for="id_pH_adj_volume">
-                            <input id="id_pH_adj_volume" value="{{config.pH_adj_volume}}" name="pH_adj_volume"
-                                class="number" max="100" min="0" step=".01" type="number" align="middle" placeholder="mL">
+                            <input id="id_pH_adj_volume" value="{{form.pH_adj_volume.value}}" name="pH_adj_volume"
+                                   class="number" max="100" min="0" step=".01" type="number" align="middle"
+                                   placeholder="mL">
                         </label>
                     </div>
                 </div>
@@ -39,18 +40,19 @@
 
                 <div class="row justify-content-between">
                     <label class="col-4 form_label" for="id_low_pH">
-                        <input id="id_low_pH" value="{{config.low_pH}}" name="low_pH"
-                            class="slider_label" readonly >
+                        <input id="id_low_pH" value="{{form.low_pH.value}}" name="low_pH"
+                               class="slider_label" readonly>
                     </label>
                     <label class="col-4 form_label" for="id_high_pH">
-                        <input id="id_high_pH" value="{{config.high_pH}}" name="high_pH"
-                            class="slider_label" readonly>
+                        <input id="id_high_pH" value="{{form.high_pH.value}}" name="high_pH"
+                               class="slider_label" readonly>
                     </label>
                 </div>
 
                 <div class="row">
                     <div class="col">
-                        <input id="id_pH_range" class="data-slider" type="text" data-slider-value="[{{config.low_pH}}, {{config.high_pH}}]"
+                        <input id="id_pH_range" class="data-slider" type="text"
+                               data-slider-value="[{{form.low_pH.value}}, {{form.high_pH.value}}]"
                                data-slider-min="0" data-slider-max="14" data-slider-step=".01"/><br/>
                     </div>
                 </div>
