@@ -17,38 +17,38 @@ class Command(BaseCommand):
         :returns: None
         """
         chemical, created = ChemicalSettings.objects.update_or_create(id=1,
-                                                                   defaults={
-                                                                            "auto_regulate_pH": False,
-                                                                             "low_pH": 5.0,
-                                                                             "high_pH": 7.0,
-                                                                             "pH_adj_volume": 1.0,
-                                                                             "last_pH_change": timezone.now(),
-                                                                             "auto_regulate_nutrients": False,
-                                                                             "low_EC": 5.0,
-                                                                             "high_EC": 7.0,
-                                                                             "nutrient_adj_volume": 1.0,
-                                                                             "last_nutrient_change": timezone.now(),
-                                                                             "auto_regulate_ORP": False,
-                                                                             "low_ORP": 5.0,
-                                                                             "high_ORP": 7.0,
-                                                                             "ORP_adj_volume": 1.0,
-                                                                             "last_ORP_change": timezone.now(),
-                                                                             "last_poll": timezone.now(),
-                                                                             "change_rate": datetime.timedelta(minutes=1),
-                                                                             "polling_rate": datetime.timedelta(minutes=1),
-                                                                             "minimum_data_count": 60,
-                                                                             })
+                                                                      defaults={
+                                                                          "auto_regulate_pH": False,
+                                                                          "low_pH": 5.0,
+                                                                          "high_pH": 7.0,
+                                                                          "pH_adj_volume": 1.0,
+                                                                          "last_pH_change": timezone.now(),
+                                                                          "auto_regulate_nutrients": False,
+                                                                          "low_EC": 5.0,
+                                                                          "high_EC": 7.0,
+                                                                          "nutrient_adj_volume": 1.0,
+                                                                          "last_nutrient_change": timezone.now(),
+                                                                          "auto_regulate_ORP": False,
+                                                                          "low_ORP": 5.0,
+                                                                          "high_ORP": 7.0,
+                                                                          "ORP_adj_volume": 1.0,
+                                                                          "last_ORP_change": timezone.now(),
+                                                                          "last_poll": timezone.now(),
+                                                                          "change_rate": datetime.timedelta(minutes=1),
+                                                                          "polling_rate": datetime.timedelta(minutes=1),
+                                                                          "minimum_data_count": 60,
+                                                                      })
 
         waste, created = WasteSettings.objects.update_or_create(id=1,
-                                                                   defaults={
-                                                                       "auto_water_change": False,
-                                                                       "last_water_change": timezone.now(),
-                                                                       "maximum_water_change_interval": 30,
-                                                                       "minimum_water_change_interval": 1,
-                                                                       "auto_pump": False,
-                                                                       "auto_refill": False,
-                                                                       "reservoir_volume": 90,
-                                                                       "basin_volume": 90})
+                                                                defaults={
+                                                                    "auto_water_change": False,
+                                                                    "last_water_change": timezone.now(),
+                                                                    "maximum_water_change_interval": 30,
+                                                                    "minimum_water_change_interval": 1,
+                                                                    "auto_pump": False,
+                                                                    "auto_refill": False,
+                                                                    "reservoir_volume": 90,
+                                                                    "basin_volume": 90})
 
         pH, created = DataType.objects.update_or_create(id=1, defaults={"type": "pH"})
         EC, created = DataType.objects.update_or_create(id=2, defaults={"type": "EC"})

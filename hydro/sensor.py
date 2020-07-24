@@ -1,5 +1,6 @@
 import fcntl  # used to access I2C parameters like addresses
 import time  # used for sleep delay and timestamps
+import re
 
 
 class Sensor:
@@ -101,7 +102,10 @@ class AtlasI2C:
             # NOTE: having to change the MSB to 0 is a glitch in the raspberry pi, and you shouldn't have to do this!
             return ''.join(char_list)  # convert the char list to a string and returns it
         else:
-            return "Error " + str(filtered)
+            if filtered:
+                return "Error " + str(int(filtered[0]))
+            else:
+                return 'No response'
 
     def query(self, string):
         # write a command to the board, wait the correct timeout, and read the response
@@ -163,10 +167,15 @@ def main():
 
         # address command lets you change which address the Raspberry Pi will poll
         elif console_input.upper().startswith("CAL"):
-            point = console_input.split(',')[1]
-            value = int(console_input.split(',')[2])
-            response = device.query("cal,%s,%d" % (point, value))
-            print(response)
+            split = console_input.split(',')
+            if len(split) == 3:
+                point = split[1]
+                value = float(split[2])
+                response = device.query("cal,%s,%d" % (point, value))
+                print(response)
+            else:
+                response = device.query(console_input.lower())
+                print(response)
 
         # continuous polling command automatically polls the board
         elif console_input.upper().startswith("POLL"):

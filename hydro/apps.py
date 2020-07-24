@@ -44,20 +44,12 @@ class HydroConfig(AppConfig):
                 temp = sensor.get_temp()
                 if pH:
                     Data(date_time=time, type=DataType.objects.get(type="pH"), value=pH).save()
-                else:
-                    Data(date_time=time, type=DataType.objects.get(type="pH"), value=0).save()
                 if EC:
                     Data(date_time=time, type=DataType.objects.get(type="EC"), value=EC).save()
-                else:
-                    Data(date_time=time, type=DataType.objects.get(type="EC"), value=0).save()
                 if ORP:
                     Data(date_time=time, type=DataType.objects.get(type="ORP"), value=ORP).save()
-                else:
-                    Data(date_time=time, type=DataType.objects.get(type="ORP"), value=0).save()
                 if temp:
-                    Data(date_time=time, type=DataType.objects.get(type="temp"), value=ORP).save()
-                else:
-                    Data(date_time=time, type=DataType.objects.get(type="temp"), value=0).save()
+                    Data(date_time=time, type=DataType.objects.get(type="temp"), value=temp).save()
 
         def monitor_data():
             chemical = ChemicalSettings.objects.get(id=1)

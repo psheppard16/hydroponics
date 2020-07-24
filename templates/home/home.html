@@ -8,7 +8,7 @@
                 <a class="nav-link active" data-toggle="tab" href="#sec1">Control Panel</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#sec2">None</a>
+                <a class="nav-link" data-toggle="tab" href="#sec2">Graphs</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#sec3">None</a>
@@ -24,9 +24,6 @@
                 {% csrf_token %}
                 <div class="container-fluid">
                     <div class="row">
-                        {% include "home/control_panel/data.html" %}
-                    </div>
-                    <div class="row">
                         {% include "home/control_panel/control.html" %}
                     </div>
                     <div class="row">
@@ -37,6 +34,11 @@
         </div>
 
         <div id="sec2" class="sec-content tab-pane fade">
+            <div class="container-fluid">
+                <div class="row">
+                    {% include "home/control_panel/data.html" %}
+                </div>
+            </div>
         </div>
 
 
