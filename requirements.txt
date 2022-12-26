@@ -1,7 +1,7 @@
 Django==2.0.7
 requests==2.18.4
 selenium==3.11.0
-wheel==0.30.0
+wheel==0.38.1
 Sphinx==1.6.5
 sphinx_bootstrap_theme==0.6.0
 django-admin-view-permission==1.4
